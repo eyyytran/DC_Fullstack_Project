@@ -4,13 +4,15 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link defer rel="stylesheet" href="../css/style.css" />
+        <script defer src="../js/registration.js"></script>
         <title>Registration</title>
     </head>
     <body>
         <div class="container-registration">
             <div class="content-registration">
                 <h1>Registration Page</h1>
-                <form>
+                <form id="form-registration">
                     <input
                         type="text"
                         name="username"
@@ -35,7 +37,7 @@
                         id="password-confirm"
                         placeholder="Confirm password"
                     />
-                    <input type="button" value="Submit" />
+                    <input type="button" value="Submit" id="submit-button" />
                 </form>
             </div>
         </div>
