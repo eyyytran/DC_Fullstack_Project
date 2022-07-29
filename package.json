@@ -27,6 +27,8 @@
     "express-session": "^1.17.3",
     "pg": "^8.7.3",
     "sequelize": "^6.21.3",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13"
   }
 }
