@@ -26,7 +26,7 @@ button:hover {
     cursor: pointer;
 }
 
-.container {
+.container-home {
     height: 100vh;
     width: 100vw;
     background: lightblue;
@@ -42,7 +42,7 @@ button:hover {
     align-items: center;
 }
 
-.content {
+.content-home {
     border: 3px solid blue;
     padding: 1rem;
 }

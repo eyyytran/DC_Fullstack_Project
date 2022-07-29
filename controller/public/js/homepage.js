@@ -8,7 +8,7 @@ loginBtn.onclick = () =>
         'http://127.0.0.1:5500/controller/public/views/login.html')
 dashboardBtn.onclick = () =>
     (window.location.href =
-        'http://127.0.0.1:5500/controller/public/views/project.html')
+        'http://127.0.0.1:5500/controller/public/views/dashboard.html')
 signupBtn.onclick = () =>
     (window.location.href =
         'http://127.0.0.1:5500/controller/public/views/registration.html')
