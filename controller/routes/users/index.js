@@ -28,9 +28,9 @@ router.post("/register", async (req, res) => {
 router.get("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
-    const findUser = await user.findOne({ where: { username: username } });
-    const userWeFound = findUser.dataValues;
-    const validated = await bcrypt.compare(password, userWeFound.password);
+    const currentUser = await Users.findOne({ where: { username: username } });
+    const validateUser = currentUser.dataValues;
+    const validated = await bcrypt.compare(password, validateUser.password);
     if (!validated) {
       res.status(400).send("Check username and password").redirect("/login");
     } else {
@@ -40,42 +40,46 @@ router.get("/login", async (req, res) => {
     res.send("could not find username");
   }
 });
-
-// update user password
-router.put("/update_password", async (req, res) => {
-  const { username, password, newPassword } = req.body;
+// update user
+router.put("/update_user", async (req, res) => {
+  const { email, password, newPassword, newEmail, newUsername } = req.body;
   try {
-    // find user based on username in our database
-    const findUser = await user.findOne({ where: { username: username } });
-    const userWeFound = findUser.dataValues;
-    const validated = await bcrypt.compare(password, userWeFound.password);
+    // find user based on email in our database
+    const currentUser = await Users.findOne({ where: { email: email } });
+    const validateUser = currentUser.dataValues;
+    const validated = await bcrypt.compare(password, validateUser.password);
     if (!validated) {
-      res.status(400).send("Check username and password").redirect("/login");
+      res.status(400).send("Check email and password");
     } else {
       const salt = await bcrypt.genSalt(5);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
-      findUser.password = hashedPassword;
-      await findUser.save();
-      res.status(200).send("Password updated");
+      currentUser.set({
+        username: newUsername,
+        password: hashedPassword,
+        email: newEmail
+          })
+      await currentUser.save();
+      res.status(200).send("User updated");
     }
   } catch (error) {
-    res.send("could not find username");
+    res.send("could not find email");
   }
 });
 // delete account
-router.delete("/delete_account", async (req, res) => {
-  const { username, password } = req.body;
+router.delete("/destroy_user", async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const findUser = await user.findOne({ where: { username: username } });
-    const userWeFound = findUser.dataValues;
-    const validated = await bcrypt.compare(password, userWeFound.password);
+    const currentUser = await Users.findOne({ where: { email: email } });
+    const validateUser = currentUser.dataValues;
+    const validated = await bcrypt.compare(password, validateUser.password);
     if (!validated) {
-      res.status(400).send("Check username and password").redirect("/login");
+      res.status(400).send("Check email and password");
     } else {
-      res.status(200).send("Sucessful login");
+      currentUser.destroy()
+      res.send("User destroyed")
     }
   } catch (error) {
-    res.send("could not find username");
+    res.send("could not find email");
   }
 });
 
