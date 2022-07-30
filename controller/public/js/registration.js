@@ -157,26 +157,25 @@ const submitForm = async e => {
         // updatedAt: new Date(),
     }
     console.log(data)
-    fetch('http://localhost:3001/users/login').then(req => req.text)
-    // const package = await fetch('http://localhost:3001/users/register', {
-    //     method: 'POST',
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    // })
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error('Got a non 200 response from API server')
-    //         }
-    //         return response.json()
-    //     })
-    //     .then(data => {
-    //         console.log('Success: ', data)
-    //     })
-    //     .catch(error => {
-    //         console.error('Error: ')
-    //     })
+    const package = await fetch('http://localhost:3001/users/register', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Got a non 200 response from API server')
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log('Success: ', data)
+        })
+        .catch(error => {
+            console.error('Error: ')
+        })
 }
 
 submitBtn.onclick = e => {
