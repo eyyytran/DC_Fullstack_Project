@@ -16,7 +16,7 @@ const isEmail = email => {
 
 const isSecure = password => {
     const re = new RegExp(
-        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,30}$'
     )
     return re.test(password)
 }
