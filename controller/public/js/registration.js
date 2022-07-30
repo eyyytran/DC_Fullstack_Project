@@ -127,7 +127,26 @@ const formValidate = e => {
     return isFormValid
 }
 
-const submitForm = async e => {}
+const submitForm = async e => {
+    const Username = e.target.form[0].value
+    const Email = e.target.form[1].value
+    const Password = e.target.form[2].value
+    const data = {
+        username: Username,
+        email: Email,
+        password: Password,
+        projects: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }
+    const package = await fetch('url here', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+}
 
 submitBtn.onclick = e => {
     e.preventDefault()
@@ -137,5 +156,6 @@ submitBtn.onclick = e => {
         console.log('Will not be submitted')
     } else {
         console.log('Will be submitted')
+        submitForm(e)
     }
 }
