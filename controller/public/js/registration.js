@@ -156,26 +156,17 @@ const submitForm = async e => {
         // createdAt: new Date(),
         // updatedAt: new Date(),
     }
-    console.log(data)
-    const package = await fetch('http://localhost:3001/users/register', {
+    console.log({ data })
+    const response = await fetch('http://localhost:3001/users/register', {
         method: 'POST',
-        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Methods': 'POST',
         },
+        body: JSON.stringify(data),
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Got a non 200 response from API server')
-            }
-            return response.json()
-        })
-        .then(data => {
-            console.log('Success: ', data)
-        })
-        .catch(error => {
-            console.error('Error: ')
-        })
+    console.log({ response })
 }
 
 submitBtn.onclick = e => {

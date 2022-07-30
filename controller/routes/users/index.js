@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt')
 
 // user registration
 router.post('/register', async (req, res) => {
-    console.log('hit route')
+    console.log('register endpoint runs...')
+    console.log({ resHeaders: res.headers })
     const { username, password, email } = req.body
     try {
         const salt = await bcrypt.genSalt(5)
@@ -22,6 +23,7 @@ router.post('/register', async (req, res) => {
         const user = await Users.create(userToCreate)
         res.status(200).send(user)
     } catch (error) {
+        console.log(error)
         res.status(400).send(error)
     }
 })
