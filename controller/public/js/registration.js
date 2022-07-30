@@ -1,3 +1,4 @@
+//TODO Add instant feedback on form.addeventlisterner with a debounce
 const submitBtn = document.getElementById('submit-button')
 const form = document.getElementById('form-registration')
 
@@ -41,6 +42,7 @@ const checkUsername = e => {
     return valid
 }
 
+//Validations
 const checkEmail = e => {
     let valid = false
     const email = e.target.form[1].value
@@ -91,6 +93,20 @@ const confirmPassword = e => {
     return valid
 }
 
+const debounce = (fn, delay = 500) => {
+    let timeoutId
+    return (...args) => {
+        //clear timer
+        if (timeoutId) {
+            clearTimeout(timeoutId)
+        }
+        //set new timer
+        timeoutId = setTimeout(() => {
+            fn.apply(null, args)
+        }, delay)
+    }
+}
+
 //Response to User
 const showError = (input, message) => {
     const formField = input.parentElement
@@ -108,6 +124,7 @@ const showSuccess = input => {
     feedback.textContent = ''
 }
 
+//Forms and Submissions
 const formValidate = e => {
     let isUsernameValid = checkUsername(e),
         isEmailValid = checkEmail(e),
