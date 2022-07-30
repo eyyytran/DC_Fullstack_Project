@@ -1,5 +1,12 @@
 "use strict";
 const { v4 } = require("uuid");
+const bcrypt = require("bcrypt");
+
+const encryptPassword = async (password) => {
+  const salt = await bcrypt.genSalt(5);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  return hashedPassword;
+};
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -18,7 +25,7 @@ module.exports = {
         {
           id: v4(),
           username: "Joe",
-          password: "ilovevarcharmander",
+          password: await encryptPassword("ilovevarcharmander"),
           email: "dadjokes4days@yahoo.com",
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -26,7 +33,7 @@ module.exports = {
         {
           id: v4(),
           username: "Amanda",
-          password: "benjilove",
+          password: await encryptPassword("benjilove"),
           email: "lizardqueen@yahoo.com",
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -34,7 +41,7 @@ module.exports = {
         {
           id: v4(),
           username: "Blake",
-          password: "imissbandpractice",
+          password: await encryptPassword("imissbandpractice"),
           email: "blkeeee@yahoo.com",
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -42,7 +49,7 @@ module.exports = {
         {
           id: v4(),
           username: "Carlos",
-          password: "gimmaVRcar",
+          password: await encryptPassword("gimmeaVRcar"),
           email: "vrracelyfe@yahoo.com",
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -50,7 +57,7 @@ module.exports = {
         {
           id: v4(),
           username: "Rahmin",
-          password: "valormakesmescream",
+          password: await encryptPassword("valormakesmescream"),
           email: "ihateEUvalorplayers@yahoo.com",
           createdAt: new Date(),
           updatedAt: new Date(),

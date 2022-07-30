@@ -15,31 +15,31 @@ module.exports = {
      "UserProjects",
      [
        {
-         userID: "41e1ceaa-3bd6-4cb3-b838-e8547c4b1db9",
+         userID: "322ed5bf-31ed-4b41-976e-c61419be4501",
          projectID: "70d894b3-45cd-4859-a38a-e2489741f828",
          createdAt: new Date(),
          updatedAt: new Date(),
        },
        {
-         userID: "0653cb9e-ef20-4853-a2cc-73e8cb54b749",
+         userID: "7d9203c2-0750-4075-9821-da1d0b1dac6b",
          projectID: "70d894b3-45cd-4859-a38a-e2489741f828",
          createdAt: new Date(),
          updatedAt: new Date(),
        },
        {
-         userID: "95e54e16-1780-41f8-ba2a-bc0ee21fd596",
+         userID: "9389ab34-19c8-442f-a3c3-9eee0b736d47",
          projectID: "70d894b3-45cd-4859-a38a-e2489741f828",
          createdAt: new Date(),
          updatedAt: new Date(),
        },
        {
-         userID: "b8e0d9c4-801c-4f3c-94eb-8b79e0831ab9",
+         userID: "227e944b-621d-4c8c-bb9e-0795de562233",
          projectID: "70d894b3-45cd-4859-a38a-e2489741f828",
          createdAt: new Date(),
          updatedAt: new Date(),
        },
        {
-         userID: "afbc0c43-ea98-4d9d-9a80-49fee6f3a661",
+         userID: "63817f02-182b-49e1-9756-55e84957c522",
          projectID: "70d894b3-45cd-4859-a38a-e2489741f828",
          createdAt: new Date(),
          updatedAt: new Date(),
@@ -56,5 +56,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete("UserProjects", null, {});
   }
 };
