@@ -1,4 +1,3 @@
-//TODO Add instant feedback on form.addeventlisterner with a debounce
 const submitBtn = document.getElementById('submit-button')
 const form = document.getElementById('form-registration')
 
@@ -153,20 +152,20 @@ const submitForm = async e => {
         username: Username,
         password: Password,
         email: Email,
-        // createdAt: new Date(),
-        // updatedAt: new Date(),
     }
-    console.log({ data })
-    const response = await fetch('http://localhost:3001/users/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Access-Control-Allow-Origin': '*',
-            // 'Access-Control-Allow-Methods': 'POST',
-        },
-        body: JSON.stringify(data),
-    })
-    console.log({ response })
+    try {
+        const response = await fetch('http://localhost:3001/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Methods': 'POST',
+            },
+            body: JSON.stringify(data),
+        })
+    } catch (error) {
+        alert('Unable to create user')
+    }
 }
 
 submitBtn.onclick = e => {
@@ -180,3 +179,23 @@ submitBtn.onclick = e => {
         submitForm(e)
     }
 }
+
+form.addEventListener(
+    'input',
+    debounce(function (e) {
+        switch (e.target.id) {
+            case 'username':
+                checkUsername()
+                break
+            case 'email':
+                checkEmail()
+                break
+            case 'password':
+                checkPassword()
+                break
+            case 'confirm-password':
+                confirmPassword()
+                break
+        }
+    })
+)
