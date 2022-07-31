@@ -1,4 +1,3 @@
-console.log('hello')
 const submitBtn = document.getElementById('submit-button')
 
 submitBtn.onclick = () =>
