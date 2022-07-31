@@ -17,8 +17,9 @@ const isEmail = email => {
 
 const isSecure = password => {
     const re = new RegExp(
-        '^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,30}$'
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$'
     )
+
     return re.test(password)
 }
 
@@ -68,7 +69,7 @@ const checkPassword = e => {
     } else if (!isSecure(password)) {
         showError(
             e.target.form[2],
-            'Password must be at least 8 characters with 1 lowercase, 1 uppercase, 1 number, and 1 special character (!@#$%^&*)'
+            'Password must be 8-50 characters with 1 lowercase, 1 uppercase, 1 number, and 1 special character (!@#$%^&*)'
         )
     } else {
         showSuccess(e.target.form[2])
@@ -130,12 +131,12 @@ const formValidate = e => {
         isEmailValid = checkEmail(e),
         isPasswordValid = checkPassword(e),
         confirmPasswordValid = confirmPassword(e)
-    // console.log({
-    //     isEmailValid,
-    //     isPasswordValid,
-    //     isUsernameValid,
-    //     confirmPasswordValid,
-    // })
+    console.log({
+        isEmailValid,
+        isPasswordValid,
+        isUsernameValid,
+        confirmPasswordValid,
+    })
     let isFormValid =
         isUsernameValid &&
         isPasswordValid &&
@@ -150,19 +151,22 @@ const submitForm = async e => {
     const Password = e.target.form[2].value
     const data = {
         username: Username,
-        email: Email,
         password: Password,
-        projects: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        email: Email,
+        // createdAt: new Date(),
+        // updatedAt: new Date(),
     }
-    const package = await fetch('url here', {
+    console.log({ data })
+    const response = await fetch('http://localhost:3001/users/register', {
         method: 'POST',
-        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Methods': 'POST',
         },
+        body: JSON.stringify(data),
     })
+    console.log({ response })
 }
 
 submitBtn.onclick = e => {
