@@ -17,7 +17,7 @@ app.use('/users', usersRoutes)
 app.use('/projects', projectsRoutes)
 app.use('/cards', cardsRoutes)
 
-app.use(express.static('public'))
+app.use('/public', express.static('./public'))
 app.engine('html', es6Renderer)
 app.set('views', 'views')
 app.set('view engine', 'html')
@@ -25,6 +25,9 @@ app.set('view engine', 'html')
 //renders all pages (these two could probably get combined)
 app.get('/', (req, res) => {
     res.render('template', {
+        locals: {
+            title: `<script defer src="/public/js/index.js"></script>`,
+        },
         partials: {
             partial: 'index',
         },
@@ -33,8 +36,10 @@ app.get('/', (req, res) => {
 
 app.get('/:route', (req, res) => {
     const route = req.params.route
-    console.log(route)
     res.render('template', {
+        locals: {
+            title: `<script defer src="/public/js/${route}.js"></script>`,
+        },
         partials: {
             partial: route,
         },
