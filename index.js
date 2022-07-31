@@ -19,11 +19,26 @@ app.use('/cards', cardsRoutes)
 
 app.use(express.static('public'))
 app.engine('html', es6Renderer)
-app.set('views', './public/views')
+app.set('views', 'views')
 app.set('view engine', 'html')
-app.get('/test', (req, res) => {
-    console.log('test successful')
-    res.send('test successful')
+
+//renders all pages (these two could probably get combined)
+app.get('/', (req, res) => {
+    res.render('template', {
+        partials: {
+            partial: 'index',
+        },
+    })
+})
+
+app.get('/:route', (req, res) => {
+    const route = req.params.route
+    console.log(route)
+    res.render('template', {
+        partials: {
+            partial: route,
+        },
+    })
 })
 
 //listening port

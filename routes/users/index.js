@@ -1,5 +1,5 @@
 const express = require('express')
-const { Users } = require('../../../sequelize/models')
+const { Users } = require('../../db/models')
 const router = express.Router()
 const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')

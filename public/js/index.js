@@ -3,12 +3,8 @@ const loginBtn = document.getElementById('login-button')
 const dashboardBtn = document.getElementById('see-dashboard')
 const signupBtn = document.getElementById('sign-up-button')
 
-loginBtn.onclick = () =>
-    (window.location.href =
-        'http://127.0.0.1:5500/controller/public/views/login.html')
+loginBtn.onclick = () => (window.location.href = 'http://localhost:3001/login')
 dashboardBtn.onclick = () =>
-    (window.location.href =
-        'http://127.0.0.1:5500/controller/public/views/dashboard.html')
+    (window.location.href = 'http://localhost:3001/dashboard')
 signupBtn.onclick = () =>
-    (window.location.href =
-        'http://127.0.0.1:5500/controller/public/views/registration.html')
+    (window.location.href = 'http://localhost:3001/signup')
