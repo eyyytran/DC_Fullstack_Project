@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const { getTitle, getScript } = require('./util/locals')
+
 const app = express()
 app.use(
     cors({ origin: 'http://127.0.0.1:5500', methods: 'GET,POST,PUT,DELETE' })
@@ -22,11 +24,11 @@ app.engine('html', es6Renderer)
 app.set('views', 'views')
 app.set('view engine', 'html')
 
-//renders all pages (these two could probably get combined)
 app.get('/', (req, res) => {
     res.render('template', {
         locals: {
-            title: `<script defer src="/public/js/index.js"></script>`,
+            title: getTitle('index'),
+            script: getScript('index'),
         },
         partials: {
             partial: 'index',
@@ -38,7 +40,8 @@ app.get('/:route', (req, res) => {
     const route = req.params.route
     res.render('template', {
         locals: {
-            title: `<script defer src="/public/js/${route}.js"></script>`,
+            title: getTitle(route),
+            script: getScript(route),
         },
         partials: {
             partial: route,
