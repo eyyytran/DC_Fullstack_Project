@@ -1,4 +1,3 @@
-//TODO Add instant feedback on form.addeventlisterner with a debounce
 const submitBtn = document.getElementById('submit-button')
 const form = document.getElementById('form-registration')
 
