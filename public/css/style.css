@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
---root {
+:root {
     --neon-blue: #5768f1;
     --white: #fafcfd;
+    --dark-blue: #455276;
+    --red: #eb557a;
+    --light-blue: #eff4fe;
+    --green: #1da4a3;
+    --lavender: #e6e9fe;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
+    color: var(--dark-blue);
 }
 
 * {
@@ -20,10 +26,23 @@ button {
     border-radius: 2px;
     border: none;
     font-family: 'Open Sans', sans-serif;
+    color: var(--lavender);
 }
 
+a,
 button:hover {
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #455276;
+    margin-top: 10px;
+}
+
+h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Home Page Styling */
@@ -31,22 +50,62 @@ button:hover {
 .container-home {
     height: 100vh;
     width: 100vw;
-    background: lightblue;
+    background: rgb(250, 252, 253);
+    background: linear-gradient(
+        rgba(87, 104, 241, 0.7) 10%,
+        rgba(250, 252, 253, 1) 70%
+    );
     display: grid;
     grid-template-rows: auto 1fr;
 }
 
 .header {
-    border: 3px solid red;
-    padding: 1rem;
+    background-color: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .content-home {
-    border: 3px solid blue;
-    padding: 1rem;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+}
+
+#signupbtn {
+    width: 90%;
+    max-width: 350px;
+    height: 60px;
+    background: var(--neon-blue);
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+#loginbtn {
+    background: var(--dark-blue);
+    width: 200px;
+    height: 100%;
+    display: block;
+}
+
+#dashboardbtn {
+    background: var(--dark-blue);
+    width: 200px;
+    height: 100%;
+    display: none;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 /* Registration Page Styling */
@@ -62,4 +121,12 @@ button:hover {
 .content-registration {
     width: 100%;
     height: 100%;
+}
+
+@media (min-width: 600px) {
+    .content-home {
+        flex-direction: row-reverse;
+        text-align: justify;
+        justify-content: center;
+    }
 }
