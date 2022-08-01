@@ -1,7 +1,18 @@
 const createbtn = document.getElementById('d-createbtn')
-const card = document.getElementsByClassName('d-project-card')
+const projectList = document.getElementById('d-projects')
+console.log(projectList)
 
 createbtn.addEventListener('click', () => console.log('I got clicked'))
+
+const generateCards = list => {
+    for (let project = 0; project < list.length; project++) {
+        const card = document.createElement('div')
+        const content = list[project].name
+        card.innerHTML = content
+        card.classList.add('d-project-card')
+        projectList.append(card)
+    }
+}
 
 const loadProjects = async () => {
     try {
@@ -10,7 +21,7 @@ const loadProjects = async () => {
             { method: 'GET' }
         )
         const data = await projects.json()
-        data.map(project => )
+        generateCards(data)
     } catch (error) {
         alert('could not fetch projects')
     }
