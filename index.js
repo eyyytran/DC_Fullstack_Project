@@ -44,6 +44,7 @@ app.get('/:route', (req, res) => {
         locals: {
             title: getTitle(route),
             script: getScript(route),
+            allProjects: [],
         },
         partials: {
             partial: route,

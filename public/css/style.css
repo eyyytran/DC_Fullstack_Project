@@ -59,11 +59,16 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
+.formfield,
 form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.error {
+    color: var(--red);
 }
 
 /* Home Page Styling */
