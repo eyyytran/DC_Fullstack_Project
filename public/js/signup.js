@@ -93,20 +93,6 @@ const confirmPassword = e => {
     return valid
 }
 
-const debounce = (fn, delay = 500) => {
-    let timeoutId
-    return (...args) => {
-        //clear timer
-        if (timeoutId) {
-            clearTimeout(timeoutId)
-        }
-        //set new timer
-        timeoutId = setTimeout(() => {
-            fn.apply(null, args)
-        }, delay)
-    }
-}
-
 //Response to User
 const showError = (input, message) => {
     const formField = input.parentElement
@@ -154,7 +140,7 @@ const submitForm = async e => {
         email: Email,
     }
     try {
-        const response = await fetch('http://localhost:3001/users/register', {
+        const request = await fetch('http://localhost:3001/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -163,6 +149,8 @@ const submitForm = async e => {
             },
             body: JSON.stringify(data),
         })
+        alert('Registration complete')
+        window.location.href = 'http://localhost:3001/login'
     } catch (error) {
         alert('Unable to create user')
     }
@@ -174,28 +162,9 @@ submitBtn.onclick = e => {
 
     if (!isFormValid) {
         console.log('Will not be submitted')
+        alert('Unable to submit form')
     } else {
         console.log('Will be submitted')
         submitForm(e)
     }
 }
-
-form.addEventListener(
-    'input',
-    debounce(function (e) {
-        switch (e.target.id) {
-            case 'username':
-                checkUsername()
-                break
-            case 'email':
-                checkEmail()
-                break
-            case 'password':
-                checkPassword()
-                break
-            case 'confirm-password':
-                confirmPassword()
-                break
-        }
-    })
-)
