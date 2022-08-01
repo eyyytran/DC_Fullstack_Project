@@ -36,11 +36,7 @@ router.post("/login", async (req, res) => {
   const validated = await bcrypt.compare(password, validateUser.password);
   if (validated) {
     req.session.user = user;
-    // res.json({
-    //   message: "Login Success",
-    //   user: user,
-    // });
-    res.redirect("/dashboard")
+    res.status(200).send("login successful")
   } else {
     res.json({
       message: "Login Failed",
