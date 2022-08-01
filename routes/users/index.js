@@ -28,23 +28,36 @@ router.post("/register", async (req, res) => {
 // login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-    const user = await Users.findOne({
-      where: { username: username },
+  const user = await Users.findOne({
+    where: { username: username },
+  });
+  const validateUser = user.dataValues;
+  const validated = await bcrypt.compare(password, validateUser.password);
+  if (validated) {
+     req.session.user = user;
+     res.json({
+       message: "Login Success",
+       user: user,
+     });
+  } else {
+    res.json({
+      message: "Login Failed",
     });
-    const validateUser = user.dataValues;
-    const validated = await bcrypt.compare(password, validateUser.password);
-    if (validated) {
-      req.session.user = user
-      user: user
-      res.send("success")
-    } else {
-      res.json({
-        message: "error ",
-      });
-    }
+  }
 });
+
+const checkLogin = async (req, res, next) => {
+  console.log("check", req.session.user);
+  if (req.session.user) {
+    next();
+  } else {
+    res.json({
+      message: "Login Failed",
+    });
+  }
+};
 // update user
-router.put("/update_user", async (req, res) => {
+router.put("/update_user", checkLogin, async (req, res) => {
   const { email, password, newPassword, newEmail, newUsername } = req.body;
   try {
     // find user based on email in our database
@@ -70,7 +83,7 @@ router.put("/update_user", async (req, res) => {
   }
 });
 // delete account
-router.delete("/destroy_user", async (req, res) => {
+router.delete("/destroy_user", checkLogin, async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await Users.findOne({ where: { email: email } });
