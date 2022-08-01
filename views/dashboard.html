@@ -1,8 +1,19 @@
-<div>
-    <h1>Dashboard</h1>
-    <ul>
-            ${allProjects.map(item => `
-            <li>${item.name}</li>
-            `).join('')}
+<div class="d-container">
+    <div class="header">
+        <div class="nav-bar" id="logo">
+            <img
+                src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
+            />
+            <h1>Trelljoe</h1>
+        </div>
+    </div>
+    <div class="d-content">
+        <div class="d-projects">
+            <ul>
+                ${allProjects.map(item => `
+                <li>${item.name}</li>
+                `).join('')}
             </ul>
+        </div>
+    </div>
 </div>

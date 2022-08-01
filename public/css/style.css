@@ -59,6 +59,7 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
+.formfield,
 form {
     display: flex;
     flex-direction: column;
@@ -66,8 +67,11 @@ form {
     align-items: center;
 }
 
-/* Home Page Styling */
+.error {
+    color: var(--red);
+}
 
+.d-container,
 .h-container {
     height: 100vh;
     width: 100vw;
@@ -87,6 +91,7 @@ form {
     align-items: center;
 }
 
+.d-content,
 .h-content {
     height: 100%;
     width: 100%;
