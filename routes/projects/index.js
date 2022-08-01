@@ -20,7 +20,7 @@ router.post("/create_project", async (req, res) => {
   }
 });
 
-router.post("/get_projects", async (req, res) => {
+router.get("/get_projects", async (req, res) => {
   const { userID } = req.body;
   const allProjectIDs = await UserProjects.findAll({
     where: { userID: userID },
