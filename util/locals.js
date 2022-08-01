@@ -41,7 +41,7 @@ const createUser = async () => {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(userToCreate),
     });
-    const json = await send.json()
-    console.log(json)
+    const json = await send.json();
+    console.log(json);
   }
 };
