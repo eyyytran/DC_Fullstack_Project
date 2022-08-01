@@ -50,14 +50,14 @@ a {
     margin-bottom: 10px;
 }
 
-h1 {
+h1,
+h2 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-h2 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+h3 {
+    margin: 0;
 }
 
 input {
@@ -76,7 +76,6 @@ form {
     color: var(--red);
 }
 
-.d-container,
 .h-container {
     height: 100vh;
     width: 100vw;
@@ -188,6 +187,7 @@ form {
     background: var(--lavender);
 }
 
+.d-inputs,
 .l-inputs,
 .su-inputs {
     margin: 1rem;
@@ -198,11 +198,13 @@ form {
     padding: 1rem;
 }
 
+.d-inputs:focus,
 .l-inputs:focus,
 .su-inputs:focus {
     border-color: var(--dark-blue);
 }
 
+.d-inputs:focus::placeholder,
 .l-inputs:focus::placeholder,
 .su-inputs:focus::placeholder {
     color: transparent;
@@ -213,6 +215,7 @@ form {
     background: transparent;
 }
 
+#d-submitbtn,
 #l-submitbtn,
 #su-submitbtn {
     width: 200px;
@@ -229,8 +232,15 @@ form {
     cursor: pointer;
 }
 
+.d-container {
+    height: 100vh;
+    width: 100vw;
+    background: var(--light-blue);
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
 .d-projects {
-    border: 3px solid blue;
     height: 100%;
     width: 100%;
     display: flex;
@@ -241,9 +251,39 @@ form {
 }
 
 .d-project-card {
-    border: 3px solid red;
+    border-radius: 5px;
     height: var(--cardheight);
     width: var(--cardwidth);
+    background: var(--white);
+    padding: 1rem;
+    text-align: left;
+}
+
+.d-module {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100vw;
+    margin: 0 auto 10px;
+    height: 100%;
+    overflow: auto;
+    font-size: 18px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.d-module-contents {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    width: 90vw;
+    padding: 20px;
+    background-color: var(--white);
+}
+
+.d-module-title {
+    text-align: center;
 }
 
 @media (min-width: 600px) {
@@ -289,6 +329,15 @@ form {
     .l-container,
     .su-container {
         background-color: var(--light-blue);
+    }
+
+    .d-projects {
+        height: 100%;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1rem;
     }
 }
 

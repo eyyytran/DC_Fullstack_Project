@@ -8,13 +8,33 @@
         </div>
         <button id="d-createbtn"><h2>Create</h2></button>
     </div>
+
+    <div class="d-module">
+        <div class="d-module-contents">
+            <div class="d-module-title">Let's work!</div>
+            <form id="d-form">
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="project-name"
+                        class="d-inputs"
+                        placeholder="Project Name"
+                    />
+                    <small></small>
+                </div>
+                <input type="button" value="Submit" id="d-submitbtn" />
+                <button class="d-close">Cancel</button>
+            </form>
+        </div>
+    </div>
+
     <div class="d-content">
+        <div class="d-projects-title">
+            <h2>Your Projects</h2>
+        </div>
         <div class="d-projects">
-            <div class="d-projects-title">
-                <h2>Your Projects</h2>
-            </div>
             ${allProjects.map(item => `
-            <div class="d-project-card">${item.name}</div>
+            <div class="d-project-card"><h3>${item.name}</h3></div>
             `).join('')}
         </div>
     </div>
