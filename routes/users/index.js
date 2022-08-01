@@ -64,9 +64,10 @@ router.put('/update_user', async (req, res) => {
                 username: newUsername,
                 password: hashedPassword,
                 email: newEmail,
+                updatedAt: new Date()
             })
             await currentUser.save()
-            res.status(200).send('User updated')
+            res.status(200).send(currentUser)
         }
     } catch (error) {
         res.send('could not find')

@@ -10,6 +10,7 @@ app.use(
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
 const cardsRoutes = require('./routes/cards')
+const userProjectRoutes = require('./routes/user_projects')
 const es6Renderer = require('express-es6-template-engine')
 const PORT = 3001
 
@@ -18,10 +19,11 @@ app.use(express.json())
 app.use('/users', usersRoutes)
 app.use('/projects', projectsRoutes)
 app.use('/cards', cardsRoutes)
+app.use('/user_projects', userProjectRoutes)
 
 app.use('/public', express.static('./public'))
 app.engine('html', es6Renderer)
-app.set('views', 'views')
+app.set('views', './views')
 app.set('view engine', 'html')
 
 app.get('/', (req, res) => {
