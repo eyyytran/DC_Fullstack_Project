@@ -1,30 +1,45 @@
 const express = require('express')
+const app = express();
 const cors = require('cors')
-const { getTitle, getScript } = require('./util/locals')
-
-const app = express()
-app.use(
-    cors({ origin: 'http://127.0.0.1:5500', methods: 'GET,POST,PUT,DELETE' })
-)
-
-const usersRoutes = require('./routes/users')
-const projectsRoutes = require('./routes/projects')
-const cardsRoutes = require('./routes/cards')
-const userProjectRoutes = require('./routes/user_projects')
-const es6Renderer = require('express-es6-template-engine')
-const PORT = 3001
-
+const es6Renderer = require("express-es6-template-engine");
+const models = require("./db/models")
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const store = new SequelizeStore({
+  db: models.sequelize,
+});
+const PORT = 3001;
+//routes
+const usersRoutes = require("./routes/users");
+const projectsRoutes = require("./routes/projects");
+const cardsRoutes = require("./routes/cards");
+const userProjectRoutes = require("./routes/user_projects");
+const { getTitle, getScript } = require("./util/locals");
 //middleware
+app.use(
+  cors({ origin: "http://127.0.0.1:5500", methods: "GET,POST,PUT,DELETE" })
+);
 app.use(express.json())
-app.use('/users', usersRoutes)
-app.use('/projects', projectsRoutes)
-app.use('/cards', cardsRoutes)
-app.use('/user_projects', userProjectRoutes)
-
 app.use('/public', express.static('./public'))
 app.engine('html', es6Renderer)
 app.set('views', './views')
 app.set('view engine', 'html')
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+  })
+);
+store.sync();
+//routes
+app.use("/users", usersRoutes);
+app.use("/projects", projectsRoutes);
+app.use("/cards", cardsRoutes);
+app.use("/user_projects", userProjectRoutes);
 
 app.get('/', (req, res) => {
     res.render('template', {
