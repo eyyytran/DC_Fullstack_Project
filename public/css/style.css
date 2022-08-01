@@ -45,6 +45,17 @@ h1 {
     margin-bottom: 1rem;
 }
 
+input {
+    font-family: 'Open Sans', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Home Page Styling */
 
 .container-home {
@@ -116,11 +127,44 @@ h1 {
     display: grid;
     grid-template-rows: auto 1fr;
     place-items: center;
+    background: var(--white);
 }
 
 .content-registration {
     width: 100%;
     height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: var(--lavender);
+}
+
+.su-inputs {
+    margin: 1rem;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 250px;
+    padding: 1rem;
+}
+
+#header-su {
+    background: transparent;
+}
+
+#submitbtn-su {
+    width: 200px;
+    height: 40px;
+    background: var(--dark-blue);
+    border: none;
+    border-radius: 2px;
+    color: var(--white);
+}
+
+#submitbtn-su:hover {
+    cursor: pointer;
 }
 
 @media (min-width: 600px) {
@@ -128,5 +172,11 @@ h1 {
         flex-direction: row-reverse;
         text-align: justify;
         justify-content: center;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    * {
+        max-width: 100vw;
     }
 }
