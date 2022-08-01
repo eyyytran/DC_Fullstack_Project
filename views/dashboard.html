@@ -6,14 +6,17 @@
             />
             <h1>Trelljoe</h1>
         </div>
+        <button id="d-createbtn"><h2>Create</h2></button>
     </div>
     <div class="d-content">
         <div class="d-projects">
-            <ul>
-                ${allProjects.map(item => `
-                <li>${item.name}</li>
-                `).join('')}
-            </ul>
+            <div class="d-projects-title">
+                <h2>Your Projects</h2>
+            </div>
+            ${allProjects.map(item => `
+            <div class="d-project-card">${item.name}</div>
+            `).join('')}
         </div>
     </div>
 </div>
+${script}

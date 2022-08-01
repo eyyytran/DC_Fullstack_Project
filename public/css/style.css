@@ -8,10 +8,15 @@
     --light-blue: #eff4fe;
     --green: #1da4a3;
     --lavender: #e6e9fe;
+}
+
+:root {
     --heroheight: 275px;
     --modulewidth: 793px;
     --formwidth: 400px;
     --moduleheight: 530px;
+    --cardheight: 200px;
+    --cardwidth: 300px;
 }
 
 body {
@@ -112,6 +117,7 @@ form {
     font-weight: bolder;
 }
 
+#d-createbtn,
 #h-loginbtn {
     background: var(--dark-blue);
     width: 200px;
@@ -221,6 +227,23 @@ form {
 #l-submitbtn,
 #su-submitbtn:hover {
     cursor: pointer;
+}
+
+.d-projects {
+    border: 3px solid blue;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.d-project-card {
+    border: 3px solid red;
+    height: var(--cardheight);
+    width: var(--cardwidth);
 }
 
 @media (min-width: 600px) {
