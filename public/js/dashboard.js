@@ -1,12 +1,11 @@
 const createbtn = document.getElementById('d-createbtn')
 const projectList = document.getElementById('d-projects')
-console.log(projectList)
-
-createbtn.addEventListener('click', () => console.log('I got clicked'))
+const createmodule = document.querySelector('.d-module')
+const cancelbtn = document.querySelector('.d-close')
 
 const generateCards = list => {
     for (let project = 0; project < list.length; project++) {
-        const card = document.createElement('div')
+        const card = document.createElement('button')
         const content = list[project].name
         card.innerHTML = content
         card.classList.add('d-project-card')
@@ -26,5 +25,13 @@ const loadProjects = async () => {
         alert('could not fetch projects')
     }
 }
+
+createbtn.addEventListener('click', () => {
+    createmodule.style.display = 'block'
+})
+
+cancelbtn.addEventListener('click', () => {
+    createmodule.style.display = 'none'
+})
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())

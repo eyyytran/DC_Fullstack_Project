@@ -238,6 +238,7 @@ form {
     background: var(--light-blue);
     display: grid;
     grid-template-rows: auto 1fr;
+    overflow-y: auto;
 }
 
 .d-projects {
@@ -245,25 +246,20 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
 }
 
 .d-project-card {
     border-radius: 5px;
     height: var(--cardheight);
     width: var(--cardwidth);
-    background: rgb(230, 233, 254);
-    background: linear-gradient(
-        36deg,
-        rgba(230, 233, 254, 1) 52%,
-        rgba(87, 104, 241, 1) 100%
-    );
+    background: var(--neon-blue);
     padding: 1rem;
-    text-align: left;
+    line-height: 1rem;
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
     font-size: 18px;
+    margin: 1rem;
 }
 
 .d-module {
@@ -347,7 +343,7 @@ form {
         flex-direction: row;
         justify-content: center;
         align-items: flex-start;
-        gap: 1rem;
+        flex-wrap: wrap;
     }
 }
 
