@@ -21,7 +21,8 @@ router.post("/create_project", async (req, res) => {
 });
 
 router.get("/get_projects", async (req, res) => {
-  const { userID } = req.body;
+  const { userID } = req.session.id;
+  console.log(userID)
   const allProjectIDs = await UserProjects.findAll({
     where: { userID: userID },
     attributes: ["projectID"],
