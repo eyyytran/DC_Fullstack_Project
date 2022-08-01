@@ -71,8 +71,7 @@ form {
     color: var(--red);
 }
 
-/* Home Page Styling */
-
+.d-container,
 .h-container {
     height: 100vh;
     width: 100vw;
@@ -92,6 +91,7 @@ form {
     align-items: center;
 }
 
+.d-content,
 .h-content {
     height: 100%;
     width: 100%;
