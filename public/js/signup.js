@@ -1,5 +1,5 @@
-const submitBtn = document.getElementById('submit-button')
-const form = document.getElementById('form-registration')
+const submitBtn = document.getElementById('su-submitbtn')
+const form = document.getElementById('su-form')
 
 //Utility Functions
 const isRequired = value => (value === '' ? false : true)
@@ -144,8 +144,6 @@ const submitForm = async e => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*',
-                // 'Access-Control-Allow-Methods': 'POST',
             },
             body: JSON.stringify(data),
         })
