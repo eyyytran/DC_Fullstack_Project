@@ -254,9 +254,16 @@ form {
     border-radius: 5px;
     height: var(--cardheight);
     width: var(--cardwidth);
-    background: var(--white);
+    background: rgb(230, 233, 254);
+    background: linear-gradient(
+        36deg,
+        rgba(230, 233, 254, 1) 52%,
+        rgba(87, 104, 241, 1) 100%
+    );
     padding: 1rem;
     text-align: left;
+    box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+    font-size: 18px;
 }
 
 .d-module {
