@@ -6,9 +6,9 @@ const bcrypt = require("bcrypt");
 
 // user registration
 router.post("/register", async (req, res) => {
-  console.log("register endpoint runs...");
-  console.log({ resHeaders: res.headers });
-  const { username, password, email } = req.body;
+  // console.log("register endpoint runs...");
+  // console.log({ resHeaders: res.headers });
+  const { username, password, email } = await req.body;
   try {
     const salt = await bcrypt.genSalt(5);
     const hashedPassword = await bcrypt.hash(password, salt);
