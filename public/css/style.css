@@ -116,11 +116,30 @@ h1 {
     display: grid;
     grid-template-rows: auto 1fr;
     place-items: center;
+    background: var(--lavender);
 }
 
 .content-registration {
     width: 100%;
     height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.su-inputs {
+    margin: 1rem;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 250px;
+    padding: 1rem;
+}
+
+#header-su {
+    background: transparent;
 }
 
 @media (min-width: 600px) {
