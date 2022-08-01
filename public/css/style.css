@@ -280,6 +280,7 @@ form {
     width: 90vw;
     padding: 20px;
     background-color: var(--white);
+    margin: 0;
 }
 
 .d-module-title {
