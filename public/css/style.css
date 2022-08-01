@@ -49,6 +49,13 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Home Page Styling */
 
 .container-home {
@@ -131,8 +138,6 @@ input {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border-top-left-radius: 4rem;
-    border-top-right-radius: 4rem;
     background: var(--lavender);
 }
 
@@ -147,6 +152,19 @@ input {
 
 #header-su {
     background: transparent;
+}
+
+#submitbtn-su {
+    width: 200px;
+    height: 40px;
+    background: var(--dark-blue);
+    border: none;
+    border-radius: 2px;
+    color: var(--white);
+}
+
+#submitbtn-su:hover {
+    cursor: pointer;
 }
 
 @media (min-width: 600px) {
