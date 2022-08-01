@@ -45,6 +45,10 @@ h1 {
     margin-bottom: 1rem;
 }
 
+input {
+    font-family: 'Open Sans', sans-serif;
+}
+
 /* Home Page Styling */
 
 .container-home {
@@ -116,7 +120,7 @@ h1 {
     display: grid;
     grid-template-rows: auto 1fr;
     place-items: center;
-    background: var(--lavender);
+    background: var(--white);
 }
 
 .content-registration {
@@ -127,6 +131,9 @@ h1 {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
+    background: var(--lavender);
 }
 
 .su-inputs {
