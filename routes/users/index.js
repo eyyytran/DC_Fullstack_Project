@@ -19,6 +19,7 @@ router.post("/register", async (req, res) => {
       updatedAt: new Date(),
     };
     const user = await Users.create(userToCreate);
+    req.session.user = user;
     res.status(200).send(user);
   } catch (error) {
     console.log(error);
@@ -27,18 +28,19 @@ router.post("/register", async (req, res) => {
 });
 // login
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   const user = await Users.findOne({
-    where: { username: username },
+    where: { email: email },
   });
   const validateUser = user.dataValues;
   const validated = await bcrypt.compare(password, validateUser.password);
   if (validated) {
-     req.session.user = user;
-     res.json({
-       message: "Login Success",
-       user: user,
-     });
+    req.session.user = user;
+    // res.json({
+    //   message: "Login Success",
+    //   user: user,
+    // });
+    res.redirect("/dashboard")
   } else {
     res.json({
       message: "Login Failed",

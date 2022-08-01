@@ -148,7 +148,7 @@ const submitForm = async e => {
             body: JSON.stringify(data),
         })
         alert('Registration complete')
-        window.location.href = 'http://localhost:3001/login'
+        window.location.href = 'http://localhost:3001/dashboard'
     } catch (error) {
         alert('Unable to create user')
     }
