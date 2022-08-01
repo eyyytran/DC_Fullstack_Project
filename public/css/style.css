@@ -260,12 +260,11 @@ form {
 }
 
 .d-module {
-    display: block;
+    display: none;
     position: fixed;
     z-index: 1;
     top: 0;
     width: 100vw;
-    margin: 0 auto 10px;
     height: 100%;
     overflow: auto;
     font-size: 18px;
@@ -276,15 +275,18 @@ form {
 .d-module-contents {
     display: flex;
     flex-direction: column;
-    height: 90vh;
-    width: 90vw;
     padding: 20px;
     background-color: var(--white);
-    margin: 0;
+    margin-right: 0px;
 }
 
 .d-module-title {
     text-align: center;
+}
+
+.d-close {
+    background-color: var(--lavender);
+    color: var(--dark-blue);
 }
 
 @media (min-width: 600px) {
