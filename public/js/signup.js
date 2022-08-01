@@ -1,5 +1,5 @@
-const submitBtn = document.getElementById('submit-button')
-const form = document.getElementById('form-registration')
+const submitBtn = document.getElementById('su-submitbtn')
+const form = document.getElementById('su-form')
 
 //Utility Functions
 const isRequired = value => (value === '' ? false : true)
