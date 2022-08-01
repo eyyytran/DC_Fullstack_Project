@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt')
 
 // user registration
 router.post('/register', async (req, res) => {
-    console.log('register endpoint runs...')
-    console.log({ resHeaders: res.headers })
-    const { username, password, email } = req.body
+    // console.log("register endpoint runs...");
+    // console.log({ resHeaders: res.headers });
+    const { username, password, email } = await req.body
     try {
         const salt = await bcrypt.genSalt(5)
         const hashedPassword = await bcrypt.hash(password, salt)
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
     }
 })
 // login
-router.post('/login', async (req, res) => {
+router.get('/login', async (req, res) => {
     const { username, password } = req.body
     try {
         const currentUser = await Users.findOne({
@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
             res.status(200).send('Sucessful login')
         }
     } catch (error) {
-        res.send('could not find username')
+        res.send('could not find')
     }
 })
 // update user
@@ -69,7 +69,7 @@ router.put('/update_user', async (req, res) => {
             res.status(200).send('User updated')
         }
     } catch (error) {
-        res.send('could not find email')
+        res.send('could not find')
     }
 })
 // delete account
@@ -86,8 +86,7 @@ router.delete('/destroy_user', async (req, res) => {
             res.send('User destroyed')
         }
     } catch (error) {
-        res.send('could not find email')
+        res.send('could not destroy')
     }
 })
-
 module.exports = router
