@@ -53,6 +53,7 @@ router.put("/update_card", async (req, res) => {
       description: description,
       status: status,
       userID: userID,
+      updatedAt: new Date()
     });
     const card = await currentCard.save();
     res.status(200).send(card);
