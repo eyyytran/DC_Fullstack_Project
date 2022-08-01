@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
     }
 })
 // login
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body
     try {
         const currentUser = await Users.findOne({
