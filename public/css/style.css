@@ -263,6 +263,7 @@ form {
     text-align: left;
     margin: 1rem;
     position: relative;
+    transition: transform 0.25s;
 }
 
 .d-module {
@@ -316,6 +317,10 @@ form {
 
 .d-project-card:hover .d-editbtn {
     display: block;
+}
+
+.d-project-card:hover {
+    transform: translateY(-5px);
 }
 
 @media (min-width: 600px) {
