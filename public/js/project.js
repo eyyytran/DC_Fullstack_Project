@@ -14,29 +14,39 @@ const loadCards = async () => {
         const cards = await sendData.json()
         generateCards(cards)
     } catch (error) {
-        alert('could not fetch projects')
+        alert('could not load your project')
     }
 }
 
 const generateCards = list => {
     for (let card = 0; card < list.length; card++) {
-        const card = document.createElement('div')
-        const editbtn = document.createElement('button')
-        const editbtnimage = document.createElement('img')
-        const content = list[card].name
-        const projectId = list[card].id
-        editbtnimage.src =
-            'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
-        card.innerHTML = content
+        const toDoList = document.getElementById('p-todo-container')
+        const doingList = document.getElementById('p-doing-container')
+        const reviewList = document.getElementById('p-review-container')
+        const completeList = document.getElementById('p-complete-container')
 
-        editbtn.classList.add('d-editbtn')
-        editbtnimage.classList.add('d-editbtn-image')
-        card.classList.add('d-project-card')
-        card.setAttribute('id', projectId)
+        const cardContainer = document.createElement('div')
 
-        projectList.append(card)
-        card.append(editbtn)
-        editbtn.append(editbtnimage)
+        let status = list[card].status
+
+        // const cardContainer = document.createElement('div')
+        // const card = document.createElement('div')
+        // const editbtn = document.createElement('button')
+        // const editbtnimage = document.createElement('img')
+        // const content = list[card].name
+        // const projectId = list[card].id
+        // editbtnimage.src =
+        //     'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
+        // card.innerHTML = content
+        // cardContainer.classList.add(`p-${status}-container`)
+        // editbtn.classList.add('p-editbtn')
+        // editbtnimage.classList.add('p-editbtn-image')
+        // card.classList.add('p-project-card')
+        // card.setAttribute('id', projectId)
+
+        // projectList.append(card)
+        // card.append(editbtn)
+        // editbtn.append(editbtnimage)
     }
 }
 
