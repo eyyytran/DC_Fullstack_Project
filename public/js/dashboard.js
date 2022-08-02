@@ -111,6 +111,24 @@ const editProjectName = async newName => {
     alert('Successfully updated your project name')
 }
 
+const deleteProject = async () => {
+    const requestData = {
+        id: localStorage.getItem('projectId'),
+    }
+    console.log(requestData)
+    const sendData = await fetch(
+        'http://localhost:3001/projects/destroy_project',
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
+    localStorage.clear()
+}
+
 createbtn.addEventListener('click', () => {
     createmodule.style.display = 'block'
 })
@@ -119,10 +137,12 @@ submitbtn.addEventListener('click', () => {
     createProject()
     createmodule.style.display = 'none'
     location.reload()
+    console.log('submit btn')
 })
 
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
+    console.log('cancel button')
 })
 
 document.addEventListener('click', e => {
@@ -132,11 +152,24 @@ document.addEventListener('click', e => {
     ) {
         openEditModule(e)
     }
+    if (e.target.className === 'd-project-card') {
+        localStorage.clear()
+        localStorage.setItem('projectId', e.target.id)
+        window.location.href = 'http://localhost:3001/project'
+    }
 })
 
 Esubmitbtn.addEventListener('click', e => {
+    e.preventDefault()
     const newName = e.target.form[0].value
     editProjectName(newName)
+    createmodule.style.display = 'none'
+    location.reload()
+})
+
+deletebtn.addEventListener('click', e => {
+    e.preventDefault()
+    deleteProject()
     createmodule.style.display = 'none'
     location.reload()
 })

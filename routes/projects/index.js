@@ -1,7 +1,7 @@
-const express = require("express");
-const { v4 } = require("uuid");
-const { UserProjects, Projects, Users, Cards } = require("../../db/models");
-const router = express.Router();
+const express = require('express')
+const { v4 } = require('uuid')
+const { UserProjects, Projects, Users, Cards } = require('../../db/models')
+const router = express.Router()
 
 router.post("/create_project", async (req, res) => {
   const { name } = await req.body;
