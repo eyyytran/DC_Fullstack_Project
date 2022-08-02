@@ -36,6 +36,7 @@ router.post("/create_card", async (req, res) => {
 
 // project page
 // get cards
+// param 
 router.get("/get_cards", async (req, res) => {
   const allCards = await Cards.findAll();
   res.render("cards", {
