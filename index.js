@@ -10,15 +10,8 @@ const store = new SequelizeStore({
     db: models.sequelize,
 })
 const PORT = 3001
-// validate user
-const checkLogin = async (req, res, next) => {
-  console.log("check", req.session.user);
-  if (req.session.user) {
-    next();
-  } else {
-    res.status(400).send("login failed").redirect("/login")
-  }
-};
+
+
 // import routes
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
@@ -44,6 +37,23 @@ app.use(
     })
 )
 store.sync()
+// validate user
+const checkLogin = (req, res, next) => {
+  console.log("check", req.session.user);
+  if (req.session.user) {
+    next();
+  } else {
+    res.render('template', {
+        locals: {
+            title: getTitle('login'),
+            script: getScript('login'),
+        },
+        partials: {
+            partial: 'login',
+        },});
+  }
+};
+
 // use routes
 app.use('/users', usersRoutes)
 app.use('/projects', checkLogin, projectsRoutes)
@@ -62,7 +72,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/:route', (req, res) => {
+app.get('/:route', checkLogin, (req, res) => {
     const route = req.params.route
     res.render('template', {
         locals: {
