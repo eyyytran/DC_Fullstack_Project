@@ -42,12 +42,20 @@ router.post("/login", async (req, res) => {
   }
 });
 // validate user
-const checkLogin = async (req, res, next) => {
+const checkLogin = (req, res, next) => {
   console.log("check", req.session.user);
   if (req.session.user) {
     next();
   } else {
-    res.status(400).send("could not login");
+    res.render("template", {
+      locals: {
+        title: getTitle("login"),
+        script: getScript("login"),
+      },
+      partials: {
+        partial: "login",
+      },
+    });
   }
 };
 // update user
