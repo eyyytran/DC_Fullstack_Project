@@ -241,7 +241,7 @@ form {
     overflow-y: auto;
 }
 
-.d-projects {
+#d-projects {
     height: 100%;
     width: 100%;
     display: flex;
@@ -259,7 +259,10 @@ form {
     line-height: 1rem;
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
     font-size: 18px;
+    color: var(--white);
+    text-align: left;
     margin: 1rem;
+    position: relative;
 }
 
 .d-module {
@@ -301,6 +304,18 @@ form {
     background-color: var(--lavender);
     color: var(--dark-blue);
     width: 150px;
+}
+
+.d-editbtn {
+    background: transparent;
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+}
+
+.d-project-card:hover .d-editbtn {
+    display: block;
 }
 
 @media (min-width: 600px) {
@@ -348,7 +363,7 @@ form {
         background-color: var(--light-blue);
     }
 
-    .d-projects {
+    #d-projects {
         height: 100%;
         width: 100%;
         flex-direction: row;

@@ -6,11 +6,21 @@ const submitbtn = document.getElementById('d-submitbtn')
 
 const generateCards = list => {
     for (let project = 0; project < list.length; project++) {
-        const card = document.createElement('button')
+        const card = document.createElement('div')
+        const editbtn = document.createElement('button')
+        const editbtnimage = document.createElement('img')
         const content = list[project].name
+        editbtnimage.src =
+            'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
         card.innerHTML = content
+
+        editbtn.classList.add('d-editbtn')
+        editbtnimage.classList.add('d-editbtn-image')
         card.classList.add('d-project-card')
+
         projectList.append(card)
+        card.append(editbtn)
+        editbtn.append(editbtnimage)
     }
 }
 
