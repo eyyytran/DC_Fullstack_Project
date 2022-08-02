@@ -266,6 +266,7 @@ form {
     transition: transform 0.25s;
 }
 
+.de-module,
 .d-module {
     display: none;
     position: fixed;
@@ -279,6 +280,7 @@ form {
     background: rgba(0, 0, 0, 0.4);
 }
 
+.de-module-contents,
 .d-module-contents {
     position: absolute;
     top: 50%;

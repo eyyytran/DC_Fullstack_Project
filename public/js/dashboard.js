@@ -1,8 +1,12 @@
 const createbtn = document.getElementById('d-createbtn')
 const projectList = document.getElementById('d-projects')
 const createmodule = document.querySelector('.d-module')
+const editmodule = document.querySelector('.de-module')
 const cancelbtn = document.querySelector('.d-close')
 const submitbtn = document.getElementById('d-submitbtn')
+const Esubmitbtn = document.getElementById('de-submitbtn')
+const deletebtn = document.querySelector('.de-deleteboard')
+const Ecancelbtn = document.querySelector('.de-close')
 
 const generateCards = list => {
     for (let project = 0; project < list.length; project++) {
@@ -10,6 +14,7 @@ const generateCards = list => {
         const editbtn = document.createElement('button')
         const editbtnimage = document.createElement('img')
         const content = list[project].name
+        const projectId = list[project].id
         editbtnimage.src =
             'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
         card.innerHTML = content
@@ -17,6 +22,7 @@ const generateCards = list => {
         editbtn.classList.add('d-editbtn')
         editbtnimage.classList.add('d-editbtn-image')
         card.classList.add('d-project-card')
+        card.setAttribute('id', projectId)
 
         projectList.append(card)
         card.append(editbtn)
@@ -70,6 +76,12 @@ submitbtn.addEventListener('click', () => {
 
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
+})
+
+document.addEventListener('click', e => {
+    if (e.target.className) {
+        editmodule.style.display = 'block'
+    }
 })
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
