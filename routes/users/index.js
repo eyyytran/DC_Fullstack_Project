@@ -36,22 +36,18 @@ router.post("/login", async (req, res) => {
   const validated = await bcrypt.compare(password, validateUser.password);
   if (validated) {
     req.session.user = user;
-    res.status(200).send("login successful")
+    res.status(200).send("login successful");
   } else {
-    res.json({
-      message: "Login Failed",
-    });
+    res.status(400).send("login failed")
   }
 });
-
+// validate user
 const checkLogin = async (req, res, next) => {
   console.log("check", req.session.user);
   if (req.session.user) {
     next();
   } else {
-    res.json({
-      message: "Login Failed",
-    });
+    res.status(400).send("could not login");
   }
 };
 // update user
@@ -77,7 +73,8 @@ router.put("/update_user", checkLogin, async (req, res) => {
       res.status(200).send(user);
     }
   } catch (error) {
-    res.send("could not find");
+    res.status(400).send("could not find");
+    console.log(error)
   }
 });
 // delete account
@@ -91,10 +88,22 @@ router.delete("/destroy_user", checkLogin, async (req, res) => {
       res.status(400).send("Check email and password");
     } else {
       user.destroy();
-      res.send("User destroyed");
+      res.send("User account removed");
     }
   } catch (error) {
-    res.send("could not destroy");
+    res.status(400).send("could not complete");
+    console.log(error)
   }
 });
+//end session
+router.put("/logout", checkLogin, (req, res) => {
+  try {
+    req.session.user = null;
+    res.status(200).send("session ended")
+  } catch (error) {
+    res.status(400).send("could not end session");
+    console.log(error)
+  }
+});
+
 module.exports = router;
