@@ -26,6 +26,7 @@ const generateCards = list => {
         const completeList = document.getElementById('p-complete-container')
 
         const cardContainer = document.createElement('div')
+        cardContainer.classList.add('')
 
         let status = list[card].status
 
