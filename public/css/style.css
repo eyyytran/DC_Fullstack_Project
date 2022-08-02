@@ -187,6 +187,7 @@ form {
     background: var(--lavender);
 }
 
+.de-inputs,
 .d-inputs,
 .l-inputs,
 .su-inputs {
@@ -198,6 +199,7 @@ form {
     padding: 1rem;
 }
 
+.de-inputs:focus,
 .d-inputs:focus,
 .l-inputs:focus,
 .su-inputs:focus {
@@ -205,6 +207,7 @@ form {
 }
 
 .d-inputs:focus::placeholder,
+.de-inputs:focus::placeholder,
 .l-inputs:focus::placeholder,
 .su-inputs:focus::placeholder {
     color: transparent;
@@ -216,6 +219,7 @@ form {
 }
 
 #d-submitbtn,
+#de-submitbtn,
 #l-submitbtn,
 #su-submitbtn {
     width: 200px;
@@ -227,7 +231,8 @@ form {
     margin: 1rem;
 }
 
-#l-submitbtn,
+#de-submitbtn:hover,
+#l-submitbtn:hover,
 #su-submitbtn:hover {
     cursor: pointer;
 }
@@ -241,7 +246,7 @@ form {
     overflow-y: auto;
 }
 
-.d-projects {
+#d-projects {
     height: 100%;
     width: 100%;
     display: flex;
@@ -259,9 +264,14 @@ form {
     line-height: 1rem;
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
     font-size: 18px;
+    color: var(--white);
+    text-align: left;
     margin: 1rem;
+    position: relative;
+    transition: transform 0.25s;
 }
 
+.de-module,
 .d-module {
     display: none;
     position: fixed;
@@ -275,9 +285,20 @@ form {
     background: rgba(0, 0, 0, 0.4);
 }
 
+.de-module-contents,
 .d-module-contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60vh;
+    width: 90vw;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
     padding: 20px;
     background-color: var(--white);
     margin-right: 0px;
@@ -287,9 +308,33 @@ form {
     text-align: center;
 }
 
+.de-close,
 .d-close {
     background-color: var(--lavender);
     color: var(--dark-blue);
+    width: 150px;
+}
+
+.d-editbtn {
+    background: transparent;
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+}
+
+.d-project-card:hover .d-editbtn {
+    display: block;
+}
+
+.d-project-card:hover {
+    transform: translateY(-5px);
+}
+
+.de-deleteboard {
+    background: var(--red);
+    margin-bottom: 1rem;
+    width: 150px;
 }
 
 @media (min-width: 600px) {
@@ -337,7 +382,7 @@ form {
         background-color: var(--light-blue);
     }
 
-    .d-projects {
+    #d-projects {
         height: 100%;
         width: 100%;
         flex-direction: row;

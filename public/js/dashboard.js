@@ -1,16 +1,32 @@
 const createbtn = document.getElementById('d-createbtn')
 const projectList = document.getElementById('d-projects')
 const createmodule = document.querySelector('.d-module')
+const editmodule = document.querySelector('.de-module')
 const cancelbtn = document.querySelector('.d-close')
-const submitbtn = document.querySelector('.d-submitbtn')
+const submitbtn = document.getElementById('d-submitbtn')
+const Esubmitbtn = document.getElementById('de-submitbtn')
+const deletebtn = document.querySelector('.de-deleteboard')
+const Ecancelbtn = document.querySelector('.de-close')
 
 const generateProjectCards = list => {
     for (let project = 0; project < list.length; project++) {
-        const card = document.createElement('button')
+        const card = document.createElement('div')
+        const editbtn = document.createElement('button')
+        const editbtnimage = document.createElement('img')
         const content = list[project].name
+        const projectId = list[project].id
+        editbtnimage.src =
+            'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
         card.innerHTML = content
+
+        editbtn.classList.add('d-editbtn')
+        editbtnimage.classList.add('d-editbtn-image')
         card.classList.add('d-project-card')
+        card.setAttribute('id', projectId)
+
         projectList.append(card)
+        card.append(editbtn)
+        editbtn.append(editbtnimage)
     }
 }
 
@@ -27,24 +43,25 @@ const loadProjects = async () => {
     }
 }
 
-const createProject = async e => {
-    const name = e.target.form[0].value
+const createProject = async () => {
+    const projectName = document.querySelector('.d-inputs').value
     const data = {
-        name
+        name: projectName,
     }
     try {
-        const newProject = await fetch(
-            'http:localhost:3001/projects/create_project',
-            {method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        alert("New Project Created")
-
+        const sendData = await fetch(
+            'http://localhost:3001/projects/create_project',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+        alert('created the project')
     } catch (error) {
-        alert('Unable to create project')
+        alert('unable to create project')
     }
 }
 
@@ -52,10 +69,27 @@ createbtn.addEventListener('click', () => {
     createmodule.style.display = 'block'
 })
 
+submitbtn.addEventListener('click', () => {
+    createProject()
+    createmodule.style.display = 'none'
+})
+
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
 })
 
-submitbtn.addEventListener('click', () => createProject())
+document.addEventListener('click', e => {
+    console.log(e.target.className)
+    if (
+        e.target.className === 'd-editbtn' ||
+        e.target.className === 'd-editbtn-image'
+    ) {
+        editmodule.style.display = 'block'
+    }
+})
+
+Esubmitbtn.addEventListener('click', e => {
+    console.log(e.target.parentNode)
+})
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
