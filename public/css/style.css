@@ -95,6 +95,11 @@ form {
     align-items: center;
 }
 
+.nav-barlinks {
+    display: flex;
+    gap: 1rem;
+}
+
 .d-content,
 .h-content {
     height: 100%;
@@ -116,12 +121,15 @@ form {
     font-weight: bolder;
 }
 
+#d-logoutbtn,
 #d-createbtn,
 #h-loginbtn {
     background: var(--dark-blue);
     width: 200px;
     height: 100%;
+    min-height: inherit;
     display: block;
+    border-radius: 0;
 }
 
 #h-dashboardbtn {
