@@ -79,9 +79,17 @@ cancelbtn.addEventListener('click', () => {
 })
 
 document.addEventListener('click', e => {
-    if (e.target.className) {
+    console.log(e.target.className)
+    if (
+        e.target.className === 'd-editbtn' ||
+        e.target.className === 'd-editbtn-image'
+    ) {
         editmodule.style.display = 'block'
     }
+})
+
+Esubmitbtn.addEventListener('click', e => {
+    console.log(e.target.parentNode)
 })
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
