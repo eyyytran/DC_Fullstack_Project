@@ -29,30 +29,36 @@ const generateCards = list => {
         const card = document.createElement('div')
         const editbtn = document.createElement('button')
         const editbtnimage = document.createElement('img')
+        const cardcontent = document.createElement('div')
         const content = list[i].name
         const cardId = list[i].id.toString()
         editbtnimage.src =
             'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
-        card.innerHTML = content
+        cardcontent.innerHTML = content
 
+        cardcontent.classList.add('p-card-content')
         editbtn.classList.add('p-editbtn')
         editbtnimage.classList.add('p-editbtn-image')
-        card.classList.add(`${status}`)
+        card.classList.add('p-card')
         card.setAttribute('id', cardId)
         if (status === 'todo') {
             toDoList.append(card)
+            card.append(cardcontent)
             card.append(editbtn)
             editbtn.append(editbtnimage)
         } else if (status === 'inprogress') {
             doingList.append(card)
+            card.append(cardcontent)
             card.append(editbtn)
             editbtn.append(editbtnimage)
         } else if (status === 'review') {
             reviewList.append(card)
+            card.append(cardcontent)
             card.append(editbtn)
             editbtn.append(editbtnimage)
         } else {
             completeList.append(card)
+            card.append(cardcontent)
             card.append(editbtn)
             editbtn.append(editbtnimage)
         }
