@@ -3,13 +3,6 @@ const { Cards } = require("../../db/models");
 const router = express.Router();
 const { v4 } = require("uuid");
 
-// listPosition: DataTypes.INTEGER,
-//   name: DataTypes.STRING(50),
-//   description: DataTypes.STRING(255),
-//   status: DataTypes.STRING,
-//   userId: DataTypes.UUID,
-//   projectId: DataTypes.UUID,
-
 // create new card
 // status options: toDo, inProgress, review, complete
 router.post("/create_card", async (req, res) => {
@@ -34,14 +27,15 @@ router.post("/create_card", async (req, res) => {
   }
 });
 
-// project page
 // get cards
-// param 
-router.get("/get_cards", async (req, res) => {
-  const allCards = await Cards.findAll();
-  res.render("cards", {
-    locals: { allCards },
-  });
+router.post("/get_cards", async (req, res) => {
+  const { projectID } = req.body;
+  try {
+    const allCards = await Cards.findAll({ where: { projectID: projectID } });
+    res.status(200).json(allCards);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 router.put("/update_card", async (req, res) => {
@@ -54,7 +48,7 @@ router.put("/update_card", async (req, res) => {
       description: description,
       status: status,
       userID: userID,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
     const card = await currentCard.save();
     res.status(200).send(card);
