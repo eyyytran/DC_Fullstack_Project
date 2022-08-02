@@ -7,6 +7,7 @@ const submitbtn = document.getElementById('d-submitbtn')
 const Esubmitbtn = document.getElementById('de-submitbtn')
 const deletebtn = document.querySelector('.de-deleteboard')
 const Ecancelbtn = document.querySelector('.de-close')
+const signoutbtn = document.querySelector('#d-logoutbtn')
 
 const generateProjectCards = list => {
     for (let project = 0; project < list.length; project++) {
@@ -65,6 +66,19 @@ const createProject = async () => {
     }
 }
 
+const signOutUser = async () => {
+    try {
+        const signOutRequest = await fetch(
+            'http://localhost:3001/users/logout',
+            { method: 'PUT' }
+        )
+        alert('Your session has ended')
+        window.location.href = 'http://localhost:3001/index'
+    } catch (error) {
+        alert('Could not end user session')
+    }
+}
+
 createbtn.addEventListener('click', () => {
     createmodule.style.display = 'block'
 })
@@ -80,7 +94,6 @@ cancelbtn.addEventListener('click', () => {
 })
 
 document.addEventListener('click', e => {
-    console.log(e.target.className)
     if (
         e.target.className === 'd-editbtn' ||
         e.target.className === 'd-editbtn-image'
@@ -91,6 +104,10 @@ document.addEventListener('click', e => {
 
 Esubmitbtn.addEventListener('click', e => {
     console.log(e.target.parentNode)
+})
+
+signoutbtn.addEventListener('click', () => {
+    signOutUser()
 })
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
