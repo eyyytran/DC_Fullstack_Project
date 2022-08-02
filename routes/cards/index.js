@@ -27,14 +27,12 @@ router.post("/create_card", async (req, res) => {
   }
 });
 
-// project page
 // get cards
-// param
 router.post("/get_cards", async (req, res) => {
   const { projectID } = req.body;
   try {
     const allCards = await Cards.findAll({ where: { projectID: projectID } });
-    res.status(200).send(allCards);
+    res.status(200).json(allCards);
   } catch (error) {
     res.status(400).send(error);
   }

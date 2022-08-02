@@ -1,6 +1,6 @@
 const express = require("express");
 const { v4 } = require("uuid");
-const { UserProjects, Projects } = require("../../db/models");
+const { UserProjects, Projects, Users } = require("../../db/models");
 const router = express.Router();
 
 router.post("/create_project", async (req, res) => {
@@ -38,9 +38,29 @@ router.get("/get_projects", async (req, res) => {
       const project = await Projects.findOne({ where: { id: projectID } });
       allProjects.push(project.dataValues);
     }
-    res.json(allProjects);
+    res.status(200).json(allProjects);
   } catch (error) {
     res.status(400).send(error);
+  }
+});
+
+router.get("/get_users", async (req, res) => {
+  const { projectID } = req.body
+  try {
+    const allUserIDs = await UserProjects.findAll({
+      where: { projectID: projectID },
+      attributes: ["userID"],
+    });
+    const allUsers = [];
+    for (let index = 0; index < allUserIDs.length; index++) {
+      const userID = allUserIDs[index].dataValues.userID;
+      const user = await Users.findOne({ where: { id: userID } });
+      allUsers.push(user.dataValues);
+    }
+    res.status(200).json(allUsers);
+  } catch (error) {
+    res.status(400).send(error);
+    console.log(error)
   }
 });
 
