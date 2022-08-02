@@ -64,6 +64,35 @@ router.get('/get_users', async (req, res) => {
     }
 })
 
+router.post("/create_join", async (req, res) => {
+  const { userID, projectID } = req.body;
+  try {
+    const newJoin = {
+      userID,
+      projectID,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const join = await UserProjects.create(newJoin);
+    res.status(200).send(join);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.delete("/destroy_project", async (req, res) => {
+  const { id } = req.body;
+  try {
+    await Cards.destroy({ where: { projectID: id } })
+    await UserProjects.destroy({ where: { projectID: id } })
+    await Projects.destroy({ where: { id: id } })
+    res.send("Project destroyed");
+  } catch (error) {
+    res.send("could not destroy");
+    console.log(error)
+  }
+});
+
 router.put('/update_project', async (req, res) => {
     const { id, name, image } = req.body
     try {
@@ -77,17 +106,6 @@ router.put('/update_project', async (req, res) => {
         res.status(200).json(currentProject)
     } catch (error) {
         res.send('could not find')
-    }
-})
-
-router.delete('/destroy_projects', async (req, res) => {
-    const { id } = req.body
-    try {
-        const currentProject = await Projects.findOne({ where: { id: id } })
-        currentProject.destroy()
-        res.send('Project destroyed')
-    } catch (error) {
-        res.send('could not destroy')
     }
 })
 
