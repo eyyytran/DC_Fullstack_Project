@@ -154,6 +154,7 @@ document.addEventListener('click', e => {
     }
     if (e.target.className === 'd-project-card') {
         localStorage.clear()
+        localStorage.setItem('projectName', e.target.innerText)
         localStorage.setItem('projectId', e.target.id)
         window.location.href = 'http://localhost:3001/project'
     }
