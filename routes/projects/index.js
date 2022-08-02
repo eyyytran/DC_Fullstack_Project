@@ -1,6 +1,6 @@
 const express = require("express");
 const { v4 } = require("uuid");
-const { UserProjects, Projects, Users } = require("../../db/models");
+const { UserProjects, Projects, Users, Cards } = require("../../db/models");
 const router = express.Router();
 
 router.post("/create_project", async (req, res) => {
@@ -45,7 +45,7 @@ router.get("/get_projects", async (req, res) => {
 });
 
 router.get("/get_users", async (req, res) => {
-  const { projectID } = req.body
+  const { projectID } = req.body;
   try {
     const allUserIDs = await UserProjects.findAll({
       where: { projectID: projectID },
@@ -60,7 +60,7 @@ router.get("/get_users", async (req, res) => {
     res.status(200).json(allUsers);
   } catch (error) {
     res.status(400).send(error);
-    console.log(error)
+    console.log(error);
   }
 });
 
@@ -80,14 +80,32 @@ router.put("/update_project", async (req, res) => {
   }
 });
 
-router.delete("/destroy_projects", async (req, res) => {
+router.post("/create_join", async (req, res) => {
+  const { userID, projectID } = req.body;
+  try {
+    const newJoin = {
+      userID,
+      projectID,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const join = await UserProjects.create(newJoin);
+    res.status(200).send(join);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.delete("/destroy_project", async (req, res) => {
   const { id } = req.body;
   try {
-    const currentProject = await Projects.findOne({ where: { id: id } });
-    currentProject.destroy();
+    await Cards.destroy({ where: { projectID: id } })
+    await UserProjects.destroy({ where: { projectID: id } })
+    await Projects.destroy({ where: { id: id } })
     res.send("Project destroyed");
   } catch (error) {
     res.send("could not destroy");
+    console.log(error)
   }
 });
 
