@@ -16,7 +16,6 @@ const PORT = 3001
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
 const cardsRoutes = require('./routes/cards')
-const userProjectRoutes = require('./routes/user_projects')
 const { getTitle, getScript } = require('./util/locals')
 //middleware
 app.use(
@@ -58,7 +57,6 @@ const checkLogin = (req, res, next) => {
 app.use('/users', usersRoutes)
 app.use('/projects', checkLogin, projectsRoutes)
 app.use('/cards', checkLogin, cardsRoutes)
-app.use('/user_projects', checkLogin, userProjectRoutes)
 
 app.get('/', (req, res) => {
     res.render('template', {
