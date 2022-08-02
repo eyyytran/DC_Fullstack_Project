@@ -72,6 +72,7 @@ createbtn.addEventListener('click', () => {
 submitbtn.addEventListener('click', () => {
     createProject()
     createmodule.style.display = 'none'
+    location.reload()
 })
 
 cancelbtn.addEventListener('click', () => {
