@@ -20,10 +20,10 @@ router.post("/register", async (req, res) => {
     };
     const user = await Users.create(userToCreate);
     req.session.user = user;
-    res.status(200).send("complete");
+    res.status(200).send(user);
   } catch (error) {
-    res.status(400).send("unable to complete");
     console.log(error);
+    res.status(400).send(error);
   }
 });
 // login
@@ -36,10 +36,9 @@ router.post("/login", async (req, res) => {
   const validated = await bcrypt.compare(password, validateUser.password);
   if (validated) {
     req.session.user = user;
-    res.status(200).send("complete");
+    res.status(200).send("login successful");
   } else {
-    res.status(400).send("unable to complete");
-    console.log(error);
+    res.status(400).send("login failed")
   }
 });
 // validate user
@@ -79,11 +78,11 @@ router.put("/update_user", checkLogin, async (req, res) => {
         updatedAt: new Date(),
       });
       await user.save();
-      res.status(200).send("complete");
+      res.status(200).send(user);
     }
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error);
+    res.status(400).send("could not find");
+    console.log(error)
   }
 });
 // delete account
@@ -93,25 +92,25 @@ router.delete("/destroy_user", checkLogin, async (req, res) => {
     const user = await Users.findOne({ where: { email: email } });
     const validateUser = user.dataValues;
     const validated = await bcrypt.compare(password, validateUser.password);
-    if (validated) {
-      user.destroy();
-      res.send("complete");
+    if (!validated) {
+      res.status(400).send("Check email and password");
     } else {
-      res.status(400).send("unable to complete");
+      user.destroy();
+      res.send("User account removed");
     }
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error);
+    res.status(400).send("could not complete");
+    console.log(error)
   }
 });
 //end session
 router.put("/logout", checkLogin, (req, res) => {
   try {
     req.session.user = null;
-    res.status(200).send("complete");
+    res.status(200).send("session ended")
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error);
+    res.status(400).send("could not end session");
+    console.log(error)
   }
 });
 
