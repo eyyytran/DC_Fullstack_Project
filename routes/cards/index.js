@@ -18,11 +18,12 @@ router.post("/create_card", async (req, res) => {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+    console.log(newCard);
     const card = await Cards.create(newCard);
-    res.status(200).send("complete");
+    res.status(200).send(card);
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error);
+    //   console.log(error);
+    res.status(400).send(error);
   }
 });
 
@@ -33,8 +34,7 @@ router.post("/get_cards", async (req, res) => {
     const allCards = await Cards.findAll({ where: { projectID: projectID } });
     res.status(200).json(allCards);
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error)
+    res.status(400).send(error);
   }
 });
 
@@ -51,10 +51,9 @@ router.put("/update_card", async (req, res) => {
       updatedAt: new Date(),
     });
     const card = await currentCard.save();
-    res.status(200).send("complete");
+    res.status(200).send(card);
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error)
+    res.send("could not find");
   }
 });
 
@@ -63,10 +62,9 @@ router.delete("/destroy_card", async (req, res) => {
   try {
     const currentCard = await Cards.findOne({ where: { id: id } });
     currentCard.destroy();
-    res.status(200).send("complete");
+    res.send("Card destroyed");
   } catch (error) {
-    res.status(400).send("unable to complete");
-    console.log(error)
+    res.send("could not destroy");
   }
 });
 
