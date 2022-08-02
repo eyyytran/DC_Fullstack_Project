@@ -73,7 +73,7 @@ const signOutUser = async () => {
             { method: 'PUT' }
         )
         alert('Your session has ended')
-        window.location.href = 'http://localhost:3001/index'
+        window.location.href = 'http://localhost:3001/'
     } catch (error) {
         alert('Could not end user session')
     }

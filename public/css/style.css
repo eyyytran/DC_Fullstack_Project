@@ -121,6 +121,7 @@ form {
     font-weight: bolder;
 }
 
+#p-logoutbtn,
 #d-logoutbtn,
 #d-createbtn,
 #h-loginbtn {
@@ -195,6 +196,8 @@ form {
     background: var(--lavender);
 }
 
+.p-inputs,
+.pe-inputs,
 .de-inputs,
 .d-inputs,
 .l-inputs,
@@ -206,7 +209,8 @@ form {
     width: 250px;
     padding: 1rem;
 }
-
+.p-inputs:focus,
+.pe-inputs:focus,
 .de-inputs:focus,
 .d-inputs:focus,
 .l-inputs:focus,
@@ -214,6 +218,8 @@ form {
     border-color: var(--dark-blue);
 }
 
+.p-inputs:focus::placeholder,
+.pe-inputs:focus::placeholder,
 .d-inputs:focus::placeholder,
 .de-inputs:focus::placeholder,
 .l-inputs:focus::placeholder,
@@ -226,6 +232,8 @@ form {
     background: transparent;
 }
 
+#p-submitbtn,
+#pe-submitbtn,
 #d-submitbtn,
 #de-submitbtn,
 #l-submitbtn,
@@ -239,12 +247,16 @@ form {
     margin: 1rem;
 }
 
+#p-submitbtn:hover,
+#pe-submitbtn:hover,
+#d-submitbtn:hover,
 #de-submitbtn:hover,
 #l-submitbtn:hover,
 #su-submitbtn:hover {
     cursor: pointer;
 }
 
+.p-container,
 .d-container {
     height: 100vh;
     width: 100vw;
@@ -279,6 +291,8 @@ form {
     transition: transform 0.25s;
 }
 
+.p-module,
+.pe-module,
 .de-module,
 .d-module {
     display: none;
@@ -293,6 +307,8 @@ form {
     background: rgba(0, 0, 0, 0.4);
 }
 
+.p-module-contents,
+.pe-module-contents,
 .de-module-contents,
 .d-module-contents {
     position: absolute;
@@ -312,10 +328,14 @@ form {
     margin-right: 0px;
 }
 
+.p-module-title,
+.pe-module-title,
+.de-module-title,
 .d-module-title {
     text-align: center;
 }
 
+.pe-close,
 .de-close,
 .d-close {
     background-color: var(--lavender);
