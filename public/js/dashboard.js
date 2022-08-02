@@ -8,7 +8,7 @@ const Esubmitbtn = document.getElementById('de-submitbtn')
 const deletebtn = document.querySelector('.de-deleteboard')
 const Ecancelbtn = document.querySelector('.de-close')
 
-const generateCards = list => {
+const generateProjectCards = list => {
     for (let project = 0; project < list.length; project++) {
         const card = document.createElement('div')
         const editbtn = document.createElement('button')
@@ -37,7 +37,7 @@ const loadProjects = async () => {
             { method: 'GET' }
         )
         const data = await projects.json()
-        generateCards(data)
+        generateProjectCards(data)
     } catch (error) {
         alert('could not fetch projects')
     }

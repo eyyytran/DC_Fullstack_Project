@@ -4,17 +4,22 @@ const { UserProjects, Projects } = require('../../db/models')
 const router = express.Router()
 
 router.post('/create_project', async (req, res) => {
-    const { name, image } = await req.body
+    const { name } = await req.body
+    const userID = req.session.user.id;
     try {
         const newProject = {
             id: v4(),
             name,
-            image,
             createdAt: new Date(),
             updatedAt: new Date(),
         }
         const project = await Projects.create(newProject)
-        res.status(200).send(project)
+        const newJoin = {
+            userID,
+            projectID: project.id
+        }
+        const join = await UserProjects.create(newJoin)
+        res.status(200).send(project, join)
     } catch (error) {
         res.status(400).send(error)
     }
