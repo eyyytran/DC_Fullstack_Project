@@ -106,7 +106,7 @@ const editProjectName = async newName => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(requestData),
             }
         )
         alert('Successfully updated your project name')
