@@ -98,21 +98,17 @@ const editProjectName = async newName => {
         name: newName,
         image: null,
     }
-    try {
-        const sendData = await fetch(
-            'http://localhost:3001/projects/update_project',
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
-        alert('Successfully updated your project name')
-    } catch (error) {
-        alert('Unable to complete request')
-    }
+    const sendData = await fetch(
+        'http://localhost:3001/projects/update_project',
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
+    alert('Successfully updated your project name')
 }
 
 createbtn.addEventListener('click', () => {
