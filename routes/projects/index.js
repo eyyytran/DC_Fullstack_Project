@@ -4,13 +4,12 @@ const { UserProjects, Projects } = require('../../db/models')
 const router = express.Router()
 
 router.post('/create_project', async (req, res) => {
-    const { name, image } = await req.body
+    const { name } = await req.body
     const userID = req.session.user.id;
     try {
         const newProject = {
             id: v4(),
             name,
-            image,
             createdAt: new Date(),
             updatedAt: new Date(),
         }

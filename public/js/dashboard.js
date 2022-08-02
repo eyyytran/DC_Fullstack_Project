@@ -2,6 +2,7 @@ const createbtn = document.getElementById('d-createbtn')
 const projectList = document.getElementById('d-projects')
 const createmodule = document.querySelector('.d-module')
 const cancelbtn = document.querySelector('.d-close')
+const submitbtn = document.querySelector('.d-submitbtn')
 
 const generateProjectCards = list => {
     for (let project = 0; project < list.length; project++) {
@@ -27,11 +28,9 @@ const loadProjects = async () => {
 }
 
 const createProject = async e => {
-    const name = e.target.form[0].value 
-    const image = e.target.form[1].value
+    const name = e.target.form[0].value
     const data = {
-        name,
-        image
+        name
     }
     try {
         const newProject = await fetch(
@@ -56,5 +55,7 @@ createbtn.addEventListener('click', () => {
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
 })
+
+submitbtn.addEventListener('click', () => createProject())
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
