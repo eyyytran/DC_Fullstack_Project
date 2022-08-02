@@ -276,8 +276,18 @@ form {
 }
 
 .d-module-contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60vh;
+    width: 90vw;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
     padding: 20px;
     background-color: var(--white);
     margin-right: 0px;
@@ -290,6 +300,7 @@ form {
 .d-close {
     background-color: var(--lavender);
     color: var(--dark-blue);
+    width: 150px;
 }
 
 @media (min-width: 600px) {
