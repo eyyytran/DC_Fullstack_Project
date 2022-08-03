@@ -295,6 +295,10 @@ form {
     transition: transform 0.25s;
 }
 
+.d-project-card:hover {
+    cursor: pointer;
+}
+
 .p-module,
 .pe-module,
 .de-module,
