@@ -8,7 +8,7 @@
     --light-blue: #eff4fe;
     --lavender: #e6e9fe;
     --periwinkle: #7b89f4;
-    --transparent: rbga(255, 255, 255, 0.2);
+    --transparent: rgba(255, 255, 255, 0.2);
 }
 
 :root {
