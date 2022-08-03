@@ -3,6 +3,9 @@ const toDoList = document.getElementById('p-todo-list')
 const doingList = document.getElementById('p-inprogress-list')
 const reviewList = document.getElementById('p-review-list')
 const completeList = document.getElementById('p-complete-list')
+const editmodule = document.querySelector('.pe-module')
+const Esubmitbtn = document.querySelector('#pe-submitbtn')
+const movebtn = document.querySelector('.pe-movebtn')
 
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
@@ -67,6 +70,50 @@ const generateCards = list => {
     }
 }
 
+const openEditModule = e => {
+    localStorage.removeItem('cardName')
+    localStorage.removeItem('cardId')
+
+    const cardName = e.target.parentNode.offsetParent.innerText
+    const cardId = e.target.parentNode.offsetParent.id
+
+    localStorage.setItem('cardName', cardName)
+    localStorage.setItem('cardId', cardId)
+    editmodule.style.display = 'block'
+    const currentName = localStorage.getItem('cardName')
+    document.querySelector('.pe-inputs').value = currentName
+}
+
+const editCardDesc = async newName => {
+    const requestData = {
+        id: localStorage.getItem('cardId'),
+        name: newName,
+    }
+    const sendData = await fetch('http://localhost:3001/cards/update_card', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
+    alert('Successfully updated your task')
+}
+
+const editCardStatus = async newStatus => {
+    const requestData = {
+        id: localStorage.getItem('cardId'),
+        status: newStatus,
+    }
+    const sendData = await fetch('http://localhost:3001/cards/update_card', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
+    alert('Successfully updated your task')
+}
+
 const signOutUser = async () => {
     try {
         const signOutRequest = await fetch(
@@ -83,6 +130,28 @@ const signOutUser = async () => {
 
 signoutbtn.addEventListener('click', () => {
     signOutUser()
+})
+
+document.addEventListener('click', e => {
+    if (
+        e.target.className === 'p-editbtn' ||
+        e.target.className === 'p-editbtn-image'
+    ) {
+        openEditModule(e)
+    }
+})
+
+Esubmitbtn.addEventListener('click', e => {
+    e.preventDefault()
+    const newName = e.target.form[0].value
+    editCardDesc(newName)
+    editmodule.style.display = 'none'
+    location.reload()
+})
+
+movebtn.addEventListener('click', e => {
+    e.preventDefault()
+    editCardStatus(newStatus)
 })
 
 window.addEventListener('DOMContentLoaded', () => {

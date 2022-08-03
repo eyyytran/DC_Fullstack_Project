@@ -235,6 +235,7 @@ form {
     background: transparent;
 }
 
+.pe-movebtn,
 #p-submitbtn,
 #pe-submitbtn,
 #d-submitbtn,
@@ -365,6 +366,7 @@ form {
     transform: translateY(-5px);
 }
 
+.pe-deletebtn,
 .de-deleteboard {
     background: var(--red);
     margin-bottom: 1rem;
@@ -408,6 +410,10 @@ form {
     justify-content: center;
     align-items: center;
     position: relative;
+}
+
+.pe-moveoptions {
+    display: none;
 }
 
 @media (min-width: 600px) {
