@@ -120,9 +120,9 @@ const createCard = async () => {
                 body: JSON.stringify(data),
             }
         )
-        alert('created the project')
+        alert('created the card')
     } catch (error) {
-        alert('unable to create project')
+        alert('unable to create card')
     }
 }
 
@@ -141,11 +141,13 @@ const editCardDesc = async newName => {
     alert('Successfully updated your task')
 }
 
-const editCardStatus = async newStatus => {
+const editCardStatus = async () => {
+    const newStatus = moveoptions.value
     const requestData = {
         id: localStorage.getItem('cardId'),
         status: newStatus,
     }
+    console.log({ requestData })
     try {
         const sendData = await fetch(
             'http://localhost:3001/cards/update_card',
@@ -157,9 +159,9 @@ const editCardStatus = async newStatus => {
                 body: JSON.stringify(requestData),
             }
         )
-        alert('Successfully updated your task')
+        alert('Successfully updated your task status')
     } catch (error) {
-        alert('Unable to update task')
+        alert('Unable to update task status')
     }
 }
 
@@ -226,6 +228,7 @@ Csubmitbtn.addEventListener('click', e => {
 Esubmitbtn.addEventListener('click', e => {
     const newName = e.target.form[0].value
     editCardDesc(newName)
+    editCardStatus()
     editmodule.style.display = 'none'
     location.reload()
 })
@@ -235,7 +238,6 @@ movebtn.addEventListener('click', e => {
     movebtn.style.display = 'none'
     moveoptions.style.display = 'block'
     setSelectorOptions()
-    // editCardStatus(newStatus)
 })
 
 deletebtn.addEventListener('click', e => {
