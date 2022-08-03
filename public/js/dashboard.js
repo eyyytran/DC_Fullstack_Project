@@ -10,6 +10,50 @@ const Ecancelbtn = document.querySelector('.de-close')
 const signoutbtn = document.querySelector('#d-logoutbtn')
 const logo = document.getElementById('logo-redirect')
 
+//validators
+const isRequired = value => (value === '' ? false : true)
+
+const isLength = (length, min, max) =>
+    length < min || length > max ? false : true
+
+const checkEntry = (e, name) => {
+    let valid = false
+    const min = 3
+    const max = 30
+
+    if (!isRequired(name)) {
+        showError(e.target.form[1], 'Please enter a password')
+    } else if (!isLength(name.length, min, max)) {
+        showError(e.target.form[1], 'Project names are 3 to 30 characters long')
+    } else {
+        showSuccess(e.target.form[1])
+        valid = true
+    }
+    return valid
+}
+
+const showError = (input, message) => {
+    const formField = input.parentElement
+    formField.classList.remove('success')
+    formField.classList.add('error')
+    const feedback = formField.querySelector('small')
+    feedback.textContent = message
+}
+
+const showSuccess = input => {
+    const formField = input.parentElement
+    formField.classList.remove('error')
+    formField.classList.add('success')
+    const feedback = formField.querySelector('small')
+    feedback.textContent = ''
+}
+
+const entryValidate = (e, name) => {
+    let isEntryValid = checkEntry(e, name)
+
+    return isEntryValid
+}
+
 const generateProjectCards = list => {
     for (let project = 0; project < list.length; project++) {
         const card = document.createElement('div')
@@ -80,8 +124,7 @@ const editProjectName = async newName => {
     }
 }
 
-const createProject = async () => {
-    const projectName = document.querySelector('.d-inputs').value
+const createProject = async projectName => {
     const data = {
         name: projectName,
     }
@@ -140,11 +183,14 @@ createbtn.addEventListener('click', () => {
     createmodule.style.display = 'block'
 })
 
-submitbtn.addEventListener('click', () => {
-    createProject()
-    createmodule.style.display = 'none'
-    location.reload()
-    console.log('submit btn')
+submitbtn.addEventListener('click', e => {
+    const projectName = document.querySelector('.d-inputs').value
+    let isEntryValid = entryValidate(e, projectName)
+    if (isEntryValid) {
+        createProject()
+        createmodule.style.display = 'none'
+        location.reload()
+    }
 })
 
 cancelbtn.addEventListener('click', () => {
@@ -170,9 +216,12 @@ document.addEventListener('click', e => {
 Esubmitbtn.addEventListener('click', e => {
     e.preventDefault()
     const newName = e.target.form[0].value
-    editProjectName(newName)
-    createmodule.style.display = 'none'
-    location.reload()
+    let isEntryValid = entryValidate(e, newName)
+    if (isEntryValid) {
+        editProjectName(newName)
+        createmodule.style.display = 'none'
+        location.reload()
+    }
 })
 
 deletebtn.addEventListener('click', e => {
