@@ -71,7 +71,7 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
-.formfield,
+.form-field,
 form {
     display: flex;
     flex-direction: column;
@@ -79,6 +79,7 @@ form {
     align-items: center;
 }
 
+#login-error,
 .error {
     color: var(--red);
 }
@@ -214,7 +215,7 @@ form {
 .d-inputs,
 .l-inputs,
 .su-inputs {
-    margin: 1rem;
+    margin: 0.5rem;
     border: none;
     border-radius: 5px;
     height: 40px;

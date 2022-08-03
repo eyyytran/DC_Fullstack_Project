@@ -1,5 +1,6 @@
 const submitBtn = document.getElementById('l-submitbtn')
 const form = document.getElementById('l-form')
+const errorMessage = document.getElementById('login-error')
 
 //utilities
 const isRequired = value => (value === '' ? false : true)
@@ -103,7 +104,7 @@ const submitForm = async e => {
         alert('Login successful')
         window.location.href = 'http://localhost:3001/dashboard'
     } catch (error) {
-        alert('Unable login')
+        errorMessage.innerHTML = 'Records do not match the data provided.'
     }
 }
 
