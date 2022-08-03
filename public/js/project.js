@@ -13,6 +13,50 @@ const deletebtn = document.querySelector('.pe-deletebtn')
 const moveoptions = document.querySelector('#pe-moveoptions')
 const logo = document.getElementById('logo-redirect')
 
+//validate
+const isRequired = value => (value === '' ? false : true)
+
+const isLength = (length, min, max) =>
+    length < min || length > max ? false : true
+
+const checkEntry = (e, name) => {
+    let valid = false
+    const min = 3
+    const max = 30
+
+    if (!isRequired(name)) {
+        showError(e.target.form[1], 'Please enter a password')
+    } else if (!isLength(name.length, min, max)) {
+        showError(e.target.form[1], 'Project names are 3 to 30 characters long')
+    } else {
+        showSuccess(e.target.form[1])
+        valid = true
+    }
+    return valid
+}
+
+const showError = (input, message) => {
+    const formField = input.parentElement
+    formField.classList.remove('success')
+    formField.classList.add('error')
+    const feedback = formField.querySelector('small')
+    feedback.textContent = message
+}
+
+const showSuccess = input => {
+    const formField = input.parentElement
+    formField.classList.remove('error')
+    formField.classList.add('success')
+    const feedback = formField.querySelector('small')
+    feedback.textContent = ''
+}
+
+const entryValidate = (e, name) => {
+    let isEntryValid = checkEntry(e, name)
+
+    return isEntryValid
+}
+
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
     const requestData = { projectID: projectID }
@@ -222,6 +266,7 @@ document.addEventListener('click', e => {
 
 Csubmitbtn.addEventListener('click', e => {
     e.preventDefault()
+    let isEntryValid = entryValidate(e, cardName)
     createCard()
     createmodule.style.display = 'none'
     location.reload()
