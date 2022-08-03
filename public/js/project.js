@@ -6,6 +6,7 @@ const completeList = document.getElementById('p-complete-list')
 const editmodule = document.querySelector('.pe-module')
 const Esubmitbtn = document.querySelector('#pe-submitbtn')
 const movebtn = document.querySelector('.pe-movebtn')
+const deletebtn = document.querySelector('.pe-deletebtn')
 
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
@@ -114,6 +115,22 @@ const editCardStatus = async newStatus => {
     alert('Successfully updated your task')
 }
 
+const deleteCard = async () => {
+    const requestData = {
+        id: localStorage.getItem('cardId'),
+    }
+    console.log(requestData)
+    const sendData = await fetch('http://localhost:3001/cards/destroy_card', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
+    localStorage.removeItem('cardId')
+    localStorage.removeItem('cardName')
+}
+
 const signOutUser = async () => {
     try {
         const signOutRequest = await fetch(
@@ -152,6 +169,13 @@ Esubmitbtn.addEventListener('click', e => {
 movebtn.addEventListener('click', e => {
     e.preventDefault()
     editCardStatus(newStatus)
+})
+
+deletebtn.addEventListener('click', e => {
+    e.preventDefault()
+    deleteCard()
+    editmodule.style.display = 'none'
+    location.reload()
 })
 
 window.addEventListener('DOMContentLoaded', () => {
