@@ -56,6 +56,7 @@ app.use('/users', usersRoutes)
 app.use('/projects', checkLogin, projectsRoutes)
 app.use('/cards', checkLogin, cardsRoutes)
 
+//this is the default render route for the user when they first navigate to our site
 app.get('/', (req, res) => {
     res.render('template', {
         locals: {

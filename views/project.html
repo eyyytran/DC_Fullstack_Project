@@ -4,16 +4,17 @@
             <img
                 src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
             />
-            <h1>Trelljoe</h1>
+            <h1 id="logo-redirect">Trelljoe</h1>
         </div>
         <div class="nav-barlinks">
+            <button class="d-dashboardbtn"><h2>Dashboard</h2></button>
             <button id="p-logoutbtn"><h2>Sign out</h2></button>
         </div>
     </div>
 
     <div class="p-module">
         <div class="p-module-contents">
-            <div class="p-module-title">Let's name your project.</div>
+            <div class="p-module-title">Let's make a new task.</div>
             <form id="p-form">
                 <div class="form-field">
                     <input
@@ -45,12 +46,12 @@
                 </div>
                 <input type="button" value="Submit" id="pe-submitbtn" />
                 <button class="pe-movebtn">Move</button>
-                <div class="pe-moveoptions">
-                    <button class="pe-todobtn"></button>
-                    <button class="pe-inprogressbtn"></button>
-                    <button class="pe-reviewbtn"></button>
-                    <button class="pe-completedbtn"></button>
-                </div>
+                <select name="move-selector" id="pe-moveoptions">
+                    <option value="todo">To-Do</option>
+                    <option value="inprogress">Doing</option>
+                    <option value="review">Review</option>
+                    <option value="complete">Complete</option>
+                </select>
                 <button class="pe-deletebtn">Delete Card</button>
                 <button class="pe-close">Cancel</button>
             </form>
@@ -66,6 +67,7 @@
                     src="https://img.icons8.com/ios/50/000000/add--v1.png"
                     alt="Add a card button"
                     class="p-createbtnimg"
+                    name="todo"
                 />
             </button>
         </div>
@@ -77,6 +79,7 @@
                     src="https://img.icons8.com/ios/50/000000/add--v1.png"
                     alt="Add a card button"
                     class="p-createbtnimg"
+                    name="inprogress"
                 />
             </button>
         </div>
@@ -88,6 +91,7 @@
                     src="https://img.icons8.com/ios/50/000000/add--v1.png"
                     alt="Add a card button"
                     class="p-createbtnimg"
+                    name="review"
                 />
             </button>
         </div>
@@ -99,6 +103,7 @@
                     src="https://img.icons8.com/ios/50/000000/add--v1.png"
                     alt="Add a card button"
                     class="p-createbtnimg"
+                    name="complete"
                 />
             </button>
         </div>

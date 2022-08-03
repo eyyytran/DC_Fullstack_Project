@@ -3,104 +3,117 @@ const toDoList = document.getElementById('p-todo-list')
 const doingList = document.getElementById('p-inprogress-list')
 const reviewList = document.getElementById('p-review-list')
 const completeList = document.getElementById('p-complete-list')
+const createmodule = document.querySelector('.p-module')
 const editmodule = document.querySelector('.pe-module')
+const Csubmitbtn = document.getElementById('p-submitbtn')
 const Esubmitbtn = document.querySelector('#pe-submitbtn')
+const cancelbtn = document.querySelector('.p-close')
 const movebtn = document.querySelector('.pe-movebtn')
 const deletebtn = document.querySelector('.pe-deletebtn')
+const moveoptions = document.querySelector('#pe-moveoptions')
+const logo = document.getElementById('logo-redirect')
 
 const loadCards = async () => {
-  const projectID = localStorage.getItem("projectId");
-  const requestData = { projectID: projectID };
-  try {
-    const sendData = await fetch("http://localhost:3001/cards/get_cards", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestData),
-    });
-    const cards = await sendData.json();
-    console.log(typeof cards);
-    generateCards(cards);
-  } catch (error) {
-    alert("could not load your project");
-  }
-};
-
-const generateCards = (list) => {
-  for (let i = 0; i < list.length; i++) {
-    const status = list[i].status.toLowerCase();
-    const card = document.createElement("div");
-    const editbtn = document.createElement("button");
-    const editbtnimage = document.createElement("img");
-    const cardcontent = document.createElement("div");
-    const content = list[i].name;
-    const cardId = list[i].id.toString();
-    editbtnimage.src =
-      "https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png";
-    cardcontent.innerHTML = content;
-
-    cardcontent.classList.add("p-card-content");
-    editbtn.classList.add("p-editbtn");
-    editbtnimage.classList.add("p-editbtn-image");
-    card.classList.add("p-card");
-    card.setAttribute("id", cardId);
-    if (status === "todo") {
-      toDoList.append(card);
-      card.append(cardcontent);
-      card.append(editbtn);
-      editbtn.append(editbtnimage);
-    } else if (status === "inprogress") {
-      doingList.append(card);
-      card.append(cardcontent);
-      card.append(editbtn);
-      editbtn.append(editbtnimage);
-    } else if (status === "review") {
-      reviewList.append(card);
-      card.append(cardcontent);
-      card.append(editbtn);
-      editbtn.append(editbtnimage);
-    } else {
-      completeList.append(card);
-      card.append(cardcontent);
-      card.append(editbtn);
-      editbtn.append(editbtnimage);
+    const projectID = localStorage.getItem('projectId')
+    const requestData = { projectID: projectID }
+    try {
+        const sendData = await fetch('http://localhost:3001/cards/get_cards', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
+        const cards = await sendData.json()
+        console.log(typeof cards)
+        generateCards(cards)
+    } catch (error) {
+        alert('could not load your project')
     }
+}
 
-    console.log("I made it");
-  }
-};
+const generateCards = list => {
+    for (let i = 0; i < list.length; i++) {
+        const status = list[i].status.toLowerCase()
+        const card = document.createElement('div')
+        const editbtn = document.createElement('button')
+        const editbtnimage = document.createElement('img')
+        const cardcontent = document.createElement('div')
+        const content = list[i].name
+        const cardId = list[i].id.toString()
+        editbtnimage.src =
+            'https://img.icons8.com/ios-glyphs/30/000000/edit--v1.png'
+        cardcontent.innerHTML = content
+
+        cardcontent.classList.add('p-card-content')
+        editbtn.classList.add('p-editbtn')
+        editbtnimage.classList.add('p-editbtn-image')
+        card.classList.add('p-card')
+        card.setAttribute('id', cardId)
+        if (status === 'todo') {
+            toDoList.append(card)
+            card.append(cardcontent)
+            card.append(editbtn)
+            editbtn.append(editbtnimage)
+        } else if (status === 'inprogress') {
+            doingList.append(card)
+            card.append(cardcontent)
+            card.append(editbtn)
+            editbtn.append(editbtnimage)
+        } else if (status === 'review') {
+            reviewList.append(card)
+            card.append(cardcontent)
+            card.append(editbtn)
+            editbtn.append(editbtnimage)
+        } else {
+            completeList.append(card)
+            card.append(cardcontent)
+            card.append(editbtn)
+            editbtn.append(editbtnimage)
+        }
+
+        console.log('I made it')
+    }
+}
 
 const openEditModule = e => {
     localStorage.removeItem('cardName')
     localStorage.removeItem('cardId')
+    localStorage.removeItem('cardStatus')
 
     const cardName = e.target.parentNode.offsetParent.innerText
     const cardId = e.target.parentNode.offsetParent.id
+    const cardStatus = e.path[4].id
 
     localStorage.setItem('cardName', cardName)
     localStorage.setItem('cardId', cardId)
+    localStorage.setItem('cardStatus', cardStatus)
+
     editmodule.style.display = 'block'
     const currentName = localStorage.getItem('cardName')
     document.querySelector('.pe-inputs').value = currentName
 }
 
-const handleErrors = (response) => {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-};
+const openCreateModule = e => {
+    localStorage.removeItem('cardStatus')
+    localStorage.setItem('cardStatus', e.target.name)
+    createmodule.style.display = 'block'
+}
 
 const createCard = async () => {
     const cardName = document.querySelector('.p-inputs').value
-    // const status = //use the id of the container
+    const newStatus = localStorage.getItem('cardStatus')
+    const projectID = localStorage.getItem('projectId')
     const data = {
+        listPosition: 1,
         name: cardName,
+        status: newStatus,
+        projectID: projectID,
     }
+    console.log({ data })
     try {
-        const request = await fetch(
-            'http://localhost:3001/projects/create_project',
+        const sendData = await fetch(
+            'http://localhost:3001/cards/create_card',
             {
                 method: 'POST',
                 headers: {
@@ -109,10 +122,9 @@ const createCard = async () => {
                 body: JSON.stringify(data),
             }
         )
-        handleErrors(request);
-        alert('created the project')
+        alert('created the card')
     } catch (error) {
-        alert('unable to create project')
+        alert('unable to create card')
     }
 }
 
@@ -131,19 +143,28 @@ const editCardDesc = async newName => {
     alert('Successfully updated your task')
 }
 
-const editCardStatus = async newStatus => {
+const editCardStatus = async () => {
+    const newStatus = moveoptions.value
     const requestData = {
         id: localStorage.getItem('cardId'),
         status: newStatus,
     }
-    const sendData = await fetch('http://localhost:3001/cards/update_card', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
-    alert('Successfully updated your task')
+    console.log({ requestData })
+    try {
+        const sendData = await fetch(
+            'http://localhost:3001/cards/update_card',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            }
+        )
+        alert('Successfully updated your task status')
+    } catch (error) {
+        alert('Unable to update task status')
+    }
 }
 
 const deleteCard = async () => {
@@ -163,21 +184,29 @@ const deleteCard = async () => {
 }
 
 const signOutUser = async () => {
-  try {
-    const signOutRequest = await fetch("http://localhost:3001/users/logout", {
-      method: "PUT",
-    });
-    alert("Your session has ended");
-    localStorage.clear();
-    window.location.href = "http://localhost:3001/";
-  } catch (error) {
-    alert("Could not end user session");
-  }
-};
+    try {
+        const signOutRequest = await fetch(
+            'http://localhost:3001/users/logout',
+            {
+                method: 'PUT',
+            }
+        )
+        alert('Your session has ended')
+        localStorage.clear()
+        window.location.href = 'http://localhost:3001/'
+    } catch (error) {
+        alert('Could not end user session')
+    }
+}
 
-signoutbtn.addEventListener("click", () => {
-  signOutUser();
-});
+const setSelectorOptions = () => {
+    const currentStatus = localStorage.getItem('cardStatus')
+    moveoptions.value = currentStatus
+}
+
+signoutbtn.addEventListener('click', () => {
+    signOutUser()
+})
 
 document.addEventListener('click', e => {
     if (
@@ -186,25 +215,31 @@ document.addEventListener('click', e => {
     ) {
         openEditModule(e)
     }
-    if (
-        e.target.className === 'p-createbtn' ||
-        e.target.className === 'p-createbtnimg'
-    ) {
-        console.log('create a card')
+    if (e.target.className === 'p-createbtnimg') {
+        openCreateModule(e)
     }
 })
 
-Esubmitbtn.addEventListener('click', e => {
+Csubmitbtn.addEventListener('click', e => {
     e.preventDefault()
+    createCard()
+    createmodule.style.display = 'none'
+    location.reload()
+})
+
+Esubmitbtn.addEventListener('click', e => {
     const newName = e.target.form[0].value
     editCardDesc(newName)
+    editCardStatus()
     editmodule.style.display = 'none'
     location.reload()
 })
 
 movebtn.addEventListener('click', e => {
     e.preventDefault()
-    editCardStatus(newStatus)
+    movebtn.style.display = 'none'
+    moveoptions.style.display = 'block'
+    setSelectorOptions()
 })
 
 deletebtn.addEventListener('click', e => {
@@ -213,6 +248,13 @@ deletebtn.addEventListener('click', e => {
     editmodule.style.display = 'none'
     location.reload()
 })
+
+cancelbtn.addEventListener('click', () => {
+    createmodule.style.display = 'none'
+    console.log('cancel button')
+})
+
+logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
     loadCards()

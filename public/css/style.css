@@ -29,6 +29,10 @@ body {
     color: var(--dark-blue);
 }
 
+body:hover {
+    cursor: default;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -79,6 +83,10 @@ form {
     color: var(--red);
 }
 
+#logo-redirect:hover {
+    cursor: pointer;
+}
+
 .h-container {
     height: 100vh;
     width: 100vw;
@@ -124,6 +132,7 @@ form {
     font-weight: bolder;
 }
 
+.d-dashboardbtn,
 #p-logoutbtn,
 #d-logoutbtn,
 #d-createbtn,
@@ -295,6 +304,10 @@ form {
     transition: transform 0.25s;
 }
 
+.d-project-card:hover {
+    cursor: pointer;
+}
+
 .p-module,
 .pe-module,
 .de-module,
@@ -326,7 +339,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 3px;
     padding: 20px;
     background-color: var(--white);
     margin-right: 0px;
@@ -339,6 +352,7 @@ form {
     text-align: center;
 }
 
+.p-close,
 .pe-close,
 .de-close,
 .d-close {
@@ -381,14 +395,14 @@ form {
 }
 
 .p-list-container {
-    flex: 1 1 calc(var(--cardwidth) + 1rem);
+    flex: 1 1 calc(var(--cardheight) + 1rem);
     flex: 0 1 calc(var(--cardwidth) + 1rem);
     margin: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 1rem;
     background: var(--lavender);
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
@@ -405,14 +419,19 @@ form {
     background: var(--white);
     margin-top: 5px;
     margin-bottom: 5px;
-    border-radius: 10px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 #091e4240;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.pe-moveoptions {
+.p-createbtn {
+    background: transparent;
+}
+
+#pe-moveoptions {
     display: none;
 }
 
