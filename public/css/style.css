@@ -83,6 +83,10 @@ form {
     color: var(--red);
 }
 
+#logo-redirect:hover {
+    cursor: pointer;
+}
+
 .h-container {
     height: 100vh;
     width: 100vw;
@@ -347,6 +351,7 @@ form {
     text-align: center;
 }
 
+.p-close,
 .pe-close,
 .de-close,
 .d-close {
@@ -389,7 +394,7 @@ form {
 }
 
 .p-list-container {
-    flex: 1 1 calc(var(--cardwidth) + 1rem);
+    flex: 1 1 calc(var(--cardheight) + 1rem);
     flex: 0 1 calc(var(--cardwidth) + 1rem);
     margin: 1rem;
     display: flex;
