@@ -3,8 +3,23 @@ const { Users } = require("../../db/models");
 const router = express.Router();
 const { v4 } = require("uuid");
 const bcrypt = require("bcrypt");
+// validate user function
+const checkLogin = (req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    res.render("template", {
+      locals: {
+        title: getTitle("index"),
+        script: getScript("index"),
+      },
+      partials: {
+        partial: "index",
+      },
+    });
+  }
+};
 
-// user registration
 router.post("/register", async (req, res) => {
   const { username, password, email } = await req.body;
   try {
@@ -22,11 +37,10 @@ router.post("/register", async (req, res) => {
     req.session.user = user;
     res.status(200).send(user);
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    res.status(400).send("error", error);
   }
 });
-// login
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await Users.findOne({
@@ -36,38 +50,20 @@ router.post("/login", async (req, res) => {
   const validated = await bcrypt.compare(password, validateUser.password);
   if (validated) {
     req.session.user = user;
-    res.status(200).send("login successful");
+    res.status(200).send(user);
   } else {
-    res.status(400).send("login failed");
+    res.status(400).send("error", error);
   }
 });
-// validate user
-const checkLogin = (req, res, next) => {
-  console.log("check", req.session.user);
-  if (req.session.user) {
-    next();
-  } else {
-    res.render("template", {
-      locals: {
-        title: getTitle("index"),
-        script: getScript("index"),
-      },
-      partials: {
-        partial: "index",
-      },
-    });
-  }
-};
-// update user
+
 router.put("/update_user", checkLogin, async (req, res) => {
   const { email, password, newPassword, newEmail, newUsername } = req.body;
   try {
-    // find user based on email in our database
     const user = await Users.findOne({ where: { email: email } });
     const validateUser = user.dataValues;
     const validated = await bcrypt.compare(password, validateUser.password);
     if (!validated) {
-      res.status(400).send("Check email and password");
+      res.status(400).send("invalid user");
     } else {
       const salt = await bcrypt.genSalt(5);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
@@ -81,11 +77,10 @@ router.put("/update_user", checkLogin, async (req, res) => {
       res.status(200).send(user);
     }
   } catch (error) {
-    res.status(400).send("could not find");
-    console.log(error);
+    res.status(400).send("error", error);
   }
 });
-// delete account
+
 router.delete("/destroy_user", checkLogin, async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -93,24 +88,22 @@ router.delete("/destroy_user", checkLogin, async (req, res) => {
     const validateUser = user.dataValues;
     const validated = await bcrypt.compare(password, validateUser.password);
     if (!validated) {
-      res.status(400).send("Check email and password");
+      res.status(400).send("invalid user");
     } else {
       user.destroy();
-      res.send("User account removed");
+      res.status(200).send("destroyed");
     }
   } catch (error) {
-    res.status(400).send("could not complete");
-    console.log(error);
+    res.status(400).send("error", error);
   }
 });
-//end session
+
 router.put("/logout", checkLogin, (req, res) => {
   try {
     req.session.user = null;
     res.status(200).send("session ended");
   } catch (error) {
-    res.status(400).send("could not end session");
-    console.log(error);
+    res.status(400).send("error", error);
   }
 });
 

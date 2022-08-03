@@ -19,9 +19,9 @@ router.post('/create_project', async (req, res) => {
             projectID: project.id,
         }
         const join = await UserProjects.create(newJoin)
-        res.status(200).send(project, join)
+        res.status(200).send(project)
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send("error",error)
     }
 })
 
@@ -40,7 +40,7 @@ router.get('/get_projects', async (req, res) => {
         }
         res.status(200).json(allProjects)
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send("error", error);
     }
 })
 
@@ -59,8 +59,7 @@ router.get('/get_users', async (req, res) => {
         }
         res.status(200).json(allUsers)
     } catch (error) {
-        res.status(400).send(error)
-        console.log(error)
+        res.status(400).send("error", error);
     }
 })
 
@@ -76,7 +75,7 @@ router.post('/create_join', async (req, res) => {
         const join = await UserProjects.create(newJoin)
         res.status(200).send(join)
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send("error", error);
     }
 })
 
@@ -86,10 +85,9 @@ router.delete('/destroy_project', async (req, res) => {
         await Cards.destroy({ where: { projectID: id } })
         await UserProjects.destroy({ where: { projectID: id } })
         await Projects.destroy({ where: { id: id } })
-        res.send('Project destroyed')
+        res.status(200).send('destroyed')
     } catch (error) {
-        res.send('could not destroy')
-        console.log(error)
+        res.status(400).send("error", error);
     }
 })
 
@@ -105,7 +103,7 @@ router.put('/update_project', async (req, res) => {
         await currentProject.save()
         res.status(200).json(currentProject)
     } catch (error) {
-        res.send('could not find')
+        res.status(400).send("error", error);
     }
 })
 
