@@ -144,7 +144,7 @@ const submitForm = async (e) => {
     alert("Registration complete");
     window.location.href = "http://localhost:3001/dashboard";
   } catch (error) {
-    alert("Unable to create user");
+    console.log(error)
   }
 };
 

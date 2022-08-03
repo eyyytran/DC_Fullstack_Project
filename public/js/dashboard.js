@@ -41,7 +41,7 @@ const loadProjects = async () => {
         const data = await projects.json()
         generateProjectCards(data)
     } catch (error) {
-        alert('could not fetch projects')
+        console.log(error)
     }
 }
 
@@ -98,7 +98,7 @@ const createProject = async () => {
         )
         alert('created the project')
     } catch (error) {
-        alert('unable to create project')
+        console.log(error)
     }
 }
 
@@ -114,7 +114,7 @@ const signOutUser = async () => {
         localStorage.clear()
         window.location.href = 'http://localhost:3001/index'
     } catch (error) {
-        alert('Could not end user session')
+        console.log(error)
     }
 }
 

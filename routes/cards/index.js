@@ -56,7 +56,7 @@ router.put('/update_card', async (req, res) => {
         const card = await currentCard.save()
         res.status(200).send(card)
     } catch (error) {
-        res.send('could not find')
+        res.send(error)
     }
 })
 
@@ -67,7 +67,7 @@ router.delete('/destroy_card', async (req, res) => {
         currentCard.destroy()
         res.send('Card destroyed')
     } catch (error) {
-        res.send('could not destroy')
+        res.send(error)
     }
 })
 

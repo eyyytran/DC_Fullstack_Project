@@ -105,7 +105,7 @@ const submitForm = async (e) => {
     alert("Login successful");
     window.location.href = "http://localhost:3001/dashboard";
   } catch (error) {
-    alert("Unable login");
+    console.log(error)
   }
 };
 

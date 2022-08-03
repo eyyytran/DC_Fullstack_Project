@@ -28,7 +28,7 @@ const loadCards = async () => {
         console.log(typeof cards)
         generateCards(cards)
     } catch (error) {
-        alert('could not load your project')
+        console.log(error)
     }
 }
 
@@ -124,7 +124,7 @@ const createCard = async () => {
         )
         alert('created the card')
     } catch (error) {
-        alert('unable to create card')
+        console.log(error)
     }
 }
 
@@ -163,7 +163,7 @@ const editCardStatus = async () => {
         )
         alert('Successfully updated your task status')
     } catch (error) {
-        alert('Unable to update task status')
+        console.log(error)
     }
 }
 
@@ -195,7 +195,7 @@ const signOutUser = async () => {
         localStorage.clear()
         window.location.href = 'http://localhost:3001/'
     } catch (error) {
-        alert('Could not end user session')
+        console.log()
     }
 }
 
