@@ -7,9 +7,11 @@ const createmodule = document.querySelector('.p-module')
 const editmodule = document.querySelector('.pe-module')
 const Csubmitbtn = document.getElementById('p-submitbtn')
 const Esubmitbtn = document.querySelector('#pe-submitbtn')
+const cancelbtn = document.querySelector('.p-close')
 const movebtn = document.querySelector('.pe-movebtn')
 const deletebtn = document.querySelector('.pe-deletebtn')
 const moveoptions = document.querySelector('#pe-moveoptions')
+const logo = document.getElementById('logo-redirect')
 
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
@@ -246,6 +248,13 @@ deletebtn.addEventListener('click', e => {
     editmodule.style.display = 'none'
     location.reload()
 })
+
+cancelbtn.addEventListener('click', () => {
+    createmodule.style.display = 'none'
+    console.log('cancel button')
+})
+
+logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
     loadCards()

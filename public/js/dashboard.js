@@ -8,6 +8,7 @@ const Esubmitbtn = document.getElementById('de-submitbtn')
 const deletebtn = document.querySelector('.de-deleteboard')
 const Ecancelbtn = document.querySelector('.de-close')
 const signoutbtn = document.querySelector('#d-logoutbtn')
+const logo = document.getElementById('logo-redirect')
 
 const generateProjectCards = list => {
     for (let project = 0; project < list.length; project++) {
@@ -184,5 +185,7 @@ deletebtn.addEventListener('click', e => {
 signoutbtn.addEventListener('click', () => {
     signOutUser()
 })
+
+logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
