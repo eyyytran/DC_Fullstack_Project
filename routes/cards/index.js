@@ -20,7 +20,7 @@ router.post("/create_card", async (req, res) => {
     const card = await Cards.create(newCard);
     res.status(200).send(card);
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
@@ -32,7 +32,7 @@ router.post("/get_cards", async (req, res) => {
     });
     res.status(200).json(allCards);
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
@@ -51,7 +51,7 @@ router.put("/update_card", async (req, res) => {
     const card = await currentCard.save();
     res.status(200).send(card);
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
@@ -62,7 +62,7 @@ router.delete("/destroy_card", async (req, res) => {
     currentCard.destroy();
     res.status(200).send("destroyed");
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 

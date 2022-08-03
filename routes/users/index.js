@@ -1,5 +1,5 @@
 const express = require("express");
-const { Users } = require("../../db/models");
+const { Users, UserProjects, Projects, Cards } = require("../../db/models");
 const router = express.Router();
 const { v4 } = require("uuid");
 const bcrypt = require("bcrypt");
@@ -37,7 +37,7 @@ router.post("/register", async (req, res) => {
     req.session.user = user;
     res.status(200).send(user);
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
     req.session.user = user;
     res.status(200).send(user);
   } else {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
@@ -77,7 +77,7 @@ router.put("/update_user", checkLogin, async (req, res) => {
       res.status(200).send(user);
     }
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
@@ -94,7 +94,31 @@ router.delete("/destroy_user", checkLogin, async (req, res) => {
       res.status(200).send("destroyed");
     }
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
+  }
+});
+
+// This will work for now but it would be better if the guest had a randomly
+// generated email so there could be more than one guest account open at a time
+router.delete("/destroy_guest", async (req, res) => {
+  try {
+    const guest = await Users.findOne({
+      where: { email: "destroyguest@destroy.com" },
+    });
+    const allProjectIDs = await UserProjects.findAll({
+      where: { userID: guest.id },
+      attributes: ["projectID"],
+    });
+    await UserProjects.destroy({ where: { userID: guest.id } });
+    for (let index = 0; index < allProjectIDs.length; index++) {
+      const projectID = allProjectIDs[index].dataValues.projectID;
+      await Cards.destroy({ where: { projectID: projectID } });
+      await Projects.destroy({ where: { id: projectID } });
+    }
+    await guest.destroy();
+    res.status(200).send("guest destroyed");
+  } catch (error) {
+    res.status(400).send("error");
   }
 });
 
@@ -103,7 +127,7 @@ router.put("/logout", checkLogin, (req, res) => {
     req.session.user = null;
     res.status(200).send("session ended");
   } catch (error) {
-    res.status(400).send("error", error);
+    res.status(400).send("error");
   }
 });
 
