@@ -5,9 +5,11 @@ const reviewList = document.getElementById('p-review-list')
 const completeList = document.getElementById('p-complete-list')
 const createmodule = document.querySelector('.p-module')
 const editmodule = document.querySelector('.pe-module')
+const Csubmitbtn = document.getElementById('p-submitbtn')
 const Esubmitbtn = document.querySelector('#pe-submitbtn')
 const movebtn = document.querySelector('.pe-movebtn')
 const deletebtn = document.querySelector('.pe-deletebtn')
+const moveoptions = document.querySelector('#pe-moveoptions')
 
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
@@ -27,8 +29,6 @@ const loadCards = async () => {
         alert('could not load your project')
     }
 }
-
-const generateLists = () => {}
 
 const generateCards = list => {
     for (let i = 0; i < list.length; i++) {
@@ -77,41 +77,53 @@ const generateCards = list => {
 const openEditModule = e => {
     localStorage.removeItem('cardName')
     localStorage.removeItem('cardId')
+    localStorage.removeItem('cardStatus')
 
     const cardName = e.target.parentNode.offsetParent.innerText
     const cardId = e.target.parentNode.offsetParent.id
+    const cardStatus = e.path[4].id
 
     localStorage.setItem('cardName', cardName)
     localStorage.setItem('cardId', cardId)
+    localStorage.setItem('cardStatus', cardStatus)
+
     editmodule.style.display = 'block'
     const currentName = localStorage.getItem('cardName')
     document.querySelector('.pe-inputs').value = currentName
 }
 
-const createCard = async e => {
+const openCreateModule = e => {
+    localStorage.removeItem('cardStatus')
+    localStorage.setItem('cardStatus', e.target.name)
+    createmodule.style.display = 'block'
+}
+
+const createCard = async () => {
     const cardName = document.querySelector('.p-inputs').value
-    console.log({ cardName })
-    const newStatus = e.target.name
-    console.log({ newStatus })
-    // const status = //use the id of the container
-    // const data = {
-    //     name: cardName,
-    // }
-    // try {
-    //     const sendData = await fetch(
-    //         'http://localhost:3001/projects/create_project',
-    //         {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(data),
-    //         }
-    //     )
-    //     alert('created the project')
-    // } catch (error) {
-    //     alert('unable to create project')
-    // }
+    const newStatus = localStorage.getItem('cardStatus')
+    const projectID = localStorage.getItem('projectId')
+    const data = {
+        listPosition: 1,
+        name: cardName,
+        status: newStatus,
+        projectID: projectID,
+    }
+    console.log({ data })
+    try {
+        const sendData = await fetch(
+            'http://localhost:3001/cards/create_card',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+        alert('created the project')
+    } catch (error) {
+        alert('unable to create project')
+    }
 }
 
 const editCardDesc = async newName => {
@@ -183,6 +195,11 @@ const signOutUser = async () => {
     }
 }
 
+const setSelectorOptions = () => {
+    const currentStatus = localStorage.getItem('cardStatus')
+    moveoptions.value = currentStatus
+}
+
 signoutbtn.addEventListener('click', () => {
     signOutUser()
 })
@@ -195,12 +212,18 @@ document.addEventListener('click', e => {
         openEditModule(e)
     }
     if (e.target.className === 'p-createbtnimg') {
-        createmodule.style.display = 'block'
+        openCreateModule(e)
     }
 })
 
-Esubmitbtn.addEventListener('click', e => {
+Csubmitbtn.addEventListener('click', e => {
     e.preventDefault()
+    createCard()
+    createmodule.style.display = 'none'
+    location.reload()
+})
+
+Esubmitbtn.addEventListener('click', e => {
     const newName = e.target.form[0].value
     editCardDesc(newName)
     editmodule.style.display = 'none'
@@ -209,7 +232,10 @@ Esubmitbtn.addEventListener('click', e => {
 
 movebtn.addEventListener('click', e => {
     e.preventDefault()
-    editCardStatus(newStatus)
+    movebtn.style.display = 'none'
+    moveoptions.style.display = 'block'
+    setSelectorOptions()
+    // editCardStatus(newStatus)
 })
 
 deletebtn.addEventListener('click', e => {

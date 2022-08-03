@@ -13,7 +13,7 @@
 
     <div class="p-module">
         <div class="p-module-contents">
-            <div class="p-module-title">Let's name your project.</div>
+            <div class="p-module-title">Let's make a new task.</div>
             <form id="p-form">
                 <div class="form-field">
                     <input
@@ -45,12 +45,12 @@
                 </div>
                 <input type="button" value="Submit" id="pe-submitbtn" />
                 <button class="pe-movebtn">Move</button>
-                <div class="pe-moveoptions">
-                    <button class="pe-todobtn"></button>
-                    <button class="pe-inprogressbtn"></button>
-                    <button class="pe-reviewbtn"></button>
-                    <button class="pe-completedbtn"></button>
-                </div>
+                <select name="move-selector" id="pe-moveoptions">
+                    <option value="todo">To-Do</option>
+                    <option value="inprogress">Doing</option>
+                    <option value="review">Review</option>
+                    <option value="complete">Complete</option>
+                </select>
                 <button class="pe-deletebtn">Delete Card</button>
                 <button class="pe-close">Cancel</button>
             </form>

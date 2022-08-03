@@ -14,7 +14,7 @@ router.post('/create_card', async (req, res) => {
             listPosition,
             name,
             status,
-            userID: userID,
+            userID,
             projectID,
             createdAt: new Date(),
             updatedAt: new Date(),
