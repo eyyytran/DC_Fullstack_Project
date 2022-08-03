@@ -29,6 +29,10 @@ body {
     color: var(--dark-blue);
 }
 
+body:hover {
+    cursor: default;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -330,7 +334,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 3px;
     padding: 20px;
     background-color: var(--white);
     margin-right: 0px;
@@ -392,7 +396,7 @@ form {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 1rem;
     background: var(--lavender);
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
@@ -409,11 +413,16 @@ form {
     background: var(--white);
     margin-top: 5px;
     margin-bottom: 5px;
-    border-radius: 10px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 #091e4240;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+}
+
+.p-createbtn {
+    background: transparent;
 }
 
 #pe-moveoptions {
