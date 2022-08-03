@@ -9,6 +9,14 @@ const deletebtn = document.querySelector(".de-deleteboard");
 const Ecancelbtn = document.querySelector(".de-close");
 const signoutbtn = document.querySelector("#d-logoutbtn");
 
+const handleErrors = (response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
+
+
 const generateProjectCards = (list) => {
   for (let project = 0; project < list.length; project++) {
     const card = document.createElement("div");
@@ -50,7 +58,7 @@ const createProject = async () => {
     name: projectName,
   };
   try {
-    const sendData = await fetch(
+    const request = await fetch(
       "http://localhost:3001/projects/create_project",
       {
         method: "POST",
@@ -60,8 +68,10 @@ const createProject = async () => {
         body: JSON.stringify(data),
       }
     );
+    handleErrors(request);
     alert("created the project");
   } catch (error) {
+    console.log(error)
     alert("unable to create project");
   }
 };

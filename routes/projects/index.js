@@ -19,9 +19,10 @@ router.post("/create_project", async (req, res) => {
       projectID: project.id,
     };
     const join = await UserProjects.create(newJoin);
-    res.status(200).send(project, join);
+    res.status(200).send(join);
   } catch (error) {
     res.status(400).send(error);
+    console.log(error)
   }
 });
 

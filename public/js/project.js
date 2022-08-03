@@ -85,6 +85,13 @@ const openEditModule = e => {
     document.querySelector('.pe-inputs').value = currentName
 }
 
+const handleErrors = (response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
+
 const createCard = async () => {
     const cardName = document.querySelector('.p-inputs').value
     // const status = //use the id of the container
@@ -92,7 +99,7 @@ const createCard = async () => {
         name: cardName,
     }
     try {
-        const sendData = await fetch(
+        const request = await fetch(
             'http://localhost:3001/projects/create_project',
             {
                 method: 'POST',
@@ -102,6 +109,7 @@ const createCard = async () => {
                 body: JSON.stringify(data),
             }
         )
+        handleErrors(request);
         alert('created the project')
     } catch (error) {
         alert('unable to create project')
