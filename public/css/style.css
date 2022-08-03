@@ -6,8 +6,11 @@
     --dark-blue: #455276;
     --red: #eb557a;
     --light-blue: #eff4fe;
-    --green: #1da4a3;
     --lavender: #e6e9fe;
+    --todoblue: #7b89f4;
+    --doingblue: #6878f3;
+    --reviewblue: #5567f1;
+    --completeblue: #4257f0;
 }
 
 :root {
@@ -15,7 +18,9 @@
     --modulewidth: 793px;
     --formwidth: 400px;
     --moduleheight: 530px;
-    --cardheight: 200px;
+    --projectheight: 200px;
+    --projectwidth: 300px;
+    --cardheight: 100px;
     --cardwidth: 300px;
 }
 
@@ -277,8 +282,8 @@ form {
 
 .d-project-card {
     border-radius: 5px;
-    height: var(--cardheight);
-    width: var(--cardwidth);
+    height: var(--projectheight);
+    width: var(--projectwidth);
     background: var(--neon-blue);
     padding: 1rem;
     line-height: 1rem;
@@ -343,6 +348,7 @@ form {
     width: 150px;
 }
 
+.p-editbtn,
 .d-editbtn {
     background: transparent;
     position: absolute;
@@ -351,10 +357,12 @@ form {
     right: 0;
 }
 
+.p-card:hover .p-editbtn,
 .d-project-card:hover .d-editbtn {
     display: block;
 }
 
+.p-card:hover,
 .d-project-card:hover {
     transform: translateY(-5px);
 }
@@ -363,6 +371,56 @@ form {
     background: var(--red);
     margin-bottom: 1rem;
     width: 150px;
+}
+
+.p-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.p-list-container {
+    flex: 1 1 calc(var(--cardwidth) + 1rem);
+    flex: 0 1 calc(var(--cardwidth) + 1rem);
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+}
+
+#todo {
+    background: var(--todoblue);
+}
+#inprogress {
+    background: var(--doingblue);
+}
+#review {
+    background: var(--reviewblue);
+}
+#complete {
+    background: var(--completeblue);
+}
+
+.p-list-title {
+    color: var(--white);
+}
+
+.p-card {
+    height: fit-content;
+    min-height: var(--cardheight);
+    width: var(--cardwidth);
+    background: var(--white);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 @media (min-width: 600px) {
