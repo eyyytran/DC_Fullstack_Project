@@ -7,9 +7,10 @@
     --red: #eb557a;
     --light-blue: #eff4fe;
     --lavender: #e6e9fe;
-    --todoblue: #d9ddfc;
-    --doingblue: #b4bcf9;
-    --reviewblue: #8e9af6;
+    --todoblue: #7b89f4;
+    --doingblue: #6878f3;
+    --reviewblue: #5567f1;
+    --completeblue: #4257f0;
 }
 
 :root {
@@ -378,10 +379,7 @@ form {
     justify-content: center;
 }
 
-.p-todo,
-.p-doing,
-.p-review,
-.p-complete {
+.p-list-container {
     flex: 1 1 calc(var(--cardwidth) + 1rem);
     flex: 0 1 calc(var(--cardwidth) + 1rem);
     margin: 1rem;
@@ -394,17 +392,17 @@ form {
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
 }
 
-.p-todo {
+#todo {
     background: var(--todoblue);
 }
-.p-doing {
+#inprogress {
     background: var(--doingblue);
 }
-.p-review {
+#review {
     background: var(--reviewblue);
 }
-.p-complete {
-    background: var(--neon-blue);
+#complete {
+    background: var(--completeblue);
 }
 
 .p-list-title {

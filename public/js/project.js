@@ -1,8 +1,8 @@
 const signoutbtn = document.querySelector('#p-logoutbtn')
-const toDoList = document.getElementById('todo')
-const doingList = document.getElementById('inprogress')
-const reviewList = document.getElementById('review')
-const completeList = document.getElementById('complete')
+const toDoList = document.getElementById('p-todo-list')
+const doingList = document.getElementById('p-inprogress-list')
+const reviewList = document.getElementById('p-review-list')
+const completeList = document.getElementById('p-complete-list')
 
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
@@ -64,6 +64,20 @@ const generateCards = list => {
         }
 
         console.log('I made it')
+    }
+}
+
+const signOutUser = async () => {
+    try {
+        const signOutRequest = await fetch(
+            'http://localhost:3001/users/logout',
+            { method: 'PUT' }
+        )
+        alert('Your session has ended')
+        localStorage.clear()
+        window.location.href = 'http://localhost:3001/'
+    } catch (error) {
+        alert('Could not end user session')
     }
 }
 
