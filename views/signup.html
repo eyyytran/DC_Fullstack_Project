@@ -1,78 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<script defer src="../public/js/signup.js"></script>
-</head>
-
-<body>
-    <div class="su-container">
-        <div class="su-module-container">
-            <div class="su-hero">
-                <div class="header" id="su-header">
-                    <img
-                        src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
+<div class="su-container">
+    <div class="su-module-container">
+        <div class="su-hero">
+            <div class="header" id="su-header">
+                <img
+                    src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
+                />
+                <h1>TrellJoe</h1>
+            </div>
+            <img src="../public/svg/registration.svg" alt="a person holding the sign-up page" id="su-heroimage">
+            <div class="su-herotext">Create an account for free with just your email</div>
+        </div>
+        <div class="su-content">
+            <h2>Let's get started</h1>
+            <a href="http://localhost:3001/login">Already have an account? Log in</a>
+            <form id="su-form">
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="username"
+                        class="su-inputs"
+                        placeholder="Username"
+                        
                     />
-                    <h1>TrellJoe</h1>
+                    <small></small>
                 </div>
-                <img src="../public/svg/registration.svg" alt="a person holding the sign-up page" id="su-heroimage">
-                <div class="su-herotext">Create an account for free with just your email</div>
-            </div>
-            <div class="su-content">
-                <h2>Let's get started</h1>
-                <a href="http://localhost:3001/login">Already have an account? Log in</a>
-                <form id="su-form">
-                    <div class="form-field">
-                        <input
-                            type="text"
-                            name="username"
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="email"
                             class="su-inputs"
-                            placeholder="Username"
-                            
-                        />
-                        <small></small>
-                    </div>
-                    <div class="form-field">
-                        <input
-                            type="text"
-                            name="email"
-                             class="su-inputs"
-                            placeholder="E-mail address"
-                            
-                        />
-                        <small></small>
-                    </div>
-                    <div class="form-field">
-                        <input
-                            type="text"
-                            name="password"
-                             class="su-inputs"
-                            placeholder="Password (8-50 characters) "
-                            
-                        />
-                        <small></small>
-                    </div>
-                    <div class="form-field">
-                        <input
-                            type="text"
-                            name="password-confirmation"
-                             class="su-inputs"
-                            placeholder="Confirm password"
-                            
-                        />
-                        <small></small>
-                    </div>
-                    <input type="button" value="Submit" id="su-submitbtn"/>
-                </form>
-                
-            </div>
+                        placeholder="E-mail address"
+                        
+                    />
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="password"
+                            class="su-inputs"
+                        placeholder="Password (8-50 characters) "
+                        
+                    />
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="password-confirmation"
+                            class="su-inputs"
+                        placeholder="Confirm password"
+                        
+                    />
+                    <small></small>
+                </div>
+                <input type="button" value="Submit" id="su-submitbtn"/>
+            </form>
+            
         </div>
     </div>
-    ${script}
-</body>
+</div>
+${script}
 
-</html>
