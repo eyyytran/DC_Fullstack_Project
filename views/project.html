@@ -1,4 +1,60 @@
-<div>
-    <h1>Project Page</h1>
+<div class="p-container">
+    <div class="header">
+        <div class="nav-bar" id="logo">
+            <img
+                src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
+            />
+            <h1>Trelljoe</h1>
+        </div>
+        <div class="nav-barlinks">
+            <button id="p-logoutbtn"><h2>Sign out</h2></button>
+        </div>
+    </div>
+
+    <div class="p-module">
+        <div class="p-module-contents">
+            <div class="p-module-title">Let's name your project.</div>
+            <form id="p-form">
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="project-name"
+                        class="p-inputs"
+                        placeholder="Project Name"
+                    />
+                    <small></small>
+                </div>
+                <input type="button" value="Submit" id="p-submitbtn" />
+                <button class="p-close">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="pe-module">
+        <div class="pe-module-contents">
+            <div class="pe-module-title">Rename your project</div>
+            <form id="p-form">
+                <div class="form-field">
+                    <input
+                        type="text"
+                        name="project-name"
+                        class="pe-inputs"
+                        placeholder="Project Name"
+                    />
+                    <small></small>
+                </div>
+                <input type="button" value="Submit" id="pe-submitbtn" />
+                <button class="pe-deleteboard">Delete Card</button>
+                <button class="pe-close">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="p-content">
+        <div class="p-todo" id="p-todo-container"></div>
+        <div class="p-doing" id="p-doing-container"></div>
+        <div class="p-review" id="p-review-container"></div>
+        <div class="p-complete" id="p-complete-container"></div>
+    </div>
 </div>
 ${script}

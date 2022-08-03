@@ -67,44 +67,15 @@ const createProject = async () => {
 };
 
 const signOutUser = async () => {
-  try {
-    const signOutRequest = await fetch("http://localhost:3001/users/logout", {
-      method: "PUT",
-    });
-    alert("Your session has ended");
-    window.location.href = "http://localhost:3001/index";
-  } catch (error) {
-    alert("Could not end user session");
-  }
-};
-
-const openEditModule = (e) => {
-  localStorage.clear();
-
-  const projectName = e.target.parentNode.offsetParent.innerText;
-  const projectId = e.target.parentNode.offsetParent.id;
-
-  localStorage.setItem("projectName", projectName);
-  localStorage.setItem("projectId", projectId);
-  editmodule.style.display = "block";
-  const currentName = localStorage.getItem("projectName");
-  document.querySelector(".de-inputs").value = currentName;
-};
-
-const editProjectName = async (newName) => {
-  const requestData = {
-    id: localStorage.getItem("projectId"),
-    name: newName,
-    image: null,
-  };
-  const sendData = await fetch(
-    "http://localhost:3001/projects/update_project",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestData),
+    try {
+        const signOutRequest = await fetch(
+            'http://localhost:3001/users/logout',
+            { method: 'PUT' }
+        )
+        alert('Your session has ended')
+        window.location.href = 'http://localhost:3001/'
+    } catch (error) {
+        alert('Could not end user session')
     }
   );
   alert("Successfully updated your project name");
