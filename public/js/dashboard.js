@@ -187,7 +187,7 @@ submitbtn.addEventListener('click', e => {
     const projectName = document.querySelector('.d-inputs').value
     let isEntryValid = entryValidate(e, projectName)
     if (isEntryValid) {
-        createProject()
+        createProject(projectName)
         createmodule.style.display = 'none'
         location.reload()
     }
