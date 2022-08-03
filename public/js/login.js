@@ -1,3 +1,5 @@
+// const { response } = require("express");
+
 const submitBtn = document.getElementById("l-submitbtn");
 const form = document.getElementById("l-form");
 
@@ -67,6 +69,13 @@ const showSuccess = (input) => {
   feedback.textContent = "";
 };
 
+const handleErrors = (response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
+
 //forms and submissions
 const formValidate = (e) => {
   let isEmailValid = checkEmail(e),
@@ -92,6 +101,7 @@ const submitForm = async (e) => {
       },
       body: JSON.stringify(data),
     });
+    handleErrors(request);
     alert("Login successful");
     window.location.href = "http://localhost:3001/dashboard";
   } catch (error) {

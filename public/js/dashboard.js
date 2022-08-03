@@ -73,11 +73,10 @@ const signOutUser = async () => {
     });
     alert("Your session has ended");
     localStorage.clear();
-    window.location.href = "http://localhost:3001/";
+    window.location.href = "http://localhost:3001/index";
   } catch (error) {
     alert("Could not end user session");
   }
-  alert("Successfully updated your project name");
 };
 
 const deleteProject = async () => {

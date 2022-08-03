@@ -49,11 +49,11 @@ const checkLogin = (req, res, next) => {
   } else {
     res.render("template", {
       locals: {
-        title: getTitle("login"),
-        script: getScript("login"),
+        title: getTitle("index"),
+        script: getScript("index"),
       },
       partials: {
-        partial: "login",
+        partial: "index",
       },
     });
   }
