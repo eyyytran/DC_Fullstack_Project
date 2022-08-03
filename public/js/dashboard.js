@@ -75,7 +75,7 @@ const editProjectName = async newName => {
         )
         alert('Successfully updated your project name')
     } catch (error) {
-        alert('Unable to complete request')
+        console.log(error)
     }
 }
 
