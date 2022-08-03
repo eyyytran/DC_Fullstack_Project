@@ -36,7 +36,6 @@ app.use(
 store.sync()
 // validate user
 const checkLogin = (req, res, next) => {
-    console.log('check', req.session.user)
     if (req.session.user) {
         next()
     } else {
