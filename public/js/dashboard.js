@@ -67,18 +67,16 @@ const createProject = async () => {
 };
 
 const signOutUser = async () => {
-    try {
-        const signOutRequest = await fetch(
-            'http://localhost:3001/users/logout',
-            { method: 'PUT' }
-        )
-        alert('Your session has ended')
-        localStorage.clear()
-        window.location.href = 'http://localhost:3001/'
-    } catch (error) {
-        alert('Could not end user session')
-    }
-  );
+  try {
+    const signOutRequest = await fetch("http://localhost:3001/users/logout", {
+      method: "PUT",
+    });
+    alert("Your session has ended");
+    localStorage.clear();
+    window.location.href = "http://localhost:3001/";
+  } catch (error) {
+    alert("Could not end user session");
+  }
   alert("Successfully updated your project name");
 };
 
