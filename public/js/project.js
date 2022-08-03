@@ -3,6 +3,7 @@ const toDoList = document.getElementById('p-todo-list')
 const doingList = document.getElementById('p-inprogress-list')
 const reviewList = document.getElementById('p-review-list')
 const completeList = document.getElementById('p-complete-list')
+const createmodule = document.querySelector('.p-module')
 const editmodule = document.querySelector('.pe-module')
 const Esubmitbtn = document.querySelector('#pe-submitbtn')
 const movebtn = document.querySelector('.pe-movebtn')
@@ -133,14 +134,21 @@ const editCardStatus = async newStatus => {
         id: localStorage.getItem('cardId'),
         status: newStatus,
     }
-    const sendData = await fetch('http://localhost:3001/cards/update_card', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
-    alert('Successfully updated your task')
+    try {
+        const sendData = await fetch(
+            'http://localhost:3001/cards/update_card',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            }
+        )
+        alert('Successfully updated your task')
+    } catch (error) {
+        alert('Unable to update task')
+    }
 }
 
 const deleteCard = async () => {
@@ -187,7 +195,7 @@ document.addEventListener('click', e => {
         openEditModule(e)
     }
     if (e.target.className === 'p-createbtnimg') {
-        openCreateModule(e)
+        createmodule.style.display = 'block'
     }
 })
 

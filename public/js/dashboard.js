@@ -44,22 +44,39 @@ const loadProjects = async () => {
     }
 }
 
+const openEditModule = e => {
+    localStorage.clear()
+
+    const projectName = e.target.parentNode.offsetParent.innerText
+    const projectId = e.target.parentNode.offsetParent.id
+
+    localStorage.setItem('projectName', projectName)
+    localStorage.setItem('projectId', projectId)
+    editmodule.style.display = 'block'
+    const currentName = localStorage.getItem('projectName')
+    document.querySelector('.de-inputs').value = currentName
+}
+
 const editProjectName = async newName => {
     const requestData = {
         id: localStorage.getItem('projectId'),
         name: newName,
     }
-    const sendData = await fetch(
-        'http://localhost:3001/projects/update_project',
-        {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        }
-    )
-    alert('Successfully updated your project')
+    try {
+        const sendData = await fetch(
+            'http://localhost:3001/projects/update_project',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+        alert('Successfully updated your project name')
+    } catch (error) {
+        alert('Unable to complete request')
+    }
 }
 
 const createProject = async () => {
@@ -139,7 +156,7 @@ document.addEventListener('click', e => {
         e.target.className === 'd-editbtn' ||
         e.target.className === 'd-editbtn-image'
     ) {
-        editmodule.style.display = 'block'
+        openEditModule(e)
     }
     if (e.target.className === 'd-project-card') {
         localStorage.clear()
