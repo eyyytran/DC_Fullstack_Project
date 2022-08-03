@@ -32,19 +32,26 @@
 
     <div class="pe-module">
         <div class="pe-module-contents">
-            <div class="pe-module-title">Rename your project</div>
+            <div class="pe-module-title">Edit your task</div>
             <form id="p-form">
                 <div class="form-field">
                     <input
                         type="text"
-                        name="project-name"
+                        name="task"
                         class="pe-inputs"
-                        placeholder="Project Name"
+                        placeholder="Task"
                     />
                     <small></small>
                 </div>
                 <input type="button" value="Submit" id="pe-submitbtn" />
-                <button class="pe-deleteboard">Delete Card</button>
+                <button class="pe-movebtn">Move</button>
+                <div class="pe-moveoptions">
+                    <button class="pe-todobtn"></button>
+                    <button class="pe-inprogressbtn"></button>
+                    <button class="pe-reviewbtn"></button>
+                    <button class="pe-completedbtn"></button>
+                </div>
+                <button class="pe-deletebtn">Delete Card</button>
                 <button class="pe-close">Cancel</button>
             </form>
         </div>
