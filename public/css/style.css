@@ -7,10 +7,8 @@
     --red: #eb557a;
     --light-blue: #eff4fe;
     --lavender: #e6e9fe;
-    --todoblue: #7b89f4;
-    --doingblue: #6878f3;
-    --reviewblue: #5567f1;
-    --completeblue: #4257f0;
+    --periwinkle: #7b89f4;
+    --transparent: rbga(255, 255, 255, 0.2);
 }
 
 :root {
@@ -94,7 +92,7 @@ form {
 }
 
 .header {
-    background-color: var(--white);
+    background-color: var(--transparent);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -377,6 +375,7 @@ form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    background: var(--periwinkle);
 }
 
 .p-list-container {
@@ -389,24 +388,12 @@ form {
     align-items: center;
     border-radius: 10px;
     padding: 1rem;
+    background: var(--lavender);
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
 }
 
-#todo {
-    background: var(--todoblue);
-}
-#inprogress {
-    background: var(--doingblue);
-}
-#review {
-    background: var(--reviewblue);
-}
-#complete {
-    background: var(--completeblue);
-}
-
 .p-list-title {
-    color: var(--white);
+    color: var(--dark-blue);
 }
 
 .p-card {
