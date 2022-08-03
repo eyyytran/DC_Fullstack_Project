@@ -156,6 +156,12 @@ document.addEventListener('click', e => {
     ) {
         openEditModule(e)
     }
+    if (
+        e.target.className === 'p-createbtn' ||
+        e.target.className === 'p-createbtnimg'
+    ) {
+        console.log('create a card')
+    }
 })
 
 Esubmitbtn.addEventListener('click', e => {
