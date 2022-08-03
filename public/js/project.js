@@ -85,6 +85,29 @@ const openEditModule = e => {
     document.querySelector('.pe-inputs').value = currentName
 }
 
+const createCard = async () => {
+    const cardName = document.querySelector('.p-inputs').value
+    // const status = //use the id of the container
+    const data = {
+        name: cardName,
+    }
+    try {
+        const sendData = await fetch(
+            'http://localhost:3001/projects/create_project',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+        alert('created the project')
+    } catch (error) {
+        alert('unable to create project')
+    }
+}
+
 const editCardDesc = async newName => {
     const requestData = {
         id: localStorage.getItem('cardId'),
@@ -154,6 +177,12 @@ document.addEventListener('click', e => {
         e.target.className === 'p-editbtn-image'
     ) {
         openEditModule(e)
+    }
+    if (
+        e.target.className === 'p-createbtn' ||
+        e.target.className === 'p-createbtnimg'
+    ) {
+        console.log('create a card')
     }
 })
 
