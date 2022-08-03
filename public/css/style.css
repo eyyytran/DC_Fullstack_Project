@@ -8,7 +8,7 @@
     --light-blue: #eff4fe;
     --lavender: #e6e9fe;
     --periwinkle: #7b89f4;
-    --transparent: rgba(255, 255, 255, 0.2);
+    --transparent: rgba(255, 255, 255, 0.3);
 }
 
 :root {
@@ -102,6 +102,7 @@ form {
 
 .header {
     background-color: var(--transparent);
+    box-shadow: 0 1px 1px rgb(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -270,11 +271,18 @@ form {
     cursor: pointer;
 }
 
-.p-container,
+.p-container {
+    height: 100vh;
+    width: 100vw;
+    background: var(--periwinkle);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+}
 .d-container {
     height: 100vh;
     width: 100vw;
-    background: var(--light-blue);
+    background: var(--lavender);
     display: grid;
     grid-template-rows: auto 1fr;
     overflow-y: auto;
@@ -392,7 +400,6 @@ form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: var(--periwinkle);
 }
 
 .p-list-container {
@@ -438,7 +445,7 @@ form {
 
 @media (min-width: 600px) {
     .h-content {
-        flex-direction: row-reverse;
+        flex-direction: row;
         text-align: justify;
         justify-content: center;
     }
@@ -484,7 +491,7 @@ form {
     #d-projects {
         height: 100%;
         width: 100%;
-        flex-direction: row;
+        flex-direction: row-reverse;
         justify-content: center;
         align-items: flex-start;
         flex-wrap: wrap;
