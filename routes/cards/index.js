@@ -6,7 +6,8 @@ const { v4 } = require("uuid");
 // create new card
 // status options: toDo, inProgress, review, complete
 router.post("/create_card", async (req, res) => {
-  const { listPosition, name, status, userID, projectID } = req.body;
+  const { listPosition, name, status, projectID } = req.body;
+  const userID = req.session.user.id
   try {
     newCard = {
       id: v4(),
