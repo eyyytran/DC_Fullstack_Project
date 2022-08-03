@@ -22,12 +22,15 @@ const isLength = (length, min, max) =>
 const checkEntry = (e, name) => {
     let valid = false
     const min = 3
-    const max = 30
+    const max = 50
 
     if (!isRequired(name)) {
         showError(e.target.form[1], 'Please enter a password')
     } else if (!isLength(name.length, min, max)) {
-        showError(e.target.form[1], 'Project names are 3 to 30 characters long')
+        showError(
+            e.target.form[1],
+            'Please enter something 3 to 50 characters long.'
+        )
     } else {
         showSuccess(e.target.form[1])
         valid = true
@@ -144,8 +147,7 @@ const openCreateModule = e => {
     createmodule.style.display = 'block'
 }
 
-const createCard = async () => {
-    const cardName = document.querySelector('.p-inputs').value
+const createCard = async cardName => {
     const newStatus = localStorage.getItem('cardStatus')
     const projectID = localStorage.getItem('projectId')
     const data = {
@@ -266,18 +268,24 @@ document.addEventListener('click', e => {
 
 Csubmitbtn.addEventListener('click', e => {
     e.preventDefault()
+    const cardName = document.querySelector('.p-inputs').value
     let isEntryValid = entryValidate(e, cardName)
-    createCard()
-    createmodule.style.display = 'none'
-    location.reload()
+    if (isEntryValid) {
+        createCard(cardName)
+        createmodule.style.display = 'none'
+        location.reload()
+    }
 })
 
 Esubmitbtn.addEventListener('click', e => {
     const newName = e.target.form[0].value
-    editCardDesc(newName)
-    editCardStatus()
-    editmodule.style.display = 'none'
-    location.reload()
+    let isEntryValid = entryValidate(e, newName)
+    if (isEntryValid) {
+        editCardDesc(newName)
+        editCardStatus()
+        editmodule.style.display = 'none'
+        location.reload()
+    }
 })
 
 movebtn.addEventListener('click', e => {
