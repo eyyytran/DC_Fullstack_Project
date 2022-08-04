@@ -1,3 +1,5 @@
+const { appUrl } = require('../../globals')
+
 const submitBtn = document.getElementById('l-submitbtn')
 const form = document.getElementById('l-form')
 const errorMessage = document.getElementById('login-error')
@@ -93,7 +95,7 @@ const submitForm = async e => {
         password: Password,
     }
     try {
-        const request = await fetch('http://localhost:3001/users/login', {
+        const request = await fetch(`${appUrl}/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

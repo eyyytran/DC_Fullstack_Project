@@ -1,3 +1,5 @@
+const { appUrl } = require('../../globals')
+
 const submitBtn = document.getElementById('su-submitbtn')
 const form = document.getElementById('su-form')
 
@@ -140,7 +142,7 @@ const submitForm = async e => {
         email: Email,
     }
     try {
-        const request = await fetch('http://localhost:3001/users/register', {
+        const request = await fetch(`${appUrl}/users/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

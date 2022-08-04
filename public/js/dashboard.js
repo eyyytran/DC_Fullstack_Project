@@ -1,3 +1,5 @@
+const { appUrl } = require('../../globals')
+
 const createbtn = document.getElementById('d-createbtn')
 const projectList = document.getElementById('d-projects')
 const createmodule = document.querySelector('.d-module')
@@ -78,10 +80,9 @@ const generateProjectCards = list => {
 
 const loadProjects = async () => {
     try {
-        const projects = await fetch(
-            'http://localhost:3001/projects/get_projects',
-            { method: 'GET' }
-        )
+        const projects = await fetch(`${appUrl}/projects/get_projects`, {
+            method: 'GET',
+        })
         const data = await projects.json()
         generateProjectCards(data)
     } catch (error) {
@@ -108,16 +109,13 @@ const editProjectName = async newName => {
         name: newName,
     }
     try {
-        const sendData = await fetch(
-            'http://localhost:3001/projects/update_project',
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
+        const sendData = await fetch(`${appUrl}/projects/update_project`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
         alert('Successfully updated your project name')
     } catch (error) {
         console.log(error)
@@ -129,16 +127,13 @@ const createProject = async projectName => {
         name: projectName,
     }
     try {
-        const sendData = await fetch(
-            'http://localhost:3001/projects/create_project',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
+        const sendData = await fetch(`${appUrl}/projects/create_project`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
         alert('created the project')
     } catch (error) {
         alert('unable to create project')
@@ -147,12 +142,9 @@ const createProject = async projectName => {
 
 const signOutUser = async () => {
     try {
-        const signOutRequest = await fetch(
-            'http://localhost:3001/users/logout',
-            {
-                method: 'PUT',
-            }
-        )
+        const signOutRequest = await fetch(`${appUrl}/users/logout`, {
+            method: 'PUT',
+        })
         alert('Your session has ended')
         localStorage.clear()
         window.location.href = window.location.origin + '/index'
@@ -166,16 +158,13 @@ const deleteProject = async () => {
         id: localStorage.getItem('projectId'),
     }
     console.log(requestData)
-    const sendData = await fetch(
-        'http://localhost:3001/projects/destroy_project',
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        }
-    )
+    const sendData = await fetch(`${appUrl}/projects/destroy_project`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
     localStorage.clear()
 }
 
