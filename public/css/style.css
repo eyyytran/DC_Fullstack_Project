@@ -136,7 +136,7 @@ form {
     margin: 3px;
 }
 
-#d-username {
+.username-display {
     border: 3px solid red;
 }
 
