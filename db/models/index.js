@@ -10,30 +10,9 @@ const db = {}
 const config = process.env.DB_CONFIG
     ? JSON.parse(process.env.DB_CONFIG)
     : require(__dirname + '/../config/config.json')[env]
-const username = process.env.DB_USERNAME || config.username
-const password = process.env.DB_PASSWORD || config.password
-const database = process.env.DB_DATABASE || config.database
+const { username, password, database } = config
 
 const sequelize = new Sequelize(database, username, password, config)
-
-console.log({
-    config,
-    username,
-    password,
-    database,
-    HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
-})
-
-// if (config.use_env_variable) {
-//     sequelize = new Sequelize(process.env[config?.use_env_variable], config)
-// } else {
-//     sequelize = new Sequelize(
-//         process.env.DB_DATABASE || config.database,
-//         process.env.DB_USERNAME || config.username,
-//         process.env.DB_PASSWORD || config.password,
-//         process.env.DB_CONFIG || config
-//     )
-// }
 
 fs.readdirSync(__dirname)
     .filter(file => {
