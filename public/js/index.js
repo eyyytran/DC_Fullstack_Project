@@ -4,32 +4,19 @@ const signupBtn = document.getElementById('h-signupbtn')
 const guestBtn = document.getElementById('h-guestbtn')
 
 const loginGuest = async () => {
-    const guestEmail = Math.floor(100000 + Math.random() * 900000)
-    const data = {
-        username: 'guest',
-        password: 'Abc1234!',
-        email: `${guestEmail}@destroy.com`,
-    }
-    const request = await fetch(`${window.location.origin}/users/register`, {
+    const result = await fetch(`${window.location.origin}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-    })
-    setTimeout(async () => {
-        const data = {
-            email: 'destroyguest@destroy.com',
+        body: JSON.stringify({
+            username: 'guest',
+            email: `${Math.floor(100000 + Math.random() * 900000)}@destroy.com`,
             password: 'Abc1234!',
-        }
-        const request = await fetch(`${window.location.origin}/users/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-    }, 100)
+        }),
+    })
+    const user = await result.json()
+    localStorage.setItem('user', JSON.stringify(user))
     setTimeout(() => {
         window.location.href = window.location.origin + '/dashboard'
     }, 100)
