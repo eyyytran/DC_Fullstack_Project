@@ -130,7 +130,7 @@ const formValidate = e => {
     return isFormValid
 }
 
-const submitForm = async e => {
+const createUser = async e => {
     const Username = e.target.form[0].value
     const Email = e.target.form[1].value
     const Password = e.target.form[2].value
@@ -140,18 +140,23 @@ const submitForm = async e => {
         email: Email,
     }
 
-    const request = await fetch(`${window.location.origin}/users/register`, {
+    const result = await fetch(`${window.location.origin}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
     })
+    const user = await result.json()
+
+    localStorage.setItem('user', JSON.stringify(user))
+
     window.location.href = window.location.origin + '/dashboard'
 }
 
 submitBtn.onclick = e => {
     e.preventDefault()
+    console.log('clicked')
     let isFormValid = formValidate(e)
 
     if (!isFormValid) {
@@ -159,6 +164,6 @@ submitBtn.onclick = e => {
         alert('Unable to submit form')
     } else {
         console.log('Will be submitted')
-        submitForm(e)
+        createUser(e)
     }
 }

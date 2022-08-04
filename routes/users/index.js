@@ -20,7 +20,9 @@ router.post('/register', async (req, res) => {
         }
         const user = await Users.create(userToCreate)
         req.session.user = user
-        res.status(200).send(user)
+        const data = { ...user.dataValues }
+        delete data.password
+        res.status(200).json(data)
     } catch (error) {
         console.log(error)
         res.status(400).send(error)
@@ -36,7 +38,8 @@ router.post('/login', async (req, res) => {
     const validated = await bcrypt.compare(password, validateUser.password)
     if (validated) {
         req.session.user = user
-        res.status(200).send('login successful')
+        const { password, ...rest } = user.dataValues
+        res.status(200).json(rest)
     } else {
         res.status(400).send('login failed')
     }
@@ -86,26 +89,27 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
     }
 })
 // delete guest account and everything associated
-router.delete("/destroy_guest", checkLogin, async (req, res) => {
-  try {
-    if (req.session.user.username === 'guest'){
-    const guest = await Users.findByPk(req.session.user.id);
-    const allProjectIDs = await UserProjects.findAll({
-      where: { userID: guest.id },
-      attributes: ["projectID"],
-    });
-    await UserProjects.destroy({ where: { userID: guest.id } });
-    for (let index = 0; index < allProjectIDs.length; index++) {
-      const projectID = allProjectIDs[index].dataValues.projectID;
-      await Cards.destroy({ where: { projectID: projectID } });
-      await Projects.destroy({ where: { id: projectID } });
+router.delete('/destroy_guest', checkLogin, async (req, res) => {
+    try {
+        if (req.session.user.username === 'guest') {
+            const guest = await Users.findByPk(req.session.user.id)
+            const allProjectIDs = await UserProjects.findAll({
+                where: { userID: guest.id },
+                attributes: ['projectID'],
+            })
+            await UserProjects.destroy({ where: { userID: guest.id } })
+            for (let index = 0; index < allProjectIDs.length; index++) {
+                const projectID = allProjectIDs[index].dataValues.projectID
+                await Cards.destroy({ where: { projectID: projectID } })
+                await Projects.destroy({ where: { id: projectID } })
+            }
+            await guest.destroy()
+            res.status(200).send('guest destroyed')
+        }
+    } catch (error) {
+        res.status(400).send('error')
     }
-    await guest.destroy();
-    res.status(200).send("guest destroyed");}
-  } catch (error) {
-    res.status(400).send("error");
-  }
-});
+})
 //end session
 router.put('/logout', checkLogin, (req, res) => {
     try {
