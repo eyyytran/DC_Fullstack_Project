@@ -86,21 +86,20 @@ const formValidate = e => {
 }
 
 const submitForm = async e => {
-    const Email = e.target.form[0].value
-    const Password = e.target.form[1].value
-    const data = {
-        email: Email,
-        password: Password,
-    }
     try {
-        const request = await fetch(`${window.location.origin}/users/login`, {
+        const result = await fetch(`${window.location.origin}/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                email: e.target.form[0].value,
+                password: e.target.form[1].value,
+            }),
         })
-        handleErrors(request)
+        const user = await result.json()
+        localStorage.setItem('user', JSON.stringify(user))
+        handleErrors(result)
         setTimeout(() => {
             window.location.href = window.location.origin + '/dashboard'
         }, 100)

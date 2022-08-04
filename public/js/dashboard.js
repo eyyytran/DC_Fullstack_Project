@@ -69,7 +69,6 @@ const generateProjectCards = list => {
         editbtnimage.classList.add('d-editbtn-image')
         card.classList.add('d-project-card')
         card.setAttribute('id', projectId)
-
         projectList.append(card)
         card.append(editbtn)
         editbtn.append(editbtnimage)
@@ -129,38 +128,39 @@ const createProject = async projectName => {
     const data = {
         name: projectName,
     }
-    const sendData = await fetch(
-        `${window.location.origin}/projects/create_project`,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }
-    )
+    await fetch(`${window.location.origin}/projects/create_project`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
 }
 
 const signOutUser = async () => {
-    const signOutRequest = await fetch(
-        `${window.location.origin}/users/logout`,
-        {
-            method: 'PUT',
-        }
-    )
+    await fetch(`${window.location.origin}/users/logout`, {
+        method: 'PUT',
+    })
     localStorage.clear()
     window.location.href = window.location.origin + '/index'
 }
 
 const signOutGuest = async () => {
-    const signOutRequest = await fetch(
-        `${window.location.origin}/users/destroy_guest`,
-        {
-            method: 'DELETE',
-        }
-    )
-    localStorage.clear()
-    window.location.href = window.location.origin + '/index'
+    try {
+        const requests = [
+            fetch(`${window.location.origin}/users/logout`, {
+                method: 'PUT',
+            }),
+            fetch(`${window.location.origin}/users/destroy_guest`, {
+                method: 'DELETE',
+            }),
+        ]
+        const results = await Promise.all(requests)
+        localStorage.clear()
+        window.location.href = window.location.origin + '/index'
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 const deleteProject = async () => {
@@ -259,7 +259,12 @@ deletebtn.addEventListener('click', e => {
 })
 
 signoutbtn.addEventListener('click', () => {
-    signOutUser()
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user?.username === 'guest') {
+        signOutGuest()
+    } else {
+        signOutUser()
+    }
 })
 
 logo.onclick = () =>

@@ -97,10 +97,13 @@ form {
 .h-container {
     height: 100vh;
     width: 100vw;
-    background: rgb(250, 252, 253);
+    background: rgb(239, 244, 254);
     background: linear-gradient(
-        rgba(87, 104, 241, 0.7) 10%,
-        rgba(250, 252, 253, 1) 70%
+        0deg,
+        rgba(239, 244, 254, 1) 70%,
+        rgba(170, 177, 240, 0.8) 78%,
+        rgba(134, 146, 240, 0.9) 87%,
+        rgba(87, 104, 241, 1) 95%
     );
     display: grid;
     grid-template-rows: auto 1fr;
