@@ -79,8 +79,10 @@ const generateProjectCards = list => {
 const loadProjects = async () => {
     try {
         const projects = await fetch(
-            'http://localhost:3001/projects/get_projects',
-            { method: 'GET' }
+            `${window.location.origin}/projects/get_projects`,
+            {
+                method: 'GET',
+            }
         )
         const data = await projects.json()
         generateProjectCards(data)
@@ -109,7 +111,7 @@ const editProjectName = async newName => {
     }
     try {
         const sendData = await fetch(
-            'http://localhost:3001/projects/update_project',
+            `${window.location.origin}/projects/update_project`,
             {
                 method: 'PUT',
                 headers: {
@@ -130,7 +132,7 @@ const createProject = async projectName => {
     }
     try {
         const sendData = await fetch(
-            'http://localhost:3001/projects/create_project',
+            `${window.location.origin}/projects/create_project`,
             {
                 method: 'POST',
                 headers: {
@@ -148,14 +150,14 @@ const createProject = async projectName => {
 const signOutUser = async () => {
     try {
         const signOutRequest = await fetch(
-            'http://localhost:3001/users/logout',
+            `${window.location.origin}/users/logout`,
             {
                 method: 'PUT',
             }
         )
         alert('Your session has ended')
         localStorage.clear()
-        window.location.href = 'http://localhost:3001/index'
+        window.location.href = window.location.origin + '/index'
     } catch (error) {
         alert('Could not end user session')
     }
@@ -167,7 +169,7 @@ const deleteProject = async () => {
     }
     console.log(requestData)
     const sendData = await fetch(
-        'http://localhost:3001/projects/destroy_project',
+        `${window.location.origin}/projects/destroy_project`,
         {
             method: 'DELETE',
             headers: {
@@ -209,7 +211,7 @@ document.addEventListener('click', e => {
         localStorage.clear()
         localStorage.setItem('projectName', e.target.innerText)
         localStorage.setItem('projectId', e.target.id)
-        window.location.href = 'http://localhost:3001/project'
+        window.location.href = window.location.origin + '/project'
     }
 })
 
@@ -235,6 +237,7 @@ signoutbtn.addEventListener('click', () => {
     signOutUser()
 })
 
-logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
+logo.onclick = () =>
+    (window.location.href = window.location.origin + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())

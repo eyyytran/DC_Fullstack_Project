@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const es6Renderer = require('express-es6-template-engine')
+const checkLogin = require('./util/checkLogin')
 const models = require('./db/models')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
@@ -9,7 +10,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const store = new SequelizeStore({
     db: models.sequelize,
 })
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 // import routes
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
@@ -34,22 +35,6 @@ app.use(
     })
 )
 store.sync()
-// validate user
-const checkLogin = (req, res, next) => {
-    if (req.session.user) {
-        next()
-    } else {
-        res.render('template', {
-            locals: {
-                title: getTitle('index'),
-                script: getScript('index'),
-            },
-            partials: {
-                partial: 'index',
-            },
-        })
-    }
-}
 
 // use routes
 app.use('/users', usersRoutes)
