@@ -238,7 +238,7 @@ const signOutUser = async () => {
         })
         alert('Your session has ended')
         localStorage.clear()
-        window.location.href = window.location.origin
+        window.location.href = appUrl
     } catch (error) {
         alert('Could not end user session')
     }
@@ -306,8 +306,7 @@ cancelbtn.addEventListener('click', () => {
     console.log('cancel button')
 })
 
-logo.onclick = () =>
-    (window.location.href = window.location.origin + '/dashboard')
+logo.onclick = () => (window.location.href = appUrl + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
     loadCards()

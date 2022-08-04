@@ -150,7 +150,7 @@ const submitForm = async e => {
             body: JSON.stringify(data),
         })
         alert('Registration complete')
-        window.location.href = window.location.origin + '/dashboard'
+        window.location.href = appUrl + '/dashboard'
     } catch (error) {
         alert('Unable to create user')
     }
