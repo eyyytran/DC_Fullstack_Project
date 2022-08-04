@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+require("dotenv").config();
 const cors = require('cors')
 const es6Renderer = require('express-es6-template-engine')
 const checkLogin = require('./util/checkLogin')
@@ -28,7 +29,7 @@ app.set('view engine', 'html')
 app.use(cookieParser())
 app.use(
     session({
-        secret: 'secret',
+        secret: process.env.SESSION_SECRET || 'secret',
         resave: false,
         saveUninitialized: true,
         store: store,
