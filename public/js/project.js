@@ -178,7 +178,6 @@ const createCard = async cardName => {
             body: JSON.stringify(data),
         }
     )
-    alert('created the card')
 }
 
 const editCardDesc = async newName => {
@@ -196,7 +195,6 @@ const editCardDesc = async newName => {
             body: JSON.stringify(requestData),
         }
     )
-    alert('Successfully updated your task')
 }
 
 const editCardStatus = async () => {
@@ -217,7 +215,6 @@ const editCardStatus = async () => {
                 body: JSON.stringify(requestData),
             }
         )
-        alert('Successfully updated your task status')
     } catch (error) {
         alert('Unable to update task status')
     }
@@ -250,7 +247,6 @@ const signOutUser = async () => {
                 method: 'PUT',
             }
         )
-        alert('Your session has ended')
         localStorage.clear()
         window.location.href = window.location.origin
     } catch (error) {
