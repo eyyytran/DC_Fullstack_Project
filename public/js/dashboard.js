@@ -155,7 +155,7 @@ const signOutUser = async () => {
         )
         alert('Your session has ended')
         localStorage.clear()
-        window.location.href = 'http://localhost:3001/index'
+        window.location.href = window.location.origin + '/index'
     } catch (error) {
         alert('Could not end user session')
     }
@@ -209,7 +209,7 @@ document.addEventListener('click', e => {
         localStorage.clear()
         localStorage.setItem('projectName', e.target.innerText)
         localStorage.setItem('projectId', e.target.id)
-        window.location.href = 'http://localhost:3001/project'
+        window.location.href = window.location.origin + '/project'
     }
 })
 
@@ -235,6 +235,7 @@ signoutbtn.addEventListener('click', () => {
     signOutUser()
 })
 
-logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
+logo.onclick = () =>
+    (window.location.href = window.location.origin + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())
