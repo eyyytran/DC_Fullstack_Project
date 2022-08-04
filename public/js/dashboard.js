@@ -130,37 +130,38 @@ const createProject = async projectName => {
     const data = {
         name: projectName,
     }
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/projects/create_project`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('created the project')
-    } catch (error) {
-        alert('unable to create project')
-    }
+    const sendData = await fetch(
+        `${window.location.origin}/projects/create_project`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }
+    )
 }
 
 const signOutUser = async () => {
-    try {
-        const signOutRequest = await fetch(
-            `${window.location.origin}/users/logout`,
-            {
-                method: 'PUT',
-            }
-        )
-        alert('Your session has ended')
-        localStorage.clear()
-        window.location.href = window.location.origin + '/index'
-    } catch (error) {
-        alert('Could not end user session')
-    }
+    const signOutRequest = await fetch(
+        `${window.location.origin}/users/logout`,
+        {
+            method: 'PUT',
+        }
+    )
+    localStorage.clear()
+    window.location.href = window.location.origin + '/index'
+}
+
+const signOutGuest = async () => {
+    const signOutRequest = await fetch(
+        `${window.location.origin}/users/destroy_guest`,
+        {
+            method: 'DELETE',
+        }
+    )
+    localStorage.clear()
+    window.location.href = window.location.origin + '/index'
 }
 
 const deleteProject = async () => {
