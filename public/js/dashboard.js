@@ -87,7 +87,7 @@ const loadProjects = async () => {
         const data = await projects.json()
         generateProjectCards(data)
     } catch (error) {
-        alert('could not fetch projects')
+        console.log(error)
     }
 }
 

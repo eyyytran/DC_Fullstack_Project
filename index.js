@@ -12,20 +12,20 @@ const store = new SequelizeStore({
 })
 const PORT = process.env.PORT || 3001
 // import routes
-const usersRoutes = require('./routes/users')
-const projectsRoutes = require('./routes/projects')
-const cardsRoutes = require('./routes/cards')
-const { getTitle, getScript } = require('./util/locals')
+const usersRoutes = require("./routes/users");
+const projectsRoutes = require("./routes/projects");
+const cardsRoutes = require("./routes/cards");
+const { getTitle, getScript } = require("./util/locals");
 //middleware
 app.use(
-    cors({ origin: 'http://127.0.0.1:5500', methods: 'GET,POST,PUT,DELETE' })
-)
-app.use(express.json())
-app.use('/public', express.static('./public'))
-app.engine('html', es6Renderer)
-app.set('views', './views')
-app.set('view engine', 'html')
-app.use(cookieParser())
+  cors({ origin: "http://127.0.0.1:5500", methods: "GET,POST,PUT,DELETE" })
+);
+app.use(express.json());
+app.use("/public", express.static("./public"));
+app.engine("html", es6Renderer);
+app.set("views", "./views");
+app.set("view engine", "html");
+app.use(cookieParser());
 app.use(
     session({
         secret: 'secret',
@@ -37,46 +37,57 @@ app.use(
 store.sync()
 
 // use routes
-app.use('/users', usersRoutes)
-app.use('/projects', checkLogin, projectsRoutes)
-app.use('/cards', checkLogin, cardsRoutes)
+app.use("/users", usersRoutes);
+app.use("/projects", checkLogin, projectsRoutes);
+app.use("/cards", checkLogin, cardsRoutes);
+// render routes
+app.get("/", (req, res) => {
+  res.render("template", {
+    locals: {
+      title: getTitle("index"),
+      script: getScript("index"),
+    },
+    partials: {
+      partial: "index",
+    },
+  });
+});
 
-//this is the default render route for the user when they first navigate to our site
-app.get('/', (req, res) => {
-    res.render('template', {
-        locals: {
-            title: getTitle('index'),
-            script: getScript('index'),
-        },
-        partials: {
-            partial: 'index',
-        },
-    })
-})
+app.get("/index", (req, res) => {
+  res.render("template", {
+    locals: {
+      title: getTitle("index"),
+      script: getScript("index"),
+    },
+    partials: {
+      partial: "index",
+    },
+  });
+});
 
-app.get('/index', (req, res) => {
-    res.render('template', {
-        locals: {
-            title: getTitle('index'),
-            script: getScript('index'),
-        },
-        partials: {
-            partial: 'index',
-        },
-    })
-})
+app.get("/login", (req, res) => {
+  res.render("template", {
+    locals: {
+      title: getTitle("login"),
+      script: getScript("login"),
+    },
+    partials: {
+      partial: "login",
+    },
+  });
+});
 
-app.get('/login', (req, res) => {
-    res.render('template', {
-        locals: {
-            title: getTitle('login'),
-            script: getScript('login'),
-        },
-        partials: {
-            partial: 'login',
-        },
-    })
-})
+app.get("/dashboard", checkLogin, (req, res) => {
+  res.render("template", {
+    locals: {
+      title: getTitle("dashboard"),
+      script: getScript("dashboard"),
+    },
+    partials: {
+      partial: "dashboard",
+    },
+  });
+});
 
 app.get('/dashboard', checkLogin, (req, res) => {
     res.render('template', {
@@ -118,5 +129,5 @@ app.get('/signup', (req, res) => {
 
 //listening port
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
-})
+  console.log(`Server listening on port ${PORT}`);
+});

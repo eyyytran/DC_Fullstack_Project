@@ -1,10 +1,9 @@
 const express = require('express')
-const { Users } = require('../../db/models')
+const { Users, Cards, Projects, UserProjects } = require('../../db/models')
 const router = express.Router()
 const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const checkLogin = require('../../util/checkLogin')
-
 // user registration
 router.post('/register', async (req, res) => {
     const { username, password, email } = await req.body
@@ -27,7 +26,6 @@ router.post('/register', async (req, res) => {
         res.status(400).send(error)
     }
 })
-
 // login
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
@@ -43,12 +41,10 @@ router.post('/login', async (req, res) => {
         res.status(400).send('login failed')
     }
 })
-
 // update user
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
     try {
-        // find user based on email in our database
         const user = await Users.findOne({ where: { email: email } })
         const validateUser = user.dataValues
         const validated = await bcrypt.compare(password, validateUser.password)
@@ -89,6 +85,29 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
         console.log(error)
     }
 })
+// This will work for now but it would be better if the guest had a randomly
+// generated email so there could be more than one guest account open at a time
+router.delete("/destroy_guest", async (req, res) => {
+  try {
+    const guest = await Users.findOne({
+      where: { email: "destroyguest@destroyguest.com" },
+    });
+    const allProjectIDs = await UserProjects.findAll({
+      where: { userID: guest.id },
+      attributes: ["projectID"],
+    });
+    await UserProjects.destroy({ where: { userID: guest.id } });
+    for (let index = 0; index < allProjectIDs.length; index++) {
+      const projectID = allProjectIDs[index].dataValues.projectID;
+      await Cards.destroy({ where: { projectID: projectID } });
+      await Projects.destroy({ where: { id: projectID } });
+    }
+    await guest.destroy();
+    res.status(200).send("guest destroyed");
+  } catch (error) {
+    res.status(400).send("error");
+  }
+});
 //end session
 router.put('/logout', checkLogin, (req, res) => {
     try {

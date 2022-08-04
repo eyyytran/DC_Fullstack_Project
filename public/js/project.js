@@ -79,7 +79,7 @@ const loadCards = async () => {
         console.log(typeof cards)
         generateCards(cards)
     } catch (error) {
-        alert('could not load your project')
+        console.log(error)
     }
 }
 
@@ -247,7 +247,7 @@ const signOutUser = async () => {
         localStorage.clear()
         window.location.href = window.location.origin
     } catch (error) {
-        alert('Could not end user session')
+        console.log()
     }
 }
 
