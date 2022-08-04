@@ -37,6 +37,12 @@ body:hover {
     box-sizing: border-box;
 }
 
+#joe-logo {
+    object-fit: contain;
+    height: 45px;
+    width: auto;
+}
+
 button {
     padding: 0.5rem;
     border-radius: 2px;
