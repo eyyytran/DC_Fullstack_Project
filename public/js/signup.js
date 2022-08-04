@@ -1,5 +1,3 @@
-const { appUrl } = require('../../globals')
-
 const submitBtn = document.getElementById('su-submitbtn')
 const form = document.getElementById('su-form')
 
@@ -142,13 +140,16 @@ const submitForm = async e => {
         email: Email,
     }
     try {
-        const request = await fetch(`${appUrl}/users/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
+        const request = await fetch(
+            `${window.location.origin}/users/register`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
         alert('Registration complete')
         window.location.href = window.location.origin + '/dashboard'
     } catch (error) {

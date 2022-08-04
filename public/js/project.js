@@ -1,5 +1,3 @@
-const { appUrl } = require('../../globals')
-
 const signoutbtn = document.querySelector('#p-logoutbtn')
 const toDoList = document.getElementById('p-todo-list')
 const doingList = document.getElementById('p-inprogress-list')
@@ -66,13 +64,16 @@ const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
     const requestData = { projectID: projectID }
     try {
-        const sendData = await fetch(`${appUrl}/cards/get_cards`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        })
+        const sendData = await fetch(
+            `${window.location.origin}/cards/get_cards`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            }
+        )
         const cards = await sendData.json()
         console.log(typeof cards)
         generateCards(cards)
@@ -166,13 +167,16 @@ const createCard = async cardName => {
     }
     console.log({ data })
     try {
-        const sendData = await fetch(`${appUrl}/cards/create_card`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
+        const sendData = await fetch(
+            `${window.location.origin}/cards/create_card`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
         alert('created the card')
     } catch (error) {
         alert('unable to create card')
@@ -184,13 +188,16 @@ const editCardDesc = async newName => {
         id: localStorage.getItem('cardId'),
         name: newName,
     }
-    const sendData = await fetch(`${appUrl}/cards/update_card`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
+    const sendData = await fetch(
+        `${window.location.origin}/cards/update_card`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
     alert('Successfully updated your task')
 }
 
@@ -202,13 +209,16 @@ const editCardStatus = async () => {
     }
     console.log({ requestData })
     try {
-        const sendData = await fetch(`${appUrl}/cards/update_card`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        })
+        const sendData = await fetch(
+            `${window.location.origin}/cards/update_card`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            }
+        )
         alert('Successfully updated your task status')
     } catch (error) {
         alert('Unable to update task status')
@@ -220,22 +230,28 @@ const deleteCard = async () => {
         id: localStorage.getItem('cardId'),
     }
     console.log(requestData)
-    const sendData = await fetch(`${appUrl}/cards/destroy_card`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
+    const sendData = await fetch(
+        `${window.location.origin}/cards/destroy_card`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
     localStorage.removeItem('cardId')
     localStorage.removeItem('cardName')
 }
 
 const signOutUser = async () => {
     try {
-        const signOutRequest = await fetch(`${appUrl}/users/logout`, {
-            method: 'PUT',
-        })
+        const signOutRequest = await fetch(
+            `${window.location.origin}/users/logout`,
+            {
+                method: 'PUT',
+            }
+        )
         alert('Your session has ended')
         localStorage.clear()
         window.location.href = window.location.origin
