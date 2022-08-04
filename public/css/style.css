@@ -51,6 +51,16 @@ button {
     color: var(--lavender);
 }
 
+select {
+    background: var(--white);
+    border-radius: 3px;
+    border: 2px solid var(--dark-blue);
+    height: 30px;
+    width: 200px;
+    margin-bottom: 1rem;
+    padding: 5px;
+}
+
 a,
 button:hover {
     cursor: pointer;
@@ -261,7 +271,6 @@ form {
     background: transparent;
 }
 
-.pe-movebtn,
 #p-submitbtn,
 #pe-submitbtn,
 #d-submitbtn,
@@ -452,6 +461,16 @@ form {
 
 .p-createbtn {
     background: transparent;
+}
+
+.pe-movebtn {
+    width: 200px;
+    height: 40px;
+    background: var(--dark-blue);
+    border: none;
+    border-radius: 2px;
+    color: var(--white);
+    margin-bottom: 1rem;
 }
 
 #pe-moveoptions {
