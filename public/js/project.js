@@ -237,17 +237,31 @@ const deleteCard = async () => {
 }
 
 const signOutUser = async () => {
+    const signOutRequest = await fetch(
+        `${window.location.origin}/users/logout`,
+        {
+            method: 'PUT',
+        }
+    )
+    localStorage.clear()
+    window.location.href = window.location.origin
+}
+
+const signOutGuest = async () => {
     try {
-        const signOutRequest = await fetch(
-            `${window.location.origin}/users/logout`,
-            {
+        const requests = [
+            fetch(`${window.location.origin}/users/logout`, {
                 method: 'PUT',
-            }
-        )
+            }),
+            fetch(`${window.location.origin}/users/destroy_guest`, {
+                method: 'DELETE',
+            }),
+        ]
+        const results = await Promise.all(requests)
         localStorage.clear()
-        window.location.href = window.location.origin
-    } catch (error) {
-        console.log()
+        window.location.href = window.location.origin + '/index'
+    } catch (err) {
+        console.error(err)
     }
 }
 
@@ -257,7 +271,12 @@ const setSelectorOptions = () => {
 }
 
 signoutbtn.addEventListener('click', () => {
-    signOutUser()
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user?.username === 'guest') {
+        signOutGuest()
+    } else {
+        signOutUser()
+    }
 })
 
 document.addEventListener('click', e => {

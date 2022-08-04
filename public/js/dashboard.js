@@ -91,7 +91,8 @@ const loadProjects = async () => {
 }
 
 const openEditModule = e => {
-    localStorage.clear()
+    localStorage.removeItem('projectName')
+    localStorage.removeItem('projectId')
 
     const projectName = e.target.parentNode.offsetParent.innerText
     const projectId = e.target.parentNode.offsetParent.id
@@ -178,7 +179,8 @@ const deleteProject = async () => {
             body: JSON.stringify(requestData),
         }
     )
-    localStorage.clear()
+    localStorage.removeItem('projectName')
+    localStorage.removeItem('projectId')
 }
 
 createbtn.addEventListener('click', () => {
@@ -220,7 +222,8 @@ document.addEventListener('click', e => {
         openEditModule(e)
     }
     if (e.target.className === 'd-project-card') {
-        localStorage.clear()
+        localStorage.removeItem('projectName')
+        localStorage.removeItem('projectId')
         localStorage.setItem('projectName', e.target.innerText)
         localStorage.setItem('projectId', e.target.id)
         window.location.href = window.location.origin + '/project'
