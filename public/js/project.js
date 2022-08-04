@@ -12,6 +12,7 @@ const movebtn = document.querySelector('.pe-movebtn')
 const deletebtn = document.querySelector('.pe-deletebtn')
 const moveoptions = document.querySelector('#pe-moveoptions')
 const logo = document.getElementById('logo-redirect')
+const dashboardbtn = document.querySelector('button.p-dashboardbtn')
 
 //validate
 const isRequired = value => (value === '' ? false : true)
@@ -323,6 +324,9 @@ cancelbtn.addEventListener('click', () => {
 })
 
 logo.onclick = () =>
+    (window.location.href = window.location.origin + '/dashboard')
+
+dashboardbtn.onclick = () =>
     (window.location.href = window.location.origin + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
