@@ -4,7 +4,6 @@ const router = express.Router()
 const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const checkLogin = require('../../util/checkLogin')
-
 // user registration
 router.post('/register', async (req, res) => {
     const { username, password, email } = await req.body
@@ -27,7 +26,6 @@ router.post('/register', async (req, res) => {
         res.status(400).send(error)
     }
 })
-
 // login
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
@@ -43,12 +41,10 @@ router.post('/login', async (req, res) => {
         res.status(400).send('login failed')
     }
 })
-
 // update user
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
     try {
-        // find user based on email in our database
         const user = await Users.findOne({ where: { email: email } })
         const validateUser = user.dataValues
         const validated = await bcrypt.compare(password, validateUser.password)
