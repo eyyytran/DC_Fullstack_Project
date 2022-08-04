@@ -101,7 +101,9 @@ const submitForm = async e => {
             body: JSON.stringify(data),
         })
         handleErrors(request)
-        window.location.href = window.location.origin + '/dashboard'
+        setTimeout(() => {
+            window.location.href = window.location.origin + '/dashboard'
+        }, 100)
     } catch (error) {
         errorMessage.innerHTML = 'Records do not match the data provided.'
     }
