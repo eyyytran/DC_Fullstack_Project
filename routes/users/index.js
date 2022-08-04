@@ -89,9 +89,8 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
 // generated email so there could be more than one guest account open at a time
 router.delete("/destroy_guest", async (req, res) => {
   try {
-    const guest = await Users.findOne({
-      where: { email: "destroyguest@destroyguest.com" },
-    });
+    if (req.session.user.name === 'guest'){
+    const guest = await Users.findByPk(req.session.user.id);
     const allProjectIDs = await UserProjects.findAll({
       where: { userID: guest.id },
       attributes: ["projectID"],
@@ -103,7 +102,7 @@ router.delete("/destroy_guest", async (req, res) => {
       await Projects.destroy({ where: { id: projectID } });
     }
     await guest.destroy();
-    res.status(200).send("guest destroyed");
+    res.status(200).send("guest destroyed");}
   } catch (error) {
     res.status(400).send("error");
   }
