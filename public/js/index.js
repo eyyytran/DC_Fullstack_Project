@@ -4,10 +4,11 @@ const signupBtn = document.getElementById('h-signupbtn')
 const guestBtn = document.getElementById('h-guestbtn')
 
 const loginGuest = async () => {
+    const guestEmail = Math.floor(100000 + Math.random() * 900000)
     const data = {
-        username: 'Guest',
+        username: 'guest',
         password: 'Abc1234!',
-        email: 'destroyguest@destroy.com',
+        email: `${guestEmail}@destroy.com`,
     }
     const request = await fetch(`${window.location.origin}/users/register`, {
         method: 'POST',
@@ -40,4 +41,7 @@ dashboardBtn.onclick = () =>
     (window.location.href = window.location.origin + '/dashboard')
 signupBtn.onclick = () =>
     (window.location.href = window.location.origin + '/signup')
-guestBtn.onclick = async () => loginGuest()
+// guestBtn.onclick = async () => loginGuest()
+guestBtn.onclick = async () => {
+    loginGuest()
+}
