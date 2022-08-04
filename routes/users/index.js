@@ -85,11 +85,10 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
         console.log(error)
     }
 })
-// This will work for now but it would be better if the guest had a randomly
-// generated email so there could be more than one guest account open at a time
-router.delete("/destroy_guest", async (req, res) => {
+// delete guest account and everything associated
+router.delete("/destroy_guest", checkLogin, async (req, res) => {
   try {
-    if (req.session.user.name === 'guest'){
+    if (req.session.user.username === 'guest'){
     const guest = await Users.findByPk(req.session.user.id);
     const allProjectIDs = await UserProjects.findAll({
       where: { userID: guest.id },
