@@ -3,20 +3,23 @@ const app = express()
 const cors = require('cors')
 const es6Renderer = require('express-es6-template-engine')
 const checkLogin = require('./util/checkLogin')
+const { getTitle, getScript } = require('./util/locals')
+const cookieParser = require('cookie-parser')
 const models = require('./db/models')
 const session = require('express-session')
-const cookieParser = require('cookie-parser')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const store = new SequelizeStore({
-    db: models.sequelize,
-})
-const PORT = process.env.PORT || 3001
-// import routes
+
+// routes
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
 const cardsRoutes = require('./routes/cards')
-const { getTitle, getScript } = require('./util/locals')
-//middleware
+
+const store = new SequelizeStore({
+    db: models.sequelize,
+})
+
+const PORT = process.env.PORT || 3001
+
 app.use(
     cors({ origin: 'http://127.0.0.1:5500', methods: 'GET,POST,PUT,DELETE' })
 )
@@ -36,12 +39,11 @@ app.use(
 )
 store.sync()
 
-// use routes
+// define routes
 app.use('/users', usersRoutes)
 app.use('/projects', checkLogin, projectsRoutes)
 app.use('/cards', checkLogin, cardsRoutes)
 
-//this is the default render route for the user when they first navigate to our site
 app.get('/', (req, res) => {
     res.render('template', {
         locals: {
@@ -114,7 +116,6 @@ app.get('/signup', (req, res) => {
     })
 })
 
-//listening port
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
 })

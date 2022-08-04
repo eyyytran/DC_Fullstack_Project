@@ -5,7 +5,6 @@ const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const checkLogin = require('../../util/checkLogin')
 
-// user registration
 router.post('/register', async (req, res) => {
     const { username, password, email } = await req.body
     try {
@@ -28,7 +27,6 @@ router.post('/register', async (req, res) => {
     }
 })
 
-// login
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await Users.findOne({
@@ -44,7 +42,6 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// update user
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
     try {
@@ -71,7 +68,7 @@ router.put('/update_user', checkLogin, async (req, res) => {
         console.log(error)
     }
 })
-// delete account
+
 router.delete('/destroy_user', checkLogin, async (req, res) => {
     const { email, password } = req.body
     try {
@@ -89,7 +86,7 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
         console.log(error)
     }
 })
-//end session
+
 router.put('/logout', checkLogin, (req, res) => {
     try {
         req.session.user = null
