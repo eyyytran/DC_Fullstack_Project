@@ -195,6 +195,18 @@ submitbtn.addEventListener('click', e => {
     }
 })
 
+document.querySelector('#new-project').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        const projectName = document.querySelector('.d-inputs').value
+        let isEntryValid = entryValidate(e, projectName)
+        if (isEntryValid) {
+            createProject(projectName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
+    }
+})
+
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
     console.log('cancel button')
@@ -223,6 +235,19 @@ Esubmitbtn.addEventListener('click', e => {
         editProjectName(newName)
         createmodule.style.display = 'none'
         location.reload()
+    }
+})
+
+document.querySelector('#edit-project').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const newName = e.target.form[0].value
+        let isEntryValid = entryValidate(e, newName)
+        if (isEntryValid) {
+            editProjectName(newName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
     }
 })
 

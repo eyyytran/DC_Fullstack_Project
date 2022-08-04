@@ -204,20 +204,17 @@ const editCardStatus = async () => {
         status: newStatus,
     }
     console.log({ requestData })
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/cards/update_card`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
-    } catch (error) {
-        alert('Unable to update task status')
-    }
+
+    const sendData = await fetch(
+        `${window.location.origin}/cards/update_card`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
 }
 
 const deleteCard = async () => {
@@ -275,6 +272,19 @@ document.addEventListener('click', e => {
     }
 })
 
+document.querySelector('#new-card').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const cardName = document.querySelector('.p-inputs').value
+        let isEntryValid = entryValidate(e, cardName)
+        if (isEntryValid) {
+            createCard(cardName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
+    }
+})
+
 Csubmitbtn.addEventListener('click', e => {
     e.preventDefault()
     const cardName = document.querySelector('.p-inputs').value
@@ -283,6 +293,20 @@ Csubmitbtn.addEventListener('click', e => {
         createCard(cardName)
         createmodule.style.display = 'none'
         location.reload()
+    }
+})
+
+document.querySelector('#edit-card').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const newName = e.target.form[0].value
+        let isEntryValid = entryValidate(e, newName)
+        if (isEntryValid) {
+            editCardDesc(newName)
+            editCardStatus()
+            editmodule.style.display = 'none'
+            location.reload()
+        }
     }
 })
 
