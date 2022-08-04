@@ -136,6 +136,10 @@ form {
     margin: 3px;
 }
 
+#d-username {
+    border: 3px solid red;
+}
+
 .p-dashboardbtn,
 #p-logoutbtn,
 #d-logoutbtn,
