@@ -167,21 +167,18 @@ const createCard = async cardName => {
         projectID: projectID,
     }
     console.log({ data })
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/cards/create_card`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('created the card')
-    } catch (error) {
-        alert('unable to create card')
-    }
+
+    const sendData = await fetch(
+        `${window.location.origin}/cards/create_card`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }
+    )
+    alert('created the card')
 }
 
 const editCardDesc = async newName => {

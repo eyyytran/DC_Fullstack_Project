@@ -120,7 +120,6 @@ const editProjectName = async newName => {
                 body: JSON.stringify(requestData),
             }
         )
-        alert('Successfully updated your project name')
     } catch (error) {
         console.log(error)
     }
