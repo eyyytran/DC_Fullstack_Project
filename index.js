@@ -9,7 +9,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const store = new SequelizeStore({
     db: models.sequelize,
 })
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 // import routes
 const usersRoutes = require('./routes/users')
 const projectsRoutes = require('./routes/projects')
