@@ -125,6 +125,7 @@ form {
     text-align: center;
 }
 
+#h-guestbtn,
 #h-signupbtn {
     width: 90%;
     max-width: 350px;
@@ -132,6 +133,7 @@ form {
     background: var(--neon-blue);
     font-size: 16px;
     font-weight: bolder;
+    margin: 3px;
 }
 
 .p-dashboardbtn,
