@@ -17,31 +17,28 @@
         <div class="l-content">
             <h2>Let's sign you in.</h2>
             <form id="l-form">
-                <div class="formfield">
+                <div class="form-field">
                     <input
                         type="text"
-                        name="email"
                         class="l-inputs"
                         placeholder="E-mail address"
                         value="dadjokes4days@yahoo.com"
                     />
                     <small></small>
                 </div>
-                <div class="formfield">
+                <div class="form-field">
                     <input
-                        type="text"
+                        type="password"
                         name="password"
                         class="l-inputs"
                         placeholder="Password (8-50 characters) "
                         value="ilovevarcharmander"
                     />
-                    <small></small>
+                    <small id="login-error"></small>
                 </div>
                 <input type="button" value="Submit" id="l-submitbtn" />
             </form>
-            <a href="http://localhost:3001/signup"
-                >Don't have an account? Click here</a
-            >
+            <a href="/signup">Don't have an account? Click here</a>
         </div>
     </div>
 </div>

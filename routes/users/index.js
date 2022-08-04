@@ -1,103 +1,94 @@
-const express = require("express");
-const { Users, UserProjects, Projects, Cards } = require("../../db/models");
-const router = express.Router();
-const { v4 } = require("uuid");
-const bcrypt = require("bcrypt");
-// validate user function
-const checkLogin = (req, res, next) => {
-  if (req.session.user) {
-    next();
-  } else {
-    res.render("template", {
-      locals: {
-        title: getTitle("index"),
-        script: getScript("index"),
-      },
-      partials: {
-        partial: "index",
-      },
-    });
-  }
-};
+const express = require('express')
+const { Users } = require('../../db/models')
+const router = express.Router()
+const { v4 } = require('uuid')
+const bcrypt = require('bcrypt')
+const checkLogin = require('../../util/checkLogin')
 
-router.post("/register", async (req, res) => {
-  const { username, password, email } = await req.body;
-  try {
-    const salt = await bcrypt.genSalt(5);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const userToCreate = {
-      id: v4(),
-      username,
-      password: hashedPassword,
-      email,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    const user = await Users.create(userToCreate);
-    req.session.user = user;
-    res.status(200).send(user);
-  } catch (error) {
-    res.status(400).send("error");
-  }
-});
-
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await Users.findOne({
-    where: { email: email },
-  });
-  const validateUser = user.dataValues;
-  const validated = await bcrypt.compare(password, validateUser.password);
-  if (validated) {
-    req.session.user = user;
-    res.status(200).send(user);
-  } else {
-    res.status(400).send("error");
-  }
-});
-
-router.put("/update_user", checkLogin, async (req, res) => {
-  const { email, password, newPassword, newEmail, newUsername } = req.body;
-  try {
-    const user = await Users.findOne({ where: { email: email } });
-    const validateUser = user.dataValues;
-    const validated = await bcrypt.compare(password, validateUser.password);
-    if (!validated) {
-      res.status(400).send("invalid user");
-    } else {
-      const salt = await bcrypt.genSalt(5);
-      const hashedPassword = await bcrypt.hash(newPassword, salt);
-      user.set({
-        username: newUsername,
-        password: hashedPassword,
-        email: newEmail,
-        updatedAt: new Date(),
-      });
-      await user.save();
-      res.status(200).send(user);
+// user registration
+router.post('/register', async (req, res) => {
+    const { username, password, email } = await req.body
+    try {
+        const salt = await bcrypt.genSalt(5)
+        const hashedPassword = await bcrypt.hash(password, salt)
+        const userToCreate = {
+            id: v4(),
+            username,
+            password: hashedPassword,
+            email,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+        const user = await Users.create(userToCreate)
+        req.session.user = user
+        res.status(200).send(user)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(error)
     }
-  } catch (error) {
-    res.status(400).send("error");
-  }
-});
+})
 
-router.delete("/destroy_user", checkLogin, async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await Users.findOne({ where: { email: email } });
-    const validateUser = user.dataValues;
-    const validated = await bcrypt.compare(password, validateUser.password);
-    if (!validated) {
-      res.status(400).send("invalid user");
+// login
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body
+    const user = await Users.findOne({
+        where: { email: email },
+    })
+    const validateUser = user.dataValues
+    const validated = await bcrypt.compare(password, validateUser.password)
+    if (validated) {
+        req.session.user = user
+        res.status(200).send('login successful')
     } else {
-      user.destroy();
-      res.status(200).send("destroyed");
+        res.status(400).send('login failed')
     }
-  } catch (error) {
-    res.status(400).send("error");
-  }
-});
+})
 
+// update user
+router.put('/update_user', checkLogin, async (req, res) => {
+    const { email, password, newPassword, newEmail, newUsername } = req.body
+    try {
+        // find user based on email in our database
+        const user = await Users.findOne({ where: { email: email } })
+        const validateUser = user.dataValues
+        const validated = await bcrypt.compare(password, validateUser.password)
+        if (!validated) {
+            res.status(400).send('Check email and password')
+        } else {
+            const salt = await bcrypt.genSalt(5)
+            const hashedPassword = await bcrypt.hash(newPassword, salt)
+            user.set({
+                username: newUsername,
+                password: hashedPassword,
+                email: newEmail,
+                updatedAt: new Date(),
+            })
+            await user.save()
+            res.status(200).send(user)
+        }
+    } catch (error) {
+        res.status(400).send('could not find')
+        console.log(error)
+    }
+})
+// delete account
+router.delete('/destroy_user', checkLogin, async (req, res) => {
+    const { email, password } = req.body
+    try {
+        const user = await Users.findOne({ where: { email: email } })
+        const validateUser = user.dataValues
+        const validated = await bcrypt.compare(password, validateUser.password)
+        if (!validated) {
+            res.status(400).send('Check email and password')
+        } else {
+            user.destroy()
+            res.send('User account removed')
+        }
+    } catch (error) {
+        res.status(400).send('could not complete')
+        console.log(error)
+    }
+})
 // This will work for now but it would be better if the guest had a randomly
 // generated email so there could be more than one guest account open at a time
 router.delete("/destroy_guest", async (req, res) => {
@@ -121,14 +112,15 @@ router.delete("/destroy_guest", async (req, res) => {
     res.status(400).send("error");
   }
 });
+//end session
+router.put('/logout', checkLogin, (req, res) => {
+    try {
+        req.session.user = null
+        res.status(200).send('session ended')
+    } catch (error) {
+        res.status(400).send('could not end session')
+        console.log(error)
+    }
+})
 
-router.put("/logout", checkLogin, (req, res) => {
-  try {
-    req.session.user = null;
-    res.status(200).send("session ended");
-  } catch (error) {
-    res.status(400).send("error");
-  }
-});
-
-module.exports = router;
+module.exports = router

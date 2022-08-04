@@ -79,8 +79,10 @@ const generateProjectCards = list => {
 const loadProjects = async () => {
     try {
         const projects = await fetch(
-            'http://localhost:3001/projects/get_projects',
-            { method: 'GET' }
+            `${window.location.origin}/projects/get_projects`,
+            {
+                method: 'GET',
+            }
         )
         const data = await projects.json()
         generateProjectCards(data)
@@ -109,7 +111,7 @@ const editProjectName = async newName => {
     }
     try {
         const sendData = await fetch(
-            'http://localhost:3001/projects/update_project',
+            `${window.location.origin}/projects/update_project`,
             {
                 method: 'PUT',
                 headers: {
@@ -118,7 +120,6 @@ const editProjectName = async newName => {
                 body: JSON.stringify(requestData),
             }
         )
-        alert('Successfully updated your project name')
     } catch (error) {
         console.log(error)
     }
@@ -128,37 +129,38 @@ const createProject = async projectName => {
     const data = {
         name: projectName,
     }
-    try {
-        const sendData = await fetch(
-            'http://localhost:3001/projects/create_project',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('created the project')
-    } catch (error) {
-        console.log(error)
-    }
+    const sendData = await fetch(
+        `${window.location.origin}/projects/create_project`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }
+    )
 }
 
 const signOutUser = async () => {
-    try {
-        const signOutRequest = await fetch(
-            'http://localhost:3001/users/logout',
-            {
-                method: 'PUT',
-            }
-        )
-        alert('Your session has ended')
-        localStorage.clear()
-        window.location.href = 'http://localhost:3001/index'
-    } catch (error) {
-        console.log(error)
-    }
+    const signOutRequest = await fetch(
+        `${window.location.origin}/users/logout`,
+        {
+            method: 'PUT',
+        }
+    )
+    localStorage.clear()
+    window.location.href = window.location.origin + '/index'
+}
+
+const signOutGuest = async () => {
+    const signOutRequest = await fetch(
+        `${window.location.origin}/users/destroy_guest`,
+        {
+            method: 'DELETE',
+        }
+    )
+    localStorage.clear()
+    window.location.href = window.location.origin + '/index'
 }
 
 const deleteProject = async () => {
@@ -167,7 +169,7 @@ const deleteProject = async () => {
     }
     console.log(requestData)
     const sendData = await fetch(
-        'http://localhost:3001/projects/destroy_project',
+        `${window.location.origin}/projects/destroy_project`,
         {
             method: 'DELETE',
             headers: {
@@ -193,6 +195,18 @@ submitbtn.addEventListener('click', e => {
     }
 })
 
+document.querySelector('#new-project').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        const projectName = document.querySelector('.d-inputs').value
+        let isEntryValid = entryValidate(e, projectName)
+        if (isEntryValid) {
+            createProject(projectName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
+    }
+})
+
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
     console.log('cancel button')
@@ -209,7 +223,7 @@ document.addEventListener('click', e => {
         localStorage.clear()
         localStorage.setItem('projectName', e.target.innerText)
         localStorage.setItem('projectId', e.target.id)
-        window.location.href = 'http://localhost:3001/project'
+        window.location.href = window.location.origin + '/project'
     }
 })
 
@@ -224,6 +238,19 @@ Esubmitbtn.addEventListener('click', e => {
     }
 })
 
+document.querySelector('#edit-project').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const newName = e.target.form[0].value
+        let isEntryValid = entryValidate(e, newName)
+        if (isEntryValid) {
+            editProjectName(newName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
+    }
+})
+
 deletebtn.addEventListener('click', e => {
     e.preventDefault()
     deleteProject()
@@ -235,6 +262,7 @@ signoutbtn.addEventListener('click', () => {
     signOutUser()
 })
 
-logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
+logo.onclick = () =>
+    (window.location.href = window.location.origin + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => loadProjects())

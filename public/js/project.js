@@ -12,6 +12,7 @@ const movebtn = document.querySelector('.pe-movebtn')
 const deletebtn = document.querySelector('.pe-deletebtn')
 const moveoptions = document.querySelector('#pe-moveoptions')
 const logo = document.getElementById('logo-redirect')
+const dashboardbtn = document.querySelector('button.p-dashboardbtn')
 
 //validate
 const isRequired = value => (value === '' ? false : true)
@@ -64,13 +65,16 @@ const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
     const requestData = { projectID: projectID }
     try {
-        const sendData = await fetch('http://localhost:3001/cards/get_cards', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
-        })
+        const sendData = await fetch(
+            `${window.location.origin}/cards/get_cards`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            }
+        )
         const cards = await sendData.json()
         console.log(typeof cards)
         generateCards(cards)
@@ -123,6 +127,12 @@ const generateCards = list => {
     }
 }
 
+const renderProjectName = () => {
+    const projectName = localStorage.getItem('projectName')
+    const projectTitle = document.querySelector('.p-projectname')
+    projectTitle.innerText = projectName
+}
+
 const openEditModule = e => {
     localStorage.removeItem('cardName')
     localStorage.removeItem('cardId')
@@ -157,21 +167,17 @@ const createCard = async cardName => {
         projectID: projectID,
     }
     console.log({ data })
-    try {
-        const sendData = await fetch(
-            'http://localhost:3001/cards/create_card',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('created the card')
-    } catch (error) {
-        console.log(error)
-    }
+
+    const sendData = await fetch(
+        `${window.location.origin}/cards/create_card`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }
+    )
 }
 
 const editCardDesc = async newName => {
@@ -179,14 +185,16 @@ const editCardDesc = async newName => {
         id: localStorage.getItem('cardId'),
         name: newName,
     }
-    const sendData = await fetch('http://localhost:3001/cards/update_card', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
-    alert('Successfully updated your task')
+    const sendData = await fetch(
+        `${window.location.origin}/cards/update_card`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
 }
 
 const editCardStatus = async () => {
@@ -196,21 +204,17 @@ const editCardStatus = async () => {
         status: newStatus,
     }
     console.log({ requestData })
-    try {
-        const sendData = await fetch(
-            'http://localhost:3001/cards/update_card',
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
-        alert('Successfully updated your task status')
-    } catch (error) {
-        console.log(error)
-    }
+
+    const sendData = await fetch(
+        `${window.location.origin}/cards/update_card`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
 }
 
 const deleteCard = async () => {
@@ -218,13 +222,16 @@ const deleteCard = async () => {
         id: localStorage.getItem('cardId'),
     }
     console.log(requestData)
-    const sendData = await fetch('http://localhost:3001/cards/destroy_card', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    })
+    const sendData = await fetch(
+        `${window.location.origin}/cards/destroy_card`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
     localStorage.removeItem('cardId')
     localStorage.removeItem('cardName')
 }
@@ -232,14 +239,13 @@ const deleteCard = async () => {
 const signOutUser = async () => {
     try {
         const signOutRequest = await fetch(
-            'http://localhost:3001/users/logout',
+            `${window.location.origin}/users/logout`,
             {
                 method: 'PUT',
             }
         )
-        alert('Your session has ended')
         localStorage.clear()
-        window.location.href = 'http://localhost:3001/'
+        window.location.href = window.location.origin
     } catch (error) {
         console.log()
     }
@@ -266,6 +272,19 @@ document.addEventListener('click', e => {
     }
 })
 
+document.querySelector('#new-card').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const cardName = document.querySelector('.p-inputs').value
+        let isEntryValid = entryValidate(e, cardName)
+        if (isEntryValid) {
+            createCard(cardName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
+    }
+})
+
 Csubmitbtn.addEventListener('click', e => {
     e.preventDefault()
     const cardName = document.querySelector('.p-inputs').value
@@ -274,6 +293,20 @@ Csubmitbtn.addEventListener('click', e => {
         createCard(cardName)
         createmodule.style.display = 'none'
         location.reload()
+    }
+})
+
+document.querySelector('#edit-card').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const newName = e.target.form[0].value
+        let isEntryValid = entryValidate(e, newName)
+        if (isEntryValid) {
+            editCardDesc(newName)
+            editCardStatus()
+            editmodule.style.display = 'none'
+            location.reload()
+        }
     }
 })
 
@@ -307,8 +340,13 @@ cancelbtn.addEventListener('click', () => {
     console.log('cancel button')
 })
 
-logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
+logo.onclick = () =>
+    (window.location.href = window.location.origin + '/dashboard')
+
+dashboardbtn.onclick = () =>
+    (window.location.href = window.location.origin + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
     loadCards()
+    renderProjectName()
 })

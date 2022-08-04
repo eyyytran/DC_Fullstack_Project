@@ -8,7 +8,7 @@
     --light-blue: #eff4fe;
     --lavender: #e6e9fe;
     --periwinkle: #7b89f4;
-    --transparent: rbga(255, 255, 255, 0.2);
+    --transparent: rgba(255, 255, 255, 0.3);
 }
 
 :root {
@@ -71,7 +71,7 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
-.formfield,
+.form-field,
 form {
     display: flex;
     flex-direction: column;
@@ -79,6 +79,7 @@ form {
     align-items: center;
 }
 
+#login-error,
 .error {
     color: var(--red);
 }
@@ -101,6 +102,7 @@ form {
 
 .header {
     background-color: var(--transparent);
+    box-shadow: 0 1px 1px rgb(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,6 +125,7 @@ form {
     text-align: center;
 }
 
+#h-guestbtn,
 #h-signupbtn {
     width: 90%;
     max-width: 350px;
@@ -130,9 +133,10 @@ form {
     background: var(--neon-blue);
     font-size: 16px;
     font-weight: bolder;
+    margin: 3px;
 }
 
-.d-dashboardbtn,
+.p-dashboardbtn,
 #p-logoutbtn,
 #d-logoutbtn,
 #d-createbtn,
@@ -214,7 +218,7 @@ form {
 .d-inputs,
 .l-inputs,
 .su-inputs {
-    margin: 1rem;
+    margin: 0.5rem;
     border: none;
     border-radius: 5px;
     height: 40px;
@@ -269,11 +273,18 @@ form {
     cursor: pointer;
 }
 
-.p-container,
+.p-container {
+    height: 100vh;
+    width: 100vw;
+    background: var(--periwinkle);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+}
 .d-container {
     height: 100vh;
     width: 100vw;
-    background: var(--light-blue);
+    background: var(--lavender);
     display: grid;
     grid-template-rows: auto 1fr;
     overflow-y: auto;
@@ -391,7 +402,6 @@ form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: var(--periwinkle);
 }
 
 .p-list-container {
@@ -435,9 +445,13 @@ form {
     display: none;
 }
 
+.p-projectname {
+    font-size: 30px;
+}
+
 @media (min-width: 600px) {
     .h-content {
-        flex-direction: row-reverse;
+        flex-direction: row;
         text-align: justify;
         justify-content: center;
     }
