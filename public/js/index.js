@@ -1,5 +1,5 @@
 const loginBtn = document.getElementById('h-loginbtn')
-const dashboardBtn = document.getElementById('h-dashboardbtn')
+
 const signupBtn = document.getElementById('h-signupbtn')
 const guestBtn = document.getElementById('h-guestbtn')
 
@@ -24,11 +24,10 @@ const loginGuest = async () => {
 
 loginBtn.onclick = () =>
     (window.location.href = window.location.origin + '/login')
-dashboardBtn.onclick = () =>
-    (window.location.href = window.location.origin + '/dashboard')
+
 signupBtn.onclick = () =>
     (window.location.href = window.location.origin + '/signup')
-// guestBtn.onclick = async () => loginGuest()
+
 guestBtn.onclick = async () => {
     loginGuest()
 }

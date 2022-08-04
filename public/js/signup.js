@@ -167,3 +167,6 @@ submitBtn.onclick = e => {
         createUser(e)
     }
 }
+
+document.querySelector('#logo-redirect').onclick = () =>
+    (window.location.href = window.location.origin + '/index')

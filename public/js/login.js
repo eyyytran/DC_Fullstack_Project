@@ -120,3 +120,6 @@ submitBtn.onclick = e => {
         submitForm(e)
     }
 }
+
+document.querySelector('#logo-redirect').onclick = () =>
+    (window.location.href = window.location.origin + '/index')

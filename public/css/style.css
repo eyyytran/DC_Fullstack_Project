@@ -168,7 +168,7 @@ form {
 }
 
 .username-display {
-    border: 3px solid red;
+    font-size: 18px;
 }
 
 .p-dashboardbtn,
