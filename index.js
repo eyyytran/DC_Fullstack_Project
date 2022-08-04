@@ -28,7 +28,7 @@ app.set('view engine', 'html')
 app.use(cookieParser())
 app.use(
     session({
-        secret: 'secret',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
         store: store,
