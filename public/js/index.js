@@ -6,7 +6,7 @@ const guestBtn = document.getElementById('h-guestbtn')
 const loginGuest = async () => {
     const guestEmail = Math.floor(100000 + Math.random() * 900000)
     const data = {
-        username: 'Guest',
+        username: 'guest',
         password: 'Abc1234!',
         email: `${guestEmail}@destroy.com`,
     }
