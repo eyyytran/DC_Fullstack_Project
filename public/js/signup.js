@@ -139,22 +139,15 @@ const submitForm = async e => {
         password: Password,
         email: Email,
     }
-    try {
-        const request = await fetch(
-            `${window.location.origin}/users/register`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('Registration complete')
-        window.location.href = window.location.origin + '/dashboard'
-    } catch (error) {
-        alert('Unable to create user')
-    }
+
+    const request = await fetch(`${window.location.origin}/users/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    window.location.href = window.location.origin + '/dashboard'
 }
 
 submitBtn.onclick = e => {
