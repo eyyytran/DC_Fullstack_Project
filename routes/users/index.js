@@ -1,5 +1,5 @@
 const express = require('express')
-const { Users } = require('../../db/models')
+const { Users, Cards, Projects, UserProjects } = require('../../db/models')
 const router = express.Router()
 const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
@@ -90,7 +90,7 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
 router.delete("/destroy_guest", async (req, res) => {
   try {
     const guest = await Users.findOne({
-      where: { email: "destroyguest@destroy.com" },
+      where: { email: "destroyguest@destroyguest.com" },
     });
     const allProjectIDs = await UserProjects.findAll({
       where: { userID: guest.id },
