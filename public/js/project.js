@@ -123,6 +123,12 @@ const generateCards = list => {
     }
 }
 
+const renderProjectName = () => {
+    const projectName = localStorage.getItem('projectName')
+    const projectTitle = document.querySelector('.p-projectname')
+    projectTitle.innerText = projectName
+}
+
 const openEditModule = e => {
     localStorage.removeItem('cardName')
     localStorage.removeItem('cardId')
@@ -311,4 +317,5 @@ logo.onclick = () => (window.location.href = 'http://localhost:3001/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
     loadCards()
+    renderProjectName()
 })

@@ -443,6 +443,10 @@ form {
     display: none;
 }
 
+.p-projectname {
+    font-size: 30px;
+}
+
 @media (min-width: 600px) {
     .h-content {
         flex-direction: row;
