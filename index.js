@@ -83,7 +83,7 @@ app.get('/dashboard', checkLogin, (req, res) => {
         locals: {
             title: getTitle('dashboard'),
             script: getScript('dashboard'),
-            username: 'yolo',
+            username: 'jason please put username here',
         },
         partials: {
             partial: 'dashboard',
@@ -96,6 +96,7 @@ app.get('/project', checkLogin, (req, res) => {
         locals: {
             title: getTitle('project'),
             script: getScript('project'),
+            username: 'jason please put username here',
         },
         partials: {
             partial: 'project',
