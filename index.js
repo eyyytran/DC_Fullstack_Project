@@ -89,29 +89,43 @@ app.get("/dashboard", checkLogin, (req, res) => {
   });
 });
 
-app.get("/project", checkLogin, (req, res) => {
-  res.render("template", {
-    locals: {
-      title: getTitle("project"),
-      script: getScript("project"),
-    },
-    partials: {
-      partial: "project",
-    },
-  });
-});
+app.get('/dashboard', checkLogin, (req, res) => {
+    res.render('template', {
+        locals: {
+            title: getTitle('dashboard'),
+            script: getScript('dashboard'),
+            username: 'jason please put username here',
+        },
+        partials: {
+            partial: 'dashboard',
+        },
+    })
+})
 
-app.get("/signup", (req, res) => {
-  res.render("template", {
-    locals: {
-      title: getTitle("signup"),
-      script: getScript("signup"),
-    },
-    partials: {
-      partial: "signup",
-    },
-  });
-});
+app.get('/project', checkLogin, (req, res) => {
+    res.render('template', {
+        locals: {
+            title: getTitle('project'),
+            script: getScript('project'),
+            username: 'jason please put username here',
+        },
+        partials: {
+            partial: 'project',
+        },
+    })
+})
+
+app.get('/signup', (req, res) => {
+    res.render('template', {
+        locals: {
+            title: getTitle('signup'),
+            script: getScript('signup'),
+        },
+        partials: {
+            partial: 'signup',
+        },
+    })
+})
 
 //listening port
 app.listen(PORT, () => {
