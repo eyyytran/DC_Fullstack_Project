@@ -565,6 +565,10 @@ form {
     display: none !important;
 }
 
+#loggedinas:hover {
+    cursor: default;
+}
+
 @media (min-width: 600px) {
     .p-nav,
     .d-nav {
