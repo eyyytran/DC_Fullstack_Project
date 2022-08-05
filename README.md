@@ -70,4 +70,4 @@ Replace the lines starting with `YOUR` with corresponding information relevant t
 7. With the local server running you may now open a browser and navigate to http://localhost:3001/index to use the app.
 
 ---
-You can read more about how we created this project at [dev.to]()
+You can read more about how we created this project at [dev.to](https://dev.to/jasonian5000/my-first-full-stack-project-with-a-partner-2n61)
