@@ -600,6 +600,13 @@ form {
         flex-direction: row;
         text-align: justify;
         justify-content: center;
+        background: linear-gradient(
+            0deg,
+            rgba(239, 244, 254, 1) 90%,
+            rgba(170, 177, 240, 1) 96%,
+            rgba(134, 146, 240, 1) 98%,
+            rgba(87, 104, 241, 1) 100%
+        );
     }
 
     .header {
