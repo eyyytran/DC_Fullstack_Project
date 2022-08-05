@@ -19,7 +19,7 @@ Trelljoe is a project management website. It allows users to create a personal a
 
 ## Background
 ---
-The creators of Trelljoe, Andrea Tran ([DEV.to](https://dev.to/eyyytran), [GitHub](https://github.com/eyyytran)) and Jason Blunck ([DEV.to](https://dev.to/jasonian5000), [GitHub](https://github.com/jasonian5000), are both students in the DigitalCrafts Web Developer program. This project is their first full stack assignment as well as their first team assignment in the program. The front end was primarily created by Andrea and the backend was primarily created by Jason. 
+The creators of Trelljoe, Andrea Tran ([DEV.to](https://dev.to/eyyytran), [GitHub](https://github.com/eyyytran)) and Jason Blunck ([DEV.to](https://dev.to/jasonian5000), [GitHub](https://github.com/jasonian5000)), are both students in the DigitalCrafts Web Developer program. This project is their first full stack assignment as well as their first team assignment in the program. The front end was primarily created by Andrea and the backend was primarily created by Jason. 
 
 Why call it "Trelljoe"? The idea was to create a website with functionality similar to the project management site [Trello](https://trello.com/). The name "Trellojoe" is a portmanteau of "Trello" and the name of our beloved instructor [Joe Frasier](https://github.com/jwfrasier).
 
