@@ -27,23 +27,37 @@ router.post('/register', async (req, res) => {
         res.status(400).send(error)
     }
 })
-// login
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body
-    const user = await Users.findOne({
-        where: { email: email },
-    })
-    const validateUser = user.dataValues
-    const validated = await bcrypt.compare(password, validateUser.password)
-    if (validated) {
-        req.session.user = user
+
+router.post(
+    '/login',
+    async ({ email: _email, password: _password, session }, res) => {
+        if (!_email || !_password) {
+            return res.status(400).send('login failed')
+        }
+
+        const user = await Users.findOne({
+            where: { email: _email?.toLowerCase?.() },
+        })
+
+        if (!user?.dataValues?.password) {
+            return res.status(400).send('login failed')
+        }
+
+        const validated = await bcrypt.compare(
+            _password,
+            user.dataValues.password
+        )
+
+        if (!validated) {
+            return res.status(400).send('login failed')
+        }
+
+        session.user = user
         const { password, ...rest } = user.dataValues
         res.status(200).json(rest)
-    } else {
-        res.status(400).send('login failed')
     }
-})
-// update user
+)
+
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
     try {
