@@ -163,6 +163,7 @@ const deleteProject = async () => {
     const requestData = {
         id: localStorage.getItem('projectId'),
     }
+    console.log(requestData)
     const sendData = await fetch(
         `${window.location.origin}/projects/destroy_project`,
         {
@@ -209,6 +210,7 @@ document.querySelector('#new-project').addEventListener('keypress', e => {
 
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
+    console.log('cancel button')
 })
 
 document.addEventListener('click', e => {
