@@ -68,7 +68,7 @@ router.put('/update_user', checkLogin, async (req, res) => {
         res.status(400).send('could not find')
     }
 })
-// delete account
+
 router.delete('/destroy_user', checkLogin, async (req, res) => {
     const { email, password } = req.body
     try {
@@ -107,7 +107,7 @@ router.delete('/destroy_guest', checkLogin, async (req, res) => {
         res.status(400).send('error')
     }
 })
-//end session
+
 router.put('/logout', checkLogin, (req, res) => {
     try {
         req.session.user = null

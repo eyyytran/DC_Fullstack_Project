@@ -97,7 +97,7 @@ const openEditModule = e => {
 
     localStorage.setItem('projectName', projectName)
     localStorage.setItem('projectId', projectId)
-    editmodule.style.display = 'block'
+    editmodule.classList.remove('hidden')
     const currentName = localStorage.getItem('projectName')
     document.querySelector('.de-inputs').value = currentName
 }
@@ -179,11 +179,11 @@ const deleteProject = async () => {
 }
 
 mobileCreateBtn.addEventListener('click', () => {
-    createmodule.style.display = 'block'
+    createmodule.classList.remove('hidden')
 })
 
 desktopCreateBtn.addEventListener('click', () => {
-    createmodule.style.display = 'block'
+    createmodule.classList.remove('hidden')
 })
 
 submitbtn.addEventListener('click', e => {
@@ -191,7 +191,7 @@ submitbtn.addEventListener('click', e => {
     let isEntryValid = entryValidate(e, projectName)
     if (isEntryValid) {
         createProject(projectName)
-        createmodule.style.display = 'none'
+        createmodule.classList.add('hidden')
         location.reload()
     }
 })
@@ -202,14 +202,14 @@ document.querySelector('#new-project').addEventListener('keypress', e => {
         let isEntryValid = entryValidate(e, projectName)
         if (isEntryValid) {
             createProject(projectName)
-            createmodule.style.display = 'none'
+            createmodule.classList.add('hidden')
             location.reload()
         }
     }
 })
 
 cancelbtn.addEventListener('click', () => {
-    createmodule.style.display = 'none'
+    createmodule.classList.add('hidden')
     console.log('cancel button')
 })
 
@@ -235,7 +235,7 @@ Esubmitbtn.addEventListener('click', e => {
     let isEntryValid = entryValidate(e, newName)
     if (isEntryValid) {
         editProjectName(newName)
-        createmodule.style.display = 'none'
+        createmodule.classList.add('hidden')
         location.reload()
     }
 })
@@ -247,7 +247,7 @@ document.querySelector('#edit-project').addEventListener('keypress', e => {
         let isEntryValid = entryValidate(e, newName)
         if (isEntryValid) {
             editProjectName(newName)
-            createmodule.style.display = 'none'
+            createmodule.classList.add('hidden')
             location.reload()
         }
     }
