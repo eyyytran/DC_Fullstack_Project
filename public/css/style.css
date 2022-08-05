@@ -156,10 +156,10 @@ form {
     z-index: 9;
 }
 
-.p-container .mobile-nav,
+/* .p-container .mobile-nav,
 .d-container .mobile-nav {
     transform: translateY(calc(var(--mobile-nav-link-height) * -2));
-}
+} */
 
 .p-container .mobile-nav-open,
 .d-container .mobile-nav-open,
@@ -415,7 +415,7 @@ form {
     border-radius: 5px;
     height: var(--projectheight);
     width: var(--projectwidth);
-    background: var(--neon-blue);
+    background: var(--dark-blue);
     padding: 1rem;
     line-height: 1rem;
     box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
@@ -666,9 +666,6 @@ form {
         justify-content: center;
         align-items: flex-start;
         flex-wrap: wrap;
-    }
-
-    #logo {
     }
 
     .hamburger-btn {
