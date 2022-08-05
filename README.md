@@ -19,7 +19,7 @@ Trelljoe is a project management website. It allows users to create a personal a
 
 ## Background
 ---
-The creators of Trelljoe, [Andrea Tran](https://github.com/eyyytran) and [Jason Blunck](https://github.com/jasonian5000), are both students in the DigitalCrafts Web Developer program. The project is their first full stack assignment as well as their first team assignment in the program. The front end was primarily created by Andrea and the backend was primarily created by Jason. 
+The creators of Trelljoe, [Andrea Tran](https://github.com/eyyytran) and [Jason Blunck](https://github.com/jasonian5000), are both students in the DigitalCrafts Web Developer program. This project is their first full stack assignment as well as their first team assignment in the program. The front end was primarily created by Andrea and the backend was primarily created by Jason. 
 
 Why call it "Trelljoe"? The idea was to create a website with functionality similar to the project management site [Trello](https://trello.com/). The name "Trellojoe" is a portmanteau of "Trello" and the name of our beloved instructor [Joe Frasier](https://github.com/jwfrasier).
 
@@ -67,7 +67,7 @@ Replace the lines starting with `YOUR` with corresponding information relevant t
 
 6. Navigate your terminal to the `/DC_Backend_Project` directory and run the command `nodemon` or just `node` if you chose not to install nodemon.
 
-7. With the local server running you many now open a browser and navigate to http://localhost:3001/index to use the app.
+7. With the local server running you may now open a browser and navigate to http://localhost:3001/index to use the app.
 
 ---
 You can read more about how we created this project at [dev.to]()
