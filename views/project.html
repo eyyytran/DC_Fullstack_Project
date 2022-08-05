@@ -1,32 +1,30 @@
 <div class="p-container">
     <div class="header">
+        <div class="hamburger-btn">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark hidden"></i>
+        </div>
         <div class="nav-bar" id="logo">
-            <img
-                src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
-            />
+            <i class="fa-solid fa-square-pen"></i>
             <h1 id="logo-redirect">Trelljoe</h1>
         </div>
-        <div class="p-projectname"></div>
-        <div class="username-display" id="p-username">${username}</div>
-        <div class="nav-barlinks">
-            <button class="mobile-nav">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="30"
-                    height="30"
-                    fill="#455276"
-                    class="bi bi-chevron-down"
-                    viewBox="0 0 16 16"
-                >
-                    <path
-                        fill-rule="evenodd"
-                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-                    />
-                </svg>
-            <button class="nav-bar" id="p-dashboardbtn">
-                <h2>Dashboard</h2>
-            </button>
-            <button class="nav-bar" id="p-logoutbtn"><h2>Sign out</h2></button>
+        <div class="p-nav">
+            <a href="/dashboard" class="mobile-nav-link">
+                <div class="mobile-nav-link-label">Dashboard</div>
+            </a>
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label" id="p-dlogoutbtn">
+                    Sign Out
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-nav">
+        <a href="/dashboard" class="mobile-nav-link">
+            <div class="mobile-nav-link-label">Dashboard</div></a
+        >
+        <div class="mobile-nav-link" id="p-logoutbtn">
+            <div class="mobile-nav-link-label">Sign Out</div>
         </div>
     </div>
 
@@ -49,7 +47,7 @@
             </form>
         </div>
     </div>
-
+    <div class="p-projectname"></div>
     <div class="pe-module">
         <div class="pe-module-contents">
             <div class="pe-module-title"><h2>Edit your task</h2></div>
@@ -130,3 +128,4 @@
     </div>
 </div>
 ${script}
+<script src="../public/js/navbar.js"></script>

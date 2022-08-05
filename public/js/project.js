@@ -1,4 +1,5 @@
-const signoutbtn = document.querySelector('#p-logoutbtn')
+const mobileSignOutBtn = document.querySelector('#p-logoutbtn')
+const desktopSignoutBtn = document.getElementById('p-dlogoutbtn')
 const toDoList = document.getElementById('p-todo-list')
 const doingList = document.getElementById('p-inprogress-list')
 const reviewList = document.getElementById('p-review-list')
@@ -12,7 +13,6 @@ const movebtn = document.querySelector('.pe-movebtn')
 const deletebtn = document.querySelector('.pe-deletebtn')
 const moveoptions = document.querySelector('#pe-moveoptions')
 const logo = document.getElementById('logo-redirect')
-const dashboardbtn = document.querySelector('button.p-dashboardbtn')
 
 //validate
 const isRequired = value => (value === '' ? false : true)
@@ -130,7 +130,7 @@ const generateCards = list => {
 const renderProjectName = () => {
     const projectName = localStorage.getItem('projectName')
     const projectTitle = document.querySelector('.p-projectname')
-    projectTitle.innerText = projectName
+    projectTitle.innerHTML = projectName
 }
 
 const openEditModule = e => {
@@ -270,7 +270,16 @@ const setSelectorOptions = () => {
     moveoptions.value = currentStatus
 }
 
-signoutbtn.addEventListener('click', () => {
+mobileSignOutBtn.addEventListener('click', () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user?.username === 'guest') {
+        signOutGuest()
+    } else {
+        signOutUser()
+    }
+})
+
+desktopSignoutBtn.addEventListener('click', () => {
     const user = JSON.parse(localStorage.getItem('user'))
     if (user?.username === 'guest') {
         signOutGuest()
@@ -360,9 +369,6 @@ cancelbtn.addEventListener('click', () => {
 })
 
 logo.onclick = () =>
-    (window.location.href = window.location.origin + '/dashboard')
-
-dashboardbtn.onclick = () =>
     (window.location.href = window.location.origin + '/dashboard')
 
 window.addEventListener('DOMContentLoaded', () => {
