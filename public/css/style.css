@@ -156,11 +156,6 @@ form {
     z-index: 9;
 }
 
-/* .p-container .mobile-nav,
-.d-container .mobile-nav {
-    transform: translateY(calc(var(--mobile-nav-link-height) * -2));
-} */
-
 .p-container .mobile-nav-open,
 .d-container .mobile-nav-open,
 .h-container .mobile-nav-open {
@@ -256,15 +251,6 @@ form {
 .username-display {
     font-size: 20px;
 }
-
-/* #p-dashboardbtn,
-#p-logoutbtn {
-    background: var(--dark-blue);
-    width: 200px;
-    height: 100%;
-    min-height: inherit;
-    border-radius: 0;
-} */
 
 #logo {
     display: flex;
