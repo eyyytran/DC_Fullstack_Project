@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="p-module">
+    <div class="p-module hidden">
         <div class="p-module-contents">
             <div class="p-module-title"><h2>Let's make a new task.</h2></div>
             <form id="p-form">
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="p-projectname"></div>
-    <div class="pe-module">
+    <div class="pe-module hidden">
         <div class="pe-module-contents">
             <div class="pe-module-title"><h2>Edit your task</h2></div>
             <form id="p-form">
@@ -74,7 +74,11 @@
                 </div>
                 <input type="button" value="Submit" id="pe-submitbtn" />
                 <button class="pe-movebtn">Move</button>
-                <select name="move-selector" id="pe-moveoptions">
+                <select
+                    name="move-selector"
+                    class="pe-move-selector hidden"
+                    id="pe-moveoptions"
+                >
                     <option value="todo">To-Do</option>
                     <option value="inprogress">Doing</option>
                     <option value="review">Review</option>
