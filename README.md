@@ -3,7 +3,7 @@
 ## Overview
 --- 
 
-Trelljoe is a project management website. It allows users to create a personal account and create, modify, and delete projects and tasks within those projects. The user's account information along with all of the project and task information is stored in a database indefinitely. A working version of the website has been published on [Heroku](https://trelljoe.herokuapp.com/). If you would like to try it out you can use the "Guest" feature. 
+Trelljoe is a project management website. It allows users to create a personal account and create, modify, and delete projects and tasks. The user's account information along with all of the project and task information is stored in a database indefinitely. A working version of the website has been published on [Heroku](https://trelljoe.herokuapp.com/). If you would like to try it out you can use the "Guest" feature. 
 
 *Note: All data created as a Guest will be destroyed when logged out.* 
 
