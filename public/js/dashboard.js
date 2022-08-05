@@ -78,18 +78,14 @@ const generateProjectCards = list => {
 }
 
 const loadProjects = async () => {
-    try {
-        const projects = await fetch(
-            `${window.location.origin}/projects/get_projects`,
-            {
-                method: 'GET',
-            }
-        )
-        const data = await projects.json()
-        generateProjectCards(data)
-    } catch (error) {
-        console.log(error)
-    }
+    const projects = await fetch(
+        `${window.location.origin}/projects/get_projects`,
+        {
+            method: 'GET',
+        }
+    )
+    const data = await projects.json()
+    generateProjectCards(data)
 }
 
 const openEditModule = e => {
@@ -111,20 +107,17 @@ const editProjectName = async newName => {
         id: localStorage.getItem('projectId'),
         name: newName,
     }
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/projects/update_project`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
-    } catch (error) {
-        console.log(error)
-    }
+
+    const sendData = await fetch(
+        `${window.location.origin}/projects/update_project`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
 }
 
 const createProject = async projectName => {
@@ -170,7 +163,6 @@ const deleteProject = async () => {
     const requestData = {
         id: localStorage.getItem('projectId'),
     }
-    console.log(requestData)
     const sendData = await fetch(
         `${window.location.origin}/projects/destroy_project`,
         {
@@ -217,7 +209,6 @@ document.querySelector('#new-project').addEventListener('keypress', e => {
 
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
-    console.log('cancel button')
 })
 
 document.addEventListener('click', e => {

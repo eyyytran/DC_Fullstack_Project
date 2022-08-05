@@ -24,7 +24,6 @@ router.post('/register', async (req, res) => {
         delete data.password
         res.status(200).json(data)
     } catch (error) {
-        console.log(error)
         res.status(400).send(error)
     }
 })
@@ -67,7 +66,6 @@ router.put('/update_user', checkLogin, async (req, res) => {
         }
     } catch (error) {
         res.status(400).send('could not find')
-        console.log(error)
     }
 })
 // delete account
@@ -85,7 +83,6 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
         }
     } catch (error) {
         res.status(400).send('could not complete')
-        console.log(error)
     }
 })
 // delete guest account and everything associated
@@ -117,7 +114,6 @@ router.put('/logout', checkLogin, (req, res) => {
         res.status(200).send('session ended')
     } catch (error) {
         res.status(400).send('could not end session')
-        console.log(error)
     }
 })
 

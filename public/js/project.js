@@ -64,23 +64,16 @@ const entryValidate = (e, name) => {
 const loadCards = async () => {
     const projectID = localStorage.getItem('projectId')
     const requestData = { projectID: projectID }
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/cards/get_cards`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
-        const cards = await sendData.json()
-        console.log(typeof cards)
-        generateCards(cards)
-    } catch (error) {
-        console.log(error)
-    }
+
+    const sendData = await fetch(`${window.location.origin}/cards/get_cards`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
+    const cards = await sendData.json()
+    generateCards(cards)
 }
 
 const generateCards = list => {
@@ -122,8 +115,6 @@ const generateCards = list => {
             card.append(editbtn)
             editbtn.append(editbtnimage)
         }
-
-        console.log('I made it')
     }
 }
 
@@ -166,7 +157,6 @@ const createCard = async cardName => {
         status: newStatus,
         projectID: projectID,
     }
-    console.log({ data })
 
     const sendData = await fetch(
         `${window.location.origin}/cards/create_card`,
@@ -203,7 +193,6 @@ const editCardStatus = async () => {
         id: localStorage.getItem('cardId'),
         status: newStatus,
     }
-    console.log({ requestData })
 
     const sendData = await fetch(
         `${window.location.origin}/cards/update_card`,
@@ -221,7 +210,7 @@ const deleteCard = async () => {
     const requestData = {
         id: localStorage.getItem('cardId'),
     }
-    console.log(requestData)
+
     const sendData = await fetch(
         `${window.location.origin}/cards/destroy_card`,
         {
@@ -365,7 +354,6 @@ deletebtn.addEventListener('click', e => {
 
 cancelbtn.addEventListener('click', () => {
     createmodule.style.display = 'none'
-    console.log('cancel button')
 })
 
 logo.onclick = () =>
