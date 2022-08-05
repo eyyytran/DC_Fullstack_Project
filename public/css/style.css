@@ -9,6 +9,7 @@
     --lavender: #e6e9fe;
     --periwinkle: #7b89f4;
     --transparent: rgba(255, 255, 255, 0.3);
+    --mobile-nav-bg-color: #aab1f0;
 }
 
 :root {
@@ -20,6 +21,9 @@
     --projectwidth: 300px;
     --cardheight: 100px;
     --cardwidth: 300px;
+    --headerheight: 75px;
+    --mobile-nav-link-height: 60px;
+    --default-transition: 600ms ease-in-out;
 }
 
 body {
@@ -107,25 +111,68 @@ form {
 .h-container {
     height: 100vh;
     width: 100vw;
-    background: rgb(239, 244, 254);
-    background: linear-gradient(
-        0deg,
-        rgba(239, 244, 254, 1) 70%,
-        rgba(170, 177, 240, 0.8) 78%,
-        rgba(134, 146, 240, 0.9) 87%,
-        rgba(87, 104, 241, 1) 95%
-    );
+
     display: grid;
     grid-template-rows: auto 1fr;
     overflow-y: auto;
+    position: relative;
 }
 
 .header {
-    background-color: var(--transparent);
+    background: rgba(134, 146, 240, 1);
     box-shadow: 0 1px 1px rgb(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    height: var(--headerheight);
+    position: relative;
+    z-index: 10;
+}
+
+.h-container .mobile-nav {
+    position: absolute;
+    top: calc(var(--headerheight));
+    background-color: var(--mobile-nav-bg-color);
+    width: 100%;
+    display: block;
+    transform: translateY(calc(var(--mobile-nav-link-height) * -3));
+    transition: transform var(--default-transition);
+    z-index: 9;
+}
+
+.h-container .mobile-nav-open {
+    transform: translateY(0);
+    transition: transform var(--default-transition);
+}
+
+.h-container .mobile-nav-link {
+    display: block;
+    margin: 0;
+    height: var(--mobile-nav-link-height);
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.h-container .mobile-nav-link-label {
+    margin-left: 15px;
+}
+
+.hamburger-btn {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-btn .fa-bars {
+    font-size: 30px;
+}
+
+.hamburger-btn .fa-xmark {
+    font-size: 40px;
 }
 
 .nav-barlinks {
@@ -143,6 +190,17 @@ form {
     justify-content: start;
     align-items: center;
     text-align: center;
+}
+
+.h-content {
+    background: rgb(239, 244, 254);
+    background: linear-gradient(
+        0deg,
+        rgba(239, 244, 254, 1) 70%,
+        rgba(170, 177, 240, 0.8) 78%,
+        rgba(134, 146, 240, 0.9) 87%,
+        rgba(87, 104, 241, 1) 95%
+    );
 }
 
 #h-guestbtn {
@@ -168,35 +226,44 @@ form {
 }
 
 .username-display {
-    font-size: 18px;
+    font-size: 20px;
 }
 
-.p-dashboardbtn,
+#p-dashboardbtn,
 #p-logoutbtn,
 #d-logoutbtn,
-#d-createbtn,
-#h-loginbtn {
+#d-createbtn {
     background: var(--dark-blue);
     width: 200px;
     height: 100%;
     min-height: inherit;
-    display: block;
     border-radius: 0;
 }
 
-#h-dashboardbtn {
-    background: var(--dark-blue);
+#h-loginbtn {
     width: 200px;
+    background: none;
     height: 100%;
-    display: none;
+    text-align: center;
+    font-size: 20px;
+    color: var(--dark-blue);
+}
+
+#toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #logo {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    margin-left: 0.5rem;
+    justify-content: center;
+}
+
+#logo img {
+    margin-right: 5px;
 }
 
 .l-container,
@@ -329,7 +396,7 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -493,11 +560,35 @@ form {
     font-size: 30px;
 }
 
+.hidden {
+    display: none !important;
+}
+
 @media (min-width: 600px) {
+    #toggle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .mobile-nav {
+        display: flex;
+        z-index: 5;
+    }
+
     .h-content {
         flex-direction: row;
         text-align: justify;
         justify-content: center;
+    }
+
+    .header {
+        box-shadow: 0 1px 1px rgb(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
     }
 
     .l-content,
@@ -545,6 +636,13 @@ form {
         justify-content: center;
         align-items: flex-start;
         flex-wrap: wrap;
+    }
+
+    #logo {
+    }
+
+    .hamburger-btn {
+        display: none;
     }
 }
 

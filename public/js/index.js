@@ -1,7 +1,8 @@
-const loginBtn = document.getElementById('h-loginbtn')
-
 const signupBtn = document.getElementById('h-signupbtn')
 const guestBtn = document.getElementById('h-guestbtn')
+const mobileNavGuestBtn = document.querySelector(
+    '.mobile-nav .mobile-nav-link-guest'
+)
 
 const loginGuest = async () => {
     const result = await fetch(`${window.location.origin}/users/register`, {
@@ -22,12 +23,9 @@ const loginGuest = async () => {
     }, 100)
 }
 
-loginBtn.onclick = () =>
-    (window.location.href = window.location.origin + '/login')
-
 signupBtn.onclick = () =>
     (window.location.href = window.location.origin + '/signup')
 
-guestBtn.onclick = async () => {
-    loginGuest()
-}
+guestBtn.onclick = async () => loginGuest()
+
+mobileNavGuestBtn.onclick = async () => loginGuest()
