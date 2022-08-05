@@ -3,7 +3,7 @@
 ## Overview
 --- 
 
-Trelljoe is a project management website. It allows users to create a personal account and create, modify, and delete projects and tasks within those projects. The user's account information along with all of the project and task information is stored in a database indefinitely. A working version of the website has been published on [Heroku](https://trelljoe.herokuapp.com/). If you would like to try it out you can use the "Guest" feature. 
+Trelljoe is a project management website. It allows users to create a personal account and create, modify, and delete projects and tasks. The user's account information along with all of the project and task information is stored in a database indefinitely. A working version of the website has been published on [Heroku](https://trelljoe.herokuapp.com/). If you would like to try it out you can use the "Guest" feature. 
 
 *Note: All data created as a Guest will be destroyed when logged out.* 
 
@@ -19,14 +19,14 @@ Trelljoe is a project management website. It allows users to create a personal a
 
 ## Background
 ---
-The creators of Trelljoe, [Andrea Tran](https://github.com/eyyytran) and [Jason Blunck](https://github.com/jasonian5000), are both students in the DigitalCrafts Web Developer program. The project is their first full stack assignment as well as their first team assignment in the program. The front end was primarily created by Andrea and the backend was primarily created by Jason. 
+The creators of Trelljoe, [Andrea Tran](https://github.com/eyyytran) and [Jason Blunck](https://github.com/jasonian5000), are both students in the DigitalCrafts Web Developer program. This project is their first full stack assignment as well as their first team assignment in the program. The front end was primarily created by Andrea and the backend was primarily created by Jason. 
 
 Why call it "Trelljoe"? The idea was to create a website with functionality similar to the project management site [Trello](https://trello.com/). The name "Trellojoe" is a portmanteau of "Trello" and the name of our beloved instructor [Joe Frasier](https://github.com/jwfrasier).
 
 ## Usage
 ---
 
-If you just want to try it out you can find a published version on [Heroku](https://trelljoe.herokuapp.com/). If you would like to download the repo and run it locally you will need a few things.
+If you want to try out the website you can find a published version on [Heroku](https://trelljoe.herokuapp.com/). If you would like to download the repository and run it locally you will need to follow these steps.
 
 1. Clone the repository using whatever method you are most comfortable. You may use the **Code** button above and follow one of the methods provided.
 
@@ -67,7 +67,7 @@ Replace the lines starting with `YOUR` with corresponding information relevant t
 
 6. Navigate your terminal to the `/DC_Backend_Project` directory and run the command `nodemon` or just `node` if you chose not to install nodemon.
 
-7. With the local server running you many now open a browser and navigate to http://localhost:3001/index to use the app.
+7. With the local server running you may now open a browser and navigate to http://localhost:3001/index to use the app.
 
 ---
 You can read more about how we created this project at [dev.to]()
