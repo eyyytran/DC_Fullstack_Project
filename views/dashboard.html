@@ -8,19 +8,26 @@
             <i class="fa-solid fa-square-pen"></i>
             <h1 id="logo-redirect">Trelljoe</h1>
         </div>
-        <div class="desktop-nav">
-            <a href="/login" class="mobile-nav-link"
-                ><div class="mobile-nav-link-label">Login</div></a
-            >
+        <div class="d-nav">
+            <div class="mobile-nav-link"></div>
+                <div class="mobile-nav-link-label" id="d-dcreatebtn">
+                    Create Project
+                </div>
+            </div>
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label" id="d-dlogoutbtn">
+                    Sign Out
+                </div>
+            </div>
         </div>
     </div>
     <div class="mobile-nav">
-        <a href="#" class="mobile-nav-link" id="d-createbtn"
-            ><div class="mobile-nav-link-label">Create a New Project</div></a
-        >
-        <a href="#" class="mobile-nav-link" id="d-logoutbtn"
-            ><div class="mobile-nav-link-label">Sign Out</div></a
-        >
+        <div class="mobile-nav-link" id="d-createbtn">
+            <div class="mobile-nav-link-label">Create a New Project</div>
+        </div>
+        <div class="mobile-nav-link" id="d-logoutbtn">
+            <div class="mobile-nav-link-label">Sign Out</div>
+        </div>
     </div>
     <div class="d-module">
         <div class="d-module-contents">
@@ -37,7 +44,7 @@
                     <small></small>
                 </div>
                 <input type="button" value="Submit" id="d-submitbtn" />
-                <button class="d-close">Cancel</button>
+                <button type="button" class="d-close">Cancel</button>
             </form>
         </div>
     </div>
