@@ -6,57 +6,59 @@ const bcrypt = require('bcrypt')
 const checkLogin = require('../../util/checkLogin')
 // user registration
 router.post('/register', async (req, res) => {
-    const { username, password, email } = await req.body
+    const { username, password, email } = req.body
+
+    if (!username || !password || !email) {
+        return res.status(400).send('registration failed')
+    }
+
     try {
         const salt = await bcrypt.genSalt(5)
         const hashedPassword = await bcrypt.hash(password, salt)
-        const userToCreate = {
+        const user = await Users.create({
             id: v4(),
             username,
             password: hashedPassword,
-            email,
+            email: email.toLowerCase(),
             createdAt: new Date(),
             updatedAt: new Date(),
-        }
-        const user = await Users.create(userToCreate)
+        })
         req.session.user = user
-        const data = { ...user.dataValues }
-        delete data.password
-        res.status(200).json(data)
+        const userResponse = { ...user.dataValues }
+        delete userResponse.password
+        res.status(200).json(userResponse)
     } catch (error) {
         res.status(400).send(error)
     }
 })
 
-router.post(
-    '/login',
-    async ({ email: _email, password: _password, session }, res) => {
-        if (!_email || !_password) {
-            return res.status(400).send('login failed')
-        }
-
-        const user = await Users.findOne({
-            where: { email: _email?.toLowerCase?.() },
-        })
-
-        if (!user?.dataValues?.password) {
-            return res.status(400).send('login failed')
-        }
-
-        const validated = await bcrypt.compare(
-            _password,
-            user.dataValues.password
-        )
-
-        if (!validated) {
-            return res.status(400).send('login failed')
-        }
-
-        session.user = user
-        const { password, ...rest } = user.dataValues
-        res.status(200).json(rest)
+router.post('/login', async (req, res) => {
+    if (!req.body.email || !req.body.password) {
+        return res.status(400).send('login failed')
     }
-)
+
+    const user = await Users.findOne({
+        where: { email: req.body.email?.toLowerCase?.() },
+    })
+
+    if (!user?.dataValues?.password) {
+        return res.status(400).send('login failed')
+    }
+
+    const validated = await bcrypt.compare(
+        req.body.password,
+        user.dataValues.password
+    )
+
+    if (!validated) {
+        return res.status(400).send('login failed')
+    }
+
+    req.session.user = user
+    const userResponse = { ...user.dataValues }
+    delete userResponse.password
+    res.status(200).json(rest)
+})
 
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
