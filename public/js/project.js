@@ -137,7 +137,7 @@ const openEditModule = e => {
     localStorage.setItem('cardId', cardId)
     localStorage.setItem('cardStatus', cardStatus)
 
-    editmodule.style.display = 'block'
+    editmodule.classList.remove('hidden')
     const currentName = localStorage.getItem('cardName')
     document.querySelector('.pe-inputs').value = currentName
 }
@@ -145,7 +145,7 @@ const openEditModule = e => {
 const openCreateModule = e => {
     localStorage.removeItem('cardStatus')
     localStorage.setItem('cardStatus', e.target.name)
-    createmodule.style.display = 'block'
+    createmodule.classList.remove('hidden')
 }
 
 const createCard = async cardName => {
@@ -296,7 +296,7 @@ document.querySelector('#new-card').addEventListener('keypress', e => {
         let isEntryValid = entryValidate(e, cardName)
         if (isEntryValid) {
             createCard(cardName)
-            createmodule.style.display = 'none'
+            createmodule.classList.add('hidden')
             location.reload()
         }
     }
@@ -308,7 +308,7 @@ Csubmitbtn.addEventListener('click', e => {
     let isEntryValid = entryValidate(e, cardName)
     if (isEntryValid) {
         createCard(cardName)
-        createmodule.style.display = 'none'
+        createmodule.classList.add('hidden')
         location.reload()
     }
 })
@@ -321,7 +321,7 @@ document.querySelector('#edit-card').addEventListener('keypress', e => {
         if (isEntryValid) {
             editCardDesc(newName)
             editCardStatus()
-            editmodule.style.display = 'none'
+            editmodule.classList.add('hidden')
             location.reload()
         }
     }
@@ -333,27 +333,27 @@ Esubmitbtn.addEventListener('click', e => {
     if (isEntryValid) {
         editCardDesc(newName)
         editCardStatus()
-        editmodule.style.display = 'none'
+        editmodule.classList.add('hidden')
         location.reload()
     }
 })
 
 movebtn.addEventListener('click', e => {
     e.preventDefault()
-    movebtn.style.display = 'none'
-    moveoptions.style.display = 'block'
+    movebtn.classList.add('hidden')
+    moveoptions.classList.remove('hidden')
     setSelectorOptions()
 })
 
 deletebtn.addEventListener('click', e => {
     e.preventDefault()
     deleteCard()
-    editmodule.style.display = 'none'
+    editmodule.classList.add('hidden')
     location.reload()
 })
 
 cancelbtn.addEventListener('click', () => {
-    createmodule.style.display = 'none'
+    createmodule.classList.add('hidden')
 })
 
 logo.onclick = () =>
