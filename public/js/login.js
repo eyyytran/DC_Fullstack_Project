@@ -22,7 +22,6 @@ const checkEmail = e => {
     if (!isRequired(email)) {
         showError(e.target.form[0], 'Please enter your email.')
     } else if (!isEmail(email)) {
-        console.log(isEmail(email))
         showError(e.target.form[0], 'This is not an email. Try again.')
     } else {
         showSuccess(e.target.form[0])
@@ -112,11 +111,7 @@ submitBtn.onclick = e => {
     e.preventDefault()
     let isFormValid = formValidate(e)
 
-    if (!isFormValid) {
-        console.log('Will not be submitted')
-        alert('Unable to submit form')
-    } else {
-        console.log('Will be submitted')
+    if (isFormValid) {
         submitForm(e)
     }
 }

@@ -50,7 +50,6 @@ const checkEmail = e => {
     if (!isRequired(email)) {
         showError(e.target.form[1], 'Email is required')
     } else if (!isEmail(email)) {
-        console.log(isEmail(email))
         showError(e.target.form[1], 'Email is not valid')
     } else {
         showSuccess(e.target.form[1])
@@ -116,12 +115,7 @@ const formValidate = e => {
         isEmailValid = checkEmail(e),
         isPasswordValid = checkPassword(e),
         confirmPasswordValid = confirmPassword(e)
-    console.log({
-        isEmailValid,
-        isPasswordValid,
-        isUsernameValid,
-        confirmPasswordValid,
-    })
+
     let isFormValid =
         isUsernameValid &&
         isPasswordValid &&
@@ -156,14 +150,10 @@ const createUser = async e => {
 
 submitBtn.onclick = e => {
     e.preventDefault()
-    console.log('clicked')
+
     let isFormValid = formValidate(e)
 
-    if (!isFormValid) {
-        console.log('Will not be submitted')
-        alert('Unable to submit form')
-    } else {
-        console.log('Will be submitted')
+    if (isFormValid) {
         createUser(e)
     }
 }
