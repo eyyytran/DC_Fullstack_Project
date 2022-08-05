@@ -71,3 +71,11 @@ Replace the lines starting with `YOUR` with corresponding information relevant t
 
 ---
 You can read more about how we created this project at [dev.to](https://dev.to/jasonian5000/my-first-full-stack-project-with-a-partner-2n61)
+
+## Screenshots
+---
+![Trelljoe Homepage](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7hghdqoeev0qxppcfr5h.png)
+
+![Trelljoe Project Page](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tpzhrzy85prt5emyddmm.png)
+
+![Trelljoe Mobile](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1uiglkbtue8j59indf7k.png)
