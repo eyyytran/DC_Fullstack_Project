@@ -9,13 +9,7 @@
     --lavender: #e6e9fe;
     --periwinkle: #7b89f4;
     --transparent: rgba(255, 255, 255, 0.3);
-    --mobile-nav-bg-color: linear-gradient(
-        0deg,
-        rgb(193, 198, 241) 10%,
-        rgba(170, 177, 240, 1) 50%,
-        rgba(134, 146, 240, 1) 85%,
-        rgba(87, 104, 241, 1) 95%
-    );
+    --mobile-nav-bg-color: rgba(87, 104, 241, 1);
 }
 
 :root {
@@ -148,6 +142,7 @@ form {
     display: none;
 }
 
+.d-container .mobile-nav,
 .h-container .mobile-nav {
     position: absolute;
     top: calc(var(--headerheight));
@@ -159,11 +154,17 @@ form {
     z-index: 9;
 }
 
+.d-container .mobile-nav {
+    transform: translateY(calc(var(--mobile-nav-link-height) * -2));
+}
+
+.d-container .mobile-nav-open,
 .h-container .mobile-nav-open {
     transform: translateY(0);
     transition: transform var(--default-transition);
 }
 
+.d-container .mobile-nav-link,
 .h-container .mobile-nav-link {
     display: block;
     margin: 0;
@@ -171,8 +172,10 @@ form {
     display: flex;
     align-items: center;
     font-size: 18px;
+    color: white;
 }
 
+.d-container .mobile-nav-link-label,
 .h-container .mobile-nav-link-label {
     margin-left: 15px;
 }
@@ -249,30 +252,12 @@ form {
 }
 
 #p-dashboardbtn,
-#p-logoutbtn,
-#d-logoutbtn,
-#d-createbtn {
+#p-logoutbtn {
     background: var(--dark-blue);
     width: 200px;
     height: 100%;
     min-height: inherit;
     border-radius: 0;
-}
-
-#h-loginbtn {
-    width: 200px;
-    background: none;
-    height: 100%;
-    text-align: center;
-    font-size: 20px;
-    color: var(--dark-blue);
-}
-
-#toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
 }
 
 #logo {
