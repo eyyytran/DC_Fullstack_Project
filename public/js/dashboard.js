@@ -1,4 +1,5 @@
-const createbtn = document.getElementById('d-createbtn')
+const mobileCreateBtn = document.getElementById('d-createbtn')
+const desktopCreateBtn = document.getElementById('d-dcreatebtn')
 const projectList = document.getElementById('d-projects')
 const createmodule = document.querySelector('.d-module')
 const editmodule = document.querySelector('.de-module')
@@ -7,7 +8,8 @@ const submitbtn = document.getElementById('d-submitbtn')
 const Esubmitbtn = document.getElementById('de-submitbtn')
 const deletebtn = document.querySelector('.de-deleteboard')
 const Ecancelbtn = document.querySelector('.de-close')
-const signoutbtn = document.querySelector('#d-logoutbtn')
+const mobileSignoutBtn = document.querySelector('#d-logoutbtn')
+const desktopSignoutBtn = document.getElementById('d-dlogoutbtn')
 const logo = document.getElementById('logo-redirect')
 
 //validators
@@ -183,7 +185,11 @@ const deleteProject = async () => {
     localStorage.removeItem('projectId')
 }
 
-createbtn.addEventListener('click', () => {
+mobileCreateBtn.addEventListener('click', () => {
+    createmodule.style.display = 'block'
+})
+
+desktopCreateBtn.addEventListener('click', () => {
     createmodule.style.display = 'block'
 })
 
@@ -261,7 +267,15 @@ deletebtn.addEventListener('click', e => {
     location.reload()
 })
 
-signoutbtn.addEventListener('click', () => {
+mobileSignoutBtn.addEventListener('click', () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user?.username === 'guest') {
+        signOutGuest()
+    } else {
+        signOutUser()
+    }
+})
+desktopSignoutBtn.addEventListener('click', () => {
     const user = JSON.parse(localStorage.getItem('user'))
     if (user?.username === 'guest') {
         signOutGuest()
