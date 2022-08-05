@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
     req.session.user = user
     const userResponse = { ...user.dataValues }
     delete userResponse.password
-    res.status(200).json(rest)
+    res.status(200).json(userResponse)
 })
 
 router.put('/update_user', checkLogin, async (req, res) => {
