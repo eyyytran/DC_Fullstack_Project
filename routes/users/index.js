@@ -1,10 +1,14 @@
 const express = require('express')
-const { Users } = require('../../db/models')
+const { Users, Cards, Projects, UserProjects } = require('../../db/models')
 const router = express.Router()
 const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const checkLogin = require('../../util/checkLogin')
+<<<<<<< HEAD
 
+=======
+// user registration
+>>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 router.post('/register', async (req, res) => {
     const { username, password, email } = await req.body
     try {
@@ -20,13 +24,18 @@ router.post('/register', async (req, res) => {
         }
         const user = await Users.create(userToCreate)
         req.session.user = user
-        res.status(200).send(user)
+        const data = { ...user.dataValues }
+        delete data.password
+        res.status(200).json(data)
     } catch (error) {
-        console.log(error)
         res.status(400).send(error)
     }
 })
+<<<<<<< HEAD
 
+=======
+// login
+>>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await Users.findOne({
@@ -36,16 +45,20 @@ router.post('/login', async (req, res) => {
     const validated = await bcrypt.compare(password, validateUser.password)
     if (validated) {
         req.session.user = user
-        res.status(200).send('login successful')
+        const { password, ...rest } = user.dataValues
+        res.status(200).json(rest)
     } else {
         res.status(400).send('login failed')
     }
 })
+<<<<<<< HEAD
 
+=======
+// update user
+>>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
     try {
-        // find user based on email in our database
         const user = await Users.findOne({ where: { email: email } })
         const validateUser = user.dataValues
         const validated = await bcrypt.compare(password, validateUser.password)
@@ -65,7 +78,6 @@ router.put('/update_user', checkLogin, async (req, res) => {
         }
     } catch (error) {
         res.status(400).send('could not find')
-        console.log(error)
     }
 })
 
@@ -83,7 +95,28 @@ router.delete('/destroy_user', checkLogin, async (req, res) => {
         }
     } catch (error) {
         res.status(400).send('could not complete')
-        console.log(error)
+    }
+})
+// delete guest account and everything associated
+router.delete('/destroy_guest', checkLogin, async (req, res) => {
+    try {
+        if (req.session.user.username === 'guest') {
+            const guest = await Users.findByPk(req.session.user.id)
+            const allProjectIDs = await UserProjects.findAll({
+                where: { userID: guest.id },
+                attributes: ['projectID'],
+            })
+            await UserProjects.destroy({ where: { userID: guest.id } })
+            for (let index = 0; index < allProjectIDs.length; index++) {
+                const projectID = allProjectIDs[index].dataValues.projectID
+                await Cards.destroy({ where: { projectID: projectID } })
+                await Projects.destroy({ where: { id: projectID } })
+            }
+            await guest.destroy()
+            res.status(200).send('guest destroyed')
+        }
+    } catch (error) {
+        res.status(400).send('error')
     }
 })
 
@@ -93,7 +126,6 @@ router.put('/logout', checkLogin, (req, res) => {
         res.status(200).send('session ended')
     } catch (error) {
         res.status(400).send('could not end session')
-        console.log(error)
     }
 })
 

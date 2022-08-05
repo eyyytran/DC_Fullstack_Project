@@ -50,7 +50,6 @@ const checkEmail = e => {
     if (!isRequired(email)) {
         showError(e.target.form[1], 'Email is required')
     } else if (!isEmail(email)) {
-        console.log(isEmail(email))
         showError(e.target.form[1], 'Email is not valid')
     } else {
         showSuccess(e.target.form[1])
@@ -116,12 +115,7 @@ const formValidate = e => {
         isEmailValid = checkEmail(e),
         isPasswordValid = checkPassword(e),
         confirmPasswordValid = confirmPassword(e)
-    console.log({
-        isEmailValid,
-        isPasswordValid,
-        isUsernameValid,
-        confirmPasswordValid,
-    })
+
     let isFormValid =
         isUsernameValid &&
         isPasswordValid &&
@@ -130,7 +124,7 @@ const formValidate = e => {
     return isFormValid
 }
 
-const submitForm = async e => {
+const createUser = async e => {
     const Username = e.target.form[0].value
     const Email = e.target.form[1].value
     const Password = e.target.form[2].value
@@ -139,33 +133,30 @@ const submitForm = async e => {
         password: Password,
         email: Email,
     }
-    try {
-        const request = await fetch(
-            `${window.location.origin}/users/register`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('Registration complete')
-        window.location.href = window.location.origin + '/dashboard'
-    } catch (error) {
-        alert('Unable to create user')
-    }
+
+    const result = await fetch(`${window.location.origin}/users/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    const user = await result.json()
+
+    localStorage.setItem('user', JSON.stringify(user))
+
+    window.location.href = window.location.origin + '/dashboard'
 }
 
 submitBtn.onclick = e => {
     e.preventDefault()
+
     let isFormValid = formValidate(e)
 
-    if (!isFormValid) {
-        console.log('Will not be submitted')
-        alert('Unable to submit form')
-    } else {
-        console.log('Will be submitted')
-        submitForm(e)
+    if (isFormValid) {
+        createUser(e)
     }
 }
+
+document.querySelector('#logo-redirect').onclick = () =>
+    (window.location.href = window.location.origin + '/index')

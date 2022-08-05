@@ -1,10 +1,10 @@
 const getTitle = route => {
     const routeToTitleMap = {
         index: 'Home | Trelljoe',
-        signup: 'Sign Up',
-        login: 'Log In',
-        dashboard: 'Dashboard',
-        project: 'Project',
+        signup: 'Sign Up | Trelljoe',
+        login: 'Log In | Trelljoe',
+        dashboard: 'Dashboard | Trelljoe',
+        project: 'Project | Trelljoe',
     }
     return routeToTitleMap[route]
 }

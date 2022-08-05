@@ -1,4 +1,5 @@
-const createbtn = document.getElementById('d-createbtn')
+const mobileCreateBtn = document.getElementById('d-createbtn')
+const desktopCreateBtn = document.getElementById('d-dcreatebtn')
 const projectList = document.getElementById('d-projects')
 const createmodule = document.querySelector('.d-module')
 const editmodule = document.querySelector('.de-module')
@@ -7,7 +8,8 @@ const submitbtn = document.getElementById('d-submitbtn')
 const Esubmitbtn = document.getElementById('de-submitbtn')
 const deletebtn = document.querySelector('.de-deleteboard')
 const Ecancelbtn = document.querySelector('.de-close')
-const signoutbtn = document.querySelector('#d-logoutbtn')
+const mobileSignoutBtn = document.querySelector('#d-logoutbtn')
+const desktopSignoutBtn = document.getElementById('d-dlogoutbtn')
 const logo = document.getElementById('logo-redirect')
 
 //validators
@@ -69,7 +71,6 @@ const generateProjectCards = list => {
         editbtnimage.classList.add('d-editbtn-image')
         card.classList.add('d-project-card')
         card.setAttribute('id', projectId)
-
         projectList.append(card)
         card.append(editbtn)
         editbtn.append(editbtnimage)
@@ -77,22 +78,19 @@ const generateProjectCards = list => {
 }
 
 const loadProjects = async () => {
-    try {
-        const projects = await fetch(
-            `${window.location.origin}/projects/get_projects`,
-            {
-                method: 'GET',
-            }
-        )
-        const data = await projects.json()
-        generateProjectCards(data)
-    } catch (error) {
-        alert('could not fetch projects')
-    }
+    const projects = await fetch(
+        `${window.location.origin}/projects/get_projects`,
+        {
+            method: 'GET',
+        }
+    )
+    const data = await projects.json()
+    generateProjectCards(data)
 }
 
 const openEditModule = e => {
-    localStorage.clear()
+    localStorage.removeItem('projectName')
+    localStorage.removeItem('projectId')
 
     const projectName = e.target.parentNode.offsetParent.innerText
     const projectId = e.target.parentNode.offsetParent.id
@@ -109,57 +107,55 @@ const editProjectName = async newName => {
         id: localStorage.getItem('projectId'),
         name: newName,
     }
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/projects/update_project`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            }
-        )
-        alert('Successfully updated your project name')
-    } catch (error) {
-        console.log(error)
-    }
+
+    const sendData = await fetch(
+        `${window.location.origin}/projects/update_project`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+    )
 }
 
 const createProject = async projectName => {
     const data = {
         name: projectName,
     }
-    try {
-        const sendData = await fetch(
-            `${window.location.origin}/projects/create_project`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-        alert('created the project')
-    } catch (error) {
-        alert('unable to create project')
-    }
+    await fetch(`${window.location.origin}/projects/create_project`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
 }
 
 const signOutUser = async () => {
+    await fetch(`${window.location.origin}/users/logout`, {
+        method: 'PUT',
+    })
+    localStorage.clear()
+    window.location.href = window.location.origin + '/index'
+}
+
+const signOutGuest = async () => {
     try {
-        const signOutRequest = await fetch(
-            `${window.location.origin}/users/logout`,
-            {
+        const requests = [
+            fetch(`${window.location.origin}/users/logout`, {
                 method: 'PUT',
-            }
-        )
-        alert('Your session has ended')
+            }),
+            fetch(`${window.location.origin}/users/destroy_guest`, {
+                method: 'DELETE',
+            }),
+        ]
+        const results = await Promise.all(requests)
         localStorage.clear()
         window.location.href = window.location.origin + '/index'
-    } catch (error) {
-        alert('Could not end user session')
+    } catch (err) {
+        console.error(err)
     }
 }
 
@@ -178,10 +174,15 @@ const deleteProject = async () => {
             body: JSON.stringify(requestData),
         }
     )
-    localStorage.clear()
+    localStorage.removeItem('projectName')
+    localStorage.removeItem('projectId')
 }
 
-createbtn.addEventListener('click', () => {
+mobileCreateBtn.addEventListener('click', () => {
+    createmodule.style.display = 'block'
+})
+
+desktopCreateBtn.addEventListener('click', () => {
     createmodule.style.display = 'block'
 })
 
@@ -192,6 +193,18 @@ submitbtn.addEventListener('click', e => {
         createProject(projectName)
         createmodule.style.display = 'none'
         location.reload()
+    }
+})
+
+document.querySelector('#new-project').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        const projectName = document.querySelector('.d-inputs').value
+        let isEntryValid = entryValidate(e, projectName)
+        if (isEntryValid) {
+            createProject(projectName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
     }
 })
 
@@ -208,7 +221,8 @@ document.addEventListener('click', e => {
         openEditModule(e)
     }
     if (e.target.className === 'd-project-card') {
-        localStorage.clear()
+        localStorage.removeItem('projectName')
+        localStorage.removeItem('projectId')
         localStorage.setItem('projectName', e.target.innerText)
         localStorage.setItem('projectId', e.target.id)
         window.location.href = window.location.origin + '/project'
@@ -226,6 +240,19 @@ Esubmitbtn.addEventListener('click', e => {
     }
 })
 
+document.querySelector('#edit-project').addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        const newName = e.target.form[0].value
+        let isEntryValid = entryValidate(e, newName)
+        if (isEntryValid) {
+            editProjectName(newName)
+            createmodule.style.display = 'none'
+            location.reload()
+        }
+    }
+})
+
 deletebtn.addEventListener('click', e => {
     e.preventDefault()
     deleteProject()
@@ -233,8 +260,21 @@ deletebtn.addEventListener('click', e => {
     location.reload()
 })
 
-signoutbtn.addEventListener('click', () => {
-    signOutUser()
+mobileSignoutBtn.addEventListener('click', () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user?.username === 'guest') {
+        signOutGuest()
+    } else {
+        signOutUser()
+    }
+})
+desktopSignoutBtn.addEventListener('click', () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user?.username === 'guest') {
+        signOutGuest()
+    } else {
+        signOutUser()
+    }
 })
 
 logo.onclick = () =>

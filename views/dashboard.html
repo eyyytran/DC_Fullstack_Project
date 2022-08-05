@@ -1,45 +1,73 @@
 <div class="d-container">
     <div class="header">
+        <div class="hamburger-btn">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark hidden"></i>
+        </div>
         <div class="nav-bar" id="logo">
-            <img
-                src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
-            />
+            <i class="fa-solid fa-square-pen"></i>
             <h1 id="logo-redirect">Trelljoe</h1>
         </div>
-        <div class="nav-barlinks">
-            <button id="d-logoutbtn"><h2>Sign out</h2></button>
-            <button id="d-createbtn"><h2>Create</h2></button>
+        <div class="d-nav">
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label">
+                    Logged in as ${username}
+                </div>
+            </div>
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label" id="d-dcreatebtn">
+                    Create Project
+                </div>
+            </div>
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label" id="d-dlogoutbtn">
+                    Sign Out
+                </div>
+            </div>
         </div>
     </div>
 
+    <div class="mobile-nav">
+        <div class="mobile-nav-link">
+            <div class="mobile-nav-link-label">Logged in as ${username}</div>
+        </div>
+        <div class="mobile-nav-link" id="d-createbtn">
+            <div class="mobile-nav-link-label">Create a New Project</div>
+        </div>
+        <div class="mobile-nav-link" id="d-logoutbtn">
+            <div class="mobile-nav-link-label">Sign Out</div>
+        </div>
+    </div>
     <div class="d-module">
         <div class="d-module-contents">
-            <div class="d-module-title">Let's name your project.</div>
+            <div class="d-module-title"><h2>Let's name your project.</h2></div>
             <form id="d-form">
                 <div class="form-field">
                     <input
                         type="text"
                         name="project-name"
                         class="d-inputs"
+                        id="new-project"
                         placeholder="Project Name"
                     />
                     <small></small>
                 </div>
                 <input type="button" value="Submit" id="d-submitbtn" />
-                <button class="d-close">Cancel</button>
+                <button type="button" class="d-close">Cancel</button>
             </form>
         </div>
     </div>
 
     <div class="de-module">
         <div class="de-module-contents">
-            <div class="de-module-title">Rename your project</div>
+            <div class="de-module-title"><h2>Rename your project</h2></div>
             <form id="d-form">
                 <div class="form-field">
                     <input
                         type="text"
                         name="project-name"
                         class="de-inputs"
+                        id="edit-project"
                         placeholder="Project Name"
                     />
                     <small></small>
@@ -59,3 +87,4 @@
     </div>
 </div>
 ${script}
+<script src="../public/js/navbar.js"></script>

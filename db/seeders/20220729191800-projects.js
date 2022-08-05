@@ -12,42 +12,6 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert(
-     "Projects",
-     [
-       {
-         id: v4(),
-         name: "Runway",
-         createdAt: new Date(),
-         updatedAt: new Date(),
-       },
-       {
-         id: v4(),
-         name: "Mindy",
-         createdAt: new Date(),
-         updatedAt: new Date(),
-       },
-       {
-         id: v4(),
-         name: "Manhattan",
-         createdAt: new Date(),
-         updatedAt: new Date(),
-       },
-       {
-         id: v4(),
-         name: "Front End",
-         createdAt: new Date(),
-         updatedAt: new Date(),
-       },
-       {
-         id: v4(),
-         name: "Back End",
-         createdAt: new Date(),
-         updatedAt: new Date(),
-       },
-     ],
-     {}
-   );
   },
 
   async down (queryInterface, Sequelize) {

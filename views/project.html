@@ -1,27 +1,51 @@
 <div class="p-container">
     <div class="header">
+        <div class="hamburger-btn">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark hidden"></i>
+        </div>
         <div class="nav-bar" id="logo">
-            <img
-                src="https://img.icons8.com/ios-glyphs/30/000000/pencil-tip.png"
-            />
+            <i class="fa-solid fa-square-pen"></i>
             <h1 id="logo-redirect">Trelljoe</h1>
         </div>
-        <div class="p-projectname"></div>
-        <div class="nav-barlinks">
-            <button class="p-dashboardbtn"><h2>Dashboard</h2></button>
-            <button id="p-logoutbtn"><h2>Sign out</h2></button>
+        <div class="p-nav">
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label">
+                    Logged in as ${username}
+                </div>
+            </div>
+            <a href="/dashboard" class="mobile-nav-link">
+                <div class="mobile-nav-link-label">Dashboard</div>
+            </a>
+            <div class="mobile-nav-link">
+                <div class="mobile-nav-link-label" id="p-dlogoutbtn">
+                    Sign Out
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-nav">
+        <div class="mobile-nav-link">
+            <div class="mobile-nav-link-label">Logged in as ${username}</div>
+        </div>
+        <a href="/dashboard" class="mobile-nav-link">
+            <div class="mobile-nav-link-label">Dashboard</div></a
+        >
+        <div class="mobile-nav-link" id="p-logoutbtn">
+            <div class="mobile-nav-link-label">Sign Out</div>
         </div>
     </div>
 
     <div class="p-module">
         <div class="p-module-contents">
-            <div class="p-module-title">Let's make a new task.</div>
+            <div class="p-module-title"><h2>Let's make a new task.</h2></div>
             <form id="p-form">
                 <div class="form-field">
                     <input
                         type="text"
                         name="project-name"
                         class="p-inputs"
+                        id="new-card"
                         placeholder="Task Name"
                     />
                     <small></small>
@@ -31,16 +55,17 @@
             </form>
         </div>
     </div>
-
+    <div class="p-projectname"></div>
     <div class="pe-module">
         <div class="pe-module-contents">
-            <div class="pe-module-title">Edit your task</div>
+            <div class="pe-module-title"><h2>Edit your task</h2></div>
             <form id="p-form">
                 <div class="form-field">
                     <input
                         type="text"
                         name="task"
                         class="pe-inputs"
+                        id="edit-card"
                         placeholder="Task"
                     />
                     <small></small>
@@ -111,3 +136,4 @@
     </div>
 </div>
 ${script}
+<script src="../public/js/navbar.js"></script>

@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+require('dotenv').config()
 const cors = require('cors')
 const es6Renderer = require('express-es6-template-engine')
 const checkLogin = require('./util/checkLogin')
@@ -31,7 +32,7 @@ app.set('view engine', 'html')
 app.use(cookieParser())
 app.use(
     session({
-        secret: 'secret',
+        secret: process.env.SESSION_SECRET || 'secret',
         resave: false,
         saveUninitialized: true,
         store: store,
@@ -43,7 +44,11 @@ store.sync()
 app.use('/users', usersRoutes)
 app.use('/projects', checkLogin, projectsRoutes)
 app.use('/cards', checkLogin, cardsRoutes)
+<<<<<<< HEAD
 
+=======
+// render routes
+>>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 app.get('/', (req, res) => {
     res.render('template', {
         locals: {
@@ -85,6 +90,7 @@ app.get('/dashboard', checkLogin, (req, res) => {
         locals: {
             title: getTitle('dashboard'),
             script: getScript('dashboard'),
+            username: req.session.user.username,
         },
         partials: {
             partial: 'dashboard',
@@ -97,6 +103,7 @@ app.get('/project', checkLogin, (req, res) => {
         locals: {
             title: getTitle('project'),
             script: getScript('project'),
+            username: req.session.user.username,
         },
         partials: {
             partial: 'project',
