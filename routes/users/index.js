@@ -4,11 +4,7 @@ const router = express.Router()
 const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const checkLogin = require('../../util/checkLogin')
-<<<<<<< HEAD
-
-=======
 // user registration
->>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 router.post('/register', async (req, res) => {
     const { username, password, email } = await req.body
     try {
@@ -31,11 +27,7 @@ router.post('/register', async (req, res) => {
         res.status(400).send(error)
     }
 })
-<<<<<<< HEAD
-
-=======
 // login
->>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await Users.findOne({
@@ -51,11 +43,7 @@ router.post('/login', async (req, res) => {
         res.status(400).send('login failed')
     }
 })
-<<<<<<< HEAD
-
-=======
 // update user
->>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 router.put('/update_user', checkLogin, async (req, res) => {
     const { email, password, newPassword, newEmail, newUsername } = req.body
     try {

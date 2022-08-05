@@ -26,7 +26,7 @@ Why call it "Trelljoe"? The idea was to create a website with functionality simi
 ## Usage
 ---
 
-If you just want to try it out you can find a published version on [Heroku](https://trelljoe.herokuapp.com/). If you would like to download the repo and run it locally you will need a few things.
+If you want to try out the website you can find a published version on [Heroku](https://trelljoe.herokuapp.com/). If you would like to download the repository and run it locally you will need to follow these steps.
 
 1. Clone the repository using whatever method you are most comfortable. You may use the **Code** button above and follow one of the methods provided.
 

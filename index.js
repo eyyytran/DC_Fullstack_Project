@@ -44,11 +44,7 @@ store.sync()
 app.use('/users', usersRoutes)
 app.use('/projects', checkLogin, projectsRoutes)
 app.use('/cards', checkLogin, cardsRoutes)
-<<<<<<< HEAD
-
-=======
 // render routes
->>>>>>> dc008e2c8bde81499ea0fef02933bc93dab813d7
 app.get('/', (req, res) => {
     res.render('template', {
         locals: {
