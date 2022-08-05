@@ -421,7 +421,7 @@ form {
 .pe-module,
 .de-module,
 .d-module {
-    display: none;
+    display: block;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -550,7 +550,7 @@ form {
 }
 
 #pe-moveoptions {
-    display: none;
+    display: block;
 }
 
 .p-projectname {
@@ -580,7 +580,8 @@ form {
         color: var(--white);
     }
 
-    .p-nav a:hover,
+    .p-nav .mobile-nav-link:hover,
+    .p-nav .mobile-nav-link-label:hover,
     .d-nav a:hover {
         color: var(--lavender);
     }
