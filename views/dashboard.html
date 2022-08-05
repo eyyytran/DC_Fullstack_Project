@@ -10,7 +10,7 @@
         </div>
         <div class="d-nav">
             <div class="mobile-nav-link">
-                <div class="mobile-nav-link-label">
+                <div class="mobile-nav-link-label" id="loggedinas">
                     Logged in as ${username}
                 </div>
             </div>
@@ -29,7 +29,9 @@
 
     <div class="mobile-nav">
         <div class="mobile-nav-link">
-            <div class="mobile-nav-link-label">Logged in as ${username}</div>
+            <div class="mobile-nav-link-label" id="loggedinas">
+                Logged in as ${username}
+            </div>
         </div>
         <div class="mobile-nav-link" id="d-createbtn">
             <div class="mobile-nav-link-label">Create a New Project</div>
@@ -38,7 +40,7 @@
             <div class="mobile-nav-link-label">Sign Out</div>
         </div>
     </div>
-    <div class="d-module">
+    <div class="d-module hidden">
         <div class="d-module-contents">
             <div class="d-module-title"><h2>Let's name your project.</h2></div>
             <form id="d-form">
@@ -58,7 +60,7 @@
         </div>
     </div>
 
-    <div class="de-module">
+    <div class="de-module hidden">
         <div class="de-module-contents">
             <div class="de-module-title"><h2>Rename your project</h2></div>
             <form id="d-form">
@@ -87,4 +89,4 @@
     </div>
 </div>
 ${script}
-<script src="../public/js/navbar.js"></script>
+<script defer src="../public/js/navbar.js"></script>

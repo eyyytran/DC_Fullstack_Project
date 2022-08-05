@@ -421,7 +421,7 @@ form {
 .pe-module,
 .de-module,
 .d-module {
-    display: none;
+    display: block;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -550,7 +550,7 @@ form {
 }
 
 #pe-moveoptions {
-    display: none;
+    display: block;
 }
 
 .p-projectname {
@@ -565,6 +565,10 @@ form {
     display: none !important;
 }
 
+#loggedinas:hover {
+    cursor: default;
+}
+
 @media (min-width: 600px) {
     .p-nav,
     .d-nav {
@@ -576,7 +580,8 @@ form {
         color: var(--white);
     }
 
-    .p-nav a:hover,
+    .p-nav .mobile-nav-link:hover,
+    .p-nav .mobile-nav-link-label:hover,
     .d-nav a:hover {
         color: var(--lavender);
     }
@@ -596,6 +601,13 @@ form {
         flex-direction: row;
         text-align: justify;
         justify-content: center;
+        background: linear-gradient(
+            0deg,
+            rgba(239, 244, 254, 1) 90%,
+            rgba(170, 177, 240, 1) 96%,
+            rgba(134, 146, 240, 1) 98%,
+            rgba(87, 104, 241, 1) 100%
+        );
     }
 
     .header {
