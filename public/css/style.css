@@ -9,7 +9,13 @@
     --lavender: #e6e9fe;
     --periwinkle: #7b89f4;
     --transparent: rgba(255, 255, 255, 0.3);
-    --mobile-nav-bg-color: #aab1f0;
+    --mobile-nav-bg-color: linear-gradient(
+        0deg,
+        rgb(193, 198, 241) 10%,
+        rgba(170, 177, 240, 1) 50%,
+        rgba(134, 146, 240, 1) 85%,
+        rgba(87, 104, 241, 1) 95%
+    );
 }
 
 :root {
@@ -118,8 +124,16 @@ form {
     position: relative;
 }
 
+#su-header i,
+#l-header i,
+.nav-bar i {
+    font-size: 30px;
+    margin-right: 7.5px;
+    margin-top: 3px;
+}
+
 .header {
-    background: rgba(134, 146, 240, 1);
+    background: rgba(87, 104, 241, 1);
     box-shadow: 0 1px 1px rgb(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
@@ -127,12 +141,17 @@ form {
     height: var(--headerheight);
     position: relative;
     z-index: 10;
+    color: var(--white);
+}
+
+.desktop-nav {
+    display: none;
 }
 
 .h-container .mobile-nav {
     position: absolute;
     top: calc(var(--headerheight));
-    background-color: var(--mobile-nav-bg-color);
+    background: var(--mobile-nav-bg-color);
     width: 100%;
     display: block;
     transform: translateY(calc(var(--mobile-nav-link-height) * -3));
@@ -197,9 +216,9 @@ form {
     background: linear-gradient(
         0deg,
         rgba(239, 244, 254, 1) 70%,
-        rgba(170, 177, 240, 0.8) 78%,
-        rgba(134, 146, 240, 0.9) 87%,
-        rgba(87, 104, 241, 1) 95%
+        rgba(170, 177, 240, 1) 85%,
+        rgba(134, 146, 240, 1) 95%,
+        rgba(87, 104, 241, 1) 100%
     );
 }
 
@@ -348,6 +367,7 @@ form {
 #l-header,
 #su-header {
     background: transparent;
+    color: var(--dark-blue);
 }
 
 #p-submitbtn,
@@ -565,11 +585,17 @@ form {
 }
 
 @media (min-width: 600px) {
-    #toggle {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
+    .desktop-nav {
+        display: block;
+        margin-right: 10px;
+    }
+
+    .desktop-nav a {
+        color: var(--white);
+    }
+
+    .desktop-nav a:hover {
+        color: var(--lavender);
     }
     .mobile-nav {
         display: flex;
