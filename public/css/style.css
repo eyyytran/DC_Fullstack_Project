@@ -569,7 +569,7 @@ form {
     cursor: default;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 900px) {
     .h-content {
         flex-direction: row;
         text-align: justify;
