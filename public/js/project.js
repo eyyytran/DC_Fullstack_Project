@@ -94,6 +94,7 @@ const generateCards = list => {
         editbtnimage.classList.add('p-editbtn-image')
         card.classList.add('p-card')
         card.setAttribute('id', cardId)
+        card.setAttribute('draggable', 'true')
         if (status === 'todo') {
             toDoList.append(card)
             card.append(cardcontent)
@@ -359,7 +360,11 @@ cancelbtn.addEventListener('click', () => {
 logo.onclick = () =>
     (window.location.href = window.location.origin + '/dashboard')
 
-window.addEventListener('DOMContentLoaded', () => {
+const dragStart = e => {
+    console.log('drag started')
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
     loadCards()
     renderProjectName()
 })
