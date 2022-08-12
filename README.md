@@ -17,7 +17,7 @@ _Note: All data created as a Guest will be destroyed when logged out._
 -   ES6 Template Engine
 -   ElephantSQL
 -   HTML/CSS
--   Heroku
+-   Heroku Deployment Pipeline
 
 ## Background
 
